@@ -1,0 +1,8 @@
+by.training.taskdao
+by.training.taskdao.dao.factory
+by.training.taskdao.dao.interfaces
+by.training.taskdao.dao.mysql.config
+by.training.taskdao.dao.mysql.factory
+by.training.taskdao.dao.mysql.implementation
+by.training.taskdao.entities
+by.training.taskdao.locale
