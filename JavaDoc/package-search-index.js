@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"by.training.taskdao"},{"l":"by.training.taskdao.dao.factory"},{"l":"by.training.taskdao.dao.interfaces"},{"l":"by.training.taskdao.dao.mysql.config"},{"l":"by.training.taskdao.dao.mysql.factory"},{"l":"by.training.taskdao.dao.mysql.implementation"},{"l":"by.training.taskdao.entities"},{"l":"by.training.taskdao.locale"}]
