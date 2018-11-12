@@ -107,19 +107,18 @@ public class MySQLReaderDAO implements ReaderDAO {
 
     /**
      * method of deleting an {@link Reader} entity in the database
-     * @param entity to delete in database
+     * @param id to delete in database
      * @return id of deleted entity
      * @throws SQLException error close connection
      */
     @Override
-    public int delete(Reader entity) throws SQLException {
+    public int delete(int id) throws SQLException {
         Connection connection = MySQLDAOFactory.createConnection();
         int deletedId = -1;
         if(connection != null) {
             try {
                 PreparedStatement preparedStatement = connection.prepareStatement(ConfigurationManager.getInstance().getMySQLQueryReaderDelete());
-                preparedStatement.setInt(1, entity.getId());
-                preparedStatement.setInt(2, entity.getLanguageId());
+                preparedStatement.setInt(1, id);
                 deletedId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();

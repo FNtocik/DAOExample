@@ -7,7 +7,6 @@ import by.training.taskdao.dao.mysql.factory.MySQLDAOFactory;
  * Abstract DAO factory pattern realization
  * @author Anton Puhachou
 * */
-
 public abstract class DAOFactory {
 
     /**constants that reflect the selected base*/

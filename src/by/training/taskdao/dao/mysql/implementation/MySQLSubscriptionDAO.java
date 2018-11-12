@@ -105,8 +105,7 @@ public class MySQLSubscriptionDAO implements SubscriptionDAO {
                 preparedStatement.setDate(3, entity.getStartSubscription());
                 preparedStatement.setDate(4, entity.getEndSubscription());
                 preparedStatement.setInt(5, entity.getPaymentId());
-                preparedStatement.setInt(6, entity.getLanguageId());
-                preparedStatement.setInt(7, entity.getId());
+                preparedStatement.setInt(6, entity.getId());
                 updatedId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -119,20 +118,19 @@ public class MySQLSubscriptionDAO implements SubscriptionDAO {
 
     /**
      * method of deleting an {@link Subscription} entity in the database
-     * @param entity to delete in database
+     * @param id to delete in database
      * @return id of deleted entity
      * @throws SQLException error close connection
      */
     @Override
-    public int delete(Subscription entity) throws SQLException {
+    public int delete(int id) throws SQLException {
         Connection connection = MySQLDAOFactory.createConnection();
         int deletedId = -1;
         if(connection != null) {
             try {
                 PreparedStatement
                         preparedStatement = connection.prepareStatement(ConfigurationManager.getInstance().getMySQLQuerySubscriptionDelete());
-                preparedStatement.setInt(1, entity.getId());
-                preparedStatement.setInt(2, entity.getLanguageId());
+                preparedStatement.setInt(1, id);
                 deletedId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();

@@ -38,7 +38,8 @@ public class MySQLPublicationDAO implements PublicationDAO {
                     entity = new Publication(resultSet.getInt(1),
                                             resultSet.getString(3),
                                             resultSet.getString(2),
-                                            resultSet.getInt(4));
+                                            resultSet.getInt(4),
+                                            resultSet.getInt(5));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -67,7 +68,8 @@ public class MySQLPublicationDAO implements PublicationDAO {
                 preparedStatement.setInt(1, entity.getId());
                 preparedStatement.setString(2, entity.getName());
                 preparedStatement.setString(3, entity.getAuthor());
-                preparedStatement.setInt(4, entity.getLanguageId());
+                preparedStatement.setInt(4, entity.getCost());
+                preparedStatement.setInt(5, entity.getLanguageId());
                 newId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -93,7 +95,8 @@ public class MySQLPublicationDAO implements PublicationDAO {
                 PreparedStatement preparedStatement = connection.prepareStatement(ConfigurationManager.getInstance().getMySQLQueryPublicationUpdate());
                 preparedStatement.setString(1, entity.getName());
                 preparedStatement.setString(2, entity.getAuthor());
-                preparedStatement.setInt(3, entity.getLanguageId());
+                preparedStatement.setInt(3, entity.getCost());
+                preparedStatement.setInt(5, entity.getLanguageId());
                 preparedStatement.setInt(4, entity.getId());
                 updatedId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
@@ -107,19 +110,18 @@ public class MySQLPublicationDAO implements PublicationDAO {
 
     /**
      * method of deleting an {@link Publication} entity in the database
-     * @param entity to delete in database
+     * @param id to delete in database
      * @return id of deleted entity
      * @throws SQLException error close connection
      */
     @Override
-    public int delete(Publication entity) throws SQLException {
+    public int delete(int id) throws SQLException {
         Connection connection = MySQLDAOFactory.createConnection();
         int deletedId = -1;
         if(connection != null) {
             try {
                 PreparedStatement preparedStatement = connection.prepareStatement(ConfigurationManager.getInstance().getMySQLQueryPublicationDelete());
-                preparedStatement.setInt(1, entity.getId());
-                preparedStatement.setInt(2, entity.getLanguageId());
+                preparedStatement.setInt(1, id);
                 deletedId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -148,7 +150,8 @@ public class MySQLPublicationDAO implements PublicationDAO {
                     entities.add(new Publication(resultSet.getInt(1),
                                                 resultSet.getString(3),
                                                 resultSet.getString(2),
-                                                resultSet.getInt(4)));
+                                                resultSet.getInt(4),
+                                                resultSet.getInt(5)));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

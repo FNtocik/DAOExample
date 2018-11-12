@@ -104,18 +104,18 @@ public class MySQLAdministratorDAO implements AdministratorDAO {
 
     /**
      * method of deleting an {@link Administrator} entity in the database
-     * @param entity to delete in database
+     * @param id to delete in database
      * @return id of deleted entity
      * @throws SQLException error close connection
      */
     @Override
-    public int delete(Administrator entity) throws SQLException {
+    public int delete(int id) throws SQLException {
         Connection connection = MySQLDAOFactory.createConnection();
         int deletedId = -1;
         if(connection != null) {
             try {
                 PreparedStatement preparedStatement = connection.prepareStatement(ConfigurationManager.getInstance().getMySQLQueryAdminDelete());
-                preparedStatement.setInt(1, entity.getId());
+                preparedStatement.setInt(1, id);
                 deletedId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();

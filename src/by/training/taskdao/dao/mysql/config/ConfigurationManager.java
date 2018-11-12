@@ -23,8 +23,7 @@ public class ConfigurationManager {
 
     /**
      * Private constructor to create an instance of manager with localisation
-     * queries
-     * to database
+     * queries to database
      */
     private ConfigurationManager() {
         Locale currentLocale = LocaleManager.getInstance().getLocale();

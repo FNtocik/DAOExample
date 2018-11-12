@@ -41,7 +41,8 @@ public class Subscription {
      * @param languageId bound language id
      * @see Subscription#Subscription(int, int, int, int, Date, Date, int)
      */
-    public Subscription(int readerId, int publicationId, int paymentId, Date startSubscription, Date endSubscription, int languageId) {
+    public Subscription(int readerId, int publicationId, int paymentId,
+                        Date startSubscription, Date endSubscription, int languageId) {
         this.readerId = readerId;
         this.publicationId = publicationId;
         this.paymentId = paymentId;
@@ -61,7 +62,9 @@ public class Subscription {
      * @param languageId bound language id
      * @see Subscription#Subscription(int, int, int, int, Date, Date, int)
      */
-    public Subscription(int id, int readerId, int publicationId, int paymentId, Date startSubscription, Date endSubscription, int languageId) {
+    public Subscription(int id, int readerId, int publicationId,
+                        int paymentId, Date startSubscription,
+                        Date endSubscription, int languageId) {
         this.id = id;
         this.readerId = readerId;
         this.publicationId = publicationId;

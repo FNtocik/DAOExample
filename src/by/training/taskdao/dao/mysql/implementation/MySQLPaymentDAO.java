@@ -35,8 +35,8 @@ public class MySQLPaymentDAO implements PaymentDAO {
                 preparedStatement.setInt(1, id);
                 resultSet = preparedStatement.executeQuery();
                 if (resultSet.next()) {
-                    entity = new Payment(resultSet.getInt(1), resultSet.getInt(3), resultSet.getInt(2),
-                            resultSet.getBoolean(4), resultSet.getInt(5));
+                    entity = new Payment(resultSet.getInt(1), resultSet.getInt(2),
+                            resultSet.getBoolean(3), resultSet.getInt(4));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -66,7 +66,6 @@ public class MySQLPaymentDAO implements PaymentDAO {
                 preparedStatement.setInt(2, entity.getCost());
                 preparedStatement.setBoolean(3, entity.isPayed());
                 preparedStatement.setInt(4, entity.getLanguageId());
-                preparedStatement.setInt(5, entity.getReaderId());
                 newId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -92,9 +91,8 @@ public class MySQLPaymentDAO implements PaymentDAO {
                 PreparedStatement preparedStatement = connection.prepareStatement(ConfigurationManager.getInstance().getMySQLQueryPaymentUpdate());
                 preparedStatement.setInt(1, entity.getCost());
                 preparedStatement.setBoolean(2, entity.isPayed());
-                preparedStatement.setInt(3, entity.getReaderId());
-                preparedStatement.setInt(4, entity.getLanguageId());
-                preparedStatement.setInt(5, entity.getId());
+                preparedStatement.setInt(3, entity.getLanguageId());
+                preparedStatement.setInt(4, entity.getId());
                 updatedId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -107,19 +105,18 @@ public class MySQLPaymentDAO implements PaymentDAO {
 
     /**
      * method of deleting an {@link Payment} entity in the database
-     * @param entity to delete in database
+     * @param id to delete in database
      * @return id of deleted entity
      * @throws SQLException error close connection
      */
     @Override
-    public int delete(Payment entity) throws SQLException {
+    public int delete(int id) throws SQLException {
         Connection connection = MySQLDAOFactory.createConnection();
         int deletedId = -1;
         if (connection != null) {
             try {
                 PreparedStatement preparedStatement = connection.prepareStatement(ConfigurationManager.getInstance().getMySQLQueryPaymentDelete());
-                preparedStatement.setInt(1, entity.getId());
-                preparedStatement.setInt(2, entity.getLanguageId());
+                preparedStatement.setInt(1, id);
                 deletedId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -146,10 +143,9 @@ public class MySQLPaymentDAO implements PaymentDAO {
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     entities.add(new Payment(resultSet.getInt(1),
-                                            resultSet.getInt(3),
                                             resultSet.getInt(2),
-                                            resultSet.getBoolean(4),
-                                            resultSet.getInt(5)));
+                                            resultSet.getBoolean(3),
+                                            resultSet.getInt(4)));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

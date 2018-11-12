@@ -19,15 +19,18 @@ public class Publication {
     /**field language id*/
     private int languageId;
 
+    private int cost;
+
     /**
      * Constructor to create a specific object <b>without</b> id
      * @param author author name
      * @param name name of publication
      * @param languageId bound language id
      */
-    public Publication(String author, String name, int languageId) {
+    public Publication(String author, String name, int cost, int languageId) {
         this.author = author;
         this.name = name;
+        this.cost = cost;
         this.languageId = languageId;
     }
 
@@ -38,10 +41,11 @@ public class Publication {
      * @param name name of publication
      * @param languageId bound language id
      */
-    public Publication(int id, String author, String name, int languageId) {
+    public Publication(int id, String author, String name, int cost, int languageId) {
         this.id = id;
         this.author = author;
         this.name = name;
+        this.cost = cost;
         this.languageId = languageId;
     }
 
@@ -83,6 +87,22 @@ public class Publication {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * get method of {@link Publication#cost}
+     * @return  cost publication per month
+     */
+    public int getCost() {
+        return cost;
+    }
+
+    /**
+     * set method of {@link Publication#cost}
+     * @param cost cost publication per month
+     */
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
     /**
