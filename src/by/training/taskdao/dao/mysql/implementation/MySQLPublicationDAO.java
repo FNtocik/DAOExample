@@ -96,8 +96,8 @@ public class MySQLPublicationDAO implements PublicationDAO {
                 preparedStatement.setString(1, entity.getName());
                 preparedStatement.setString(2, entity.getAuthor());
                 preparedStatement.setInt(3, entity.getCost());
-                preparedStatement.setInt(5, entity.getLanguageId());
                 preparedStatement.setInt(4, entity.getId());
+                preparedStatement.setInt(5, entity.getLanguageId());
                 updatedId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();

@@ -93,8 +93,7 @@ public class MySQLReaderDAO implements ReaderDAO {
                 PreparedStatement preparedStatement = connection.prepareStatement(ConfigurationManager.getInstance().getMySQLQueryReaderUpdate());
                 preparedStatement.setString(1, entity.getLogin());
                 preparedStatement.setString(2, entity.getPassword());
-                preparedStatement.setInt(3, entity.getLanguageId());
-                preparedStatement.setInt(4, entity.getId());
+                preparedStatement.setInt(3, entity.getId());
                 updatedId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();

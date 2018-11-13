@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Publication</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+<input hidden type="text" id="languageId" value="">
+<div>
+    <a href="subs.html">Subscriptions</a>
+    <a href="reader.html">Readers</a>
+</div>
+<div>
+    <form>
+        <label>
+            <input hidden type="text" id="publicationId" value="">
+        </label>
+        <label>
+            <input type="text" id="name" value="">
+        </label><br>
+        <label>
+            <input type="text" id="author" value="">
+        </label><br>
+        <label>
+            <input type="number" id="cost" value="0">
+        </label><br>
+        <input type="submit" onclick="edit()" value="Save">
+        <input type="submit" onclick="add()" value="Add">
+        <input type="submit" onclick="del()" value="Delete">
+    </form>
+</div>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>name</td>
+            <td>author</td>
+            <td>cost per month</td>
+        </tr>
+        </thead>
+        <tbody id="allPublications">
+
+        </tbody>
+    </table>
+</div>
+</body>
+<script>
+    var oldRow = null;
+    var publicationElement = document.getElementById("publicationId");
+    var languageElement = document.getElementById("languageId");
+    var nameInput = document.getElementById("name");
+    var authorInput = document.getElementById("author");
+    var costInput = document.getElementById("cost");
+    var table = document.getElementById("allPublications");
+    table.addEventListener('click', function (event) {
+        if(oldRow != null)
+            oldRow.style.background = "white";
+        var row = event.target.parentNode;
+        row.style.background = "blue";
+        publicationElement.value = row.childNodes[0].textContent;
+        get();
+        oldRow = row;
+    });
+
+    getAll();
+
+    function add() {
+        var request = new XMLHttpRequest();
+        request.open("POST", "addPublication", true);
+        request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        request.onreadystatechange = function (ev) {
+            if(this.readyState != XMLHttpRequest.DONE)
+                return;
+            getAll();
+        };
+        var name = nameInput.value;
+        var author = authorInput.value;
+        var cost = costInput.value;
+        var languageId = languageElement.value;
+        var msg = "name=" + name + "&author="
+            + author + "&cost=" + cost + "&languageId=" + languageId;
+        request.send(msg);
+    }
+
+    function edit() {
+        var request = new XMLHttpRequest();
+        request.open("POST", "editPublication", true);
+        request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        request.onreadystatechange = function (ev) {
+            if(this.readyState != XMLHttpRequest.DONE)
+                return;
+            getAll();
+        };
+        var publicationId = publicationElement.value;
+        var name = nameInput.value;
+        var author = authorInput.value;
+        var cost = costInput.value;
+        var languageId = languageElement.value;
+        var msg = "publicationId=" + publicationId + "&name=" + name +
+            "&author=" + author + "&cost=" + cost + "&languageId=" + languageId;
+        request.send(msg);
+    }
+
+    function del() {
+        var request = new XMLHttpRequest();
+        request.open("POST", "deletePublication", true);
+        request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        request.onreadystatechange = function (ev) {
+            if(this.readyState != XMLHttpRequest.DONE)
+                return;
+            getAll();
+        };
+        request.send("publicationId=" +
+            publicationElement.value);
+    }
+
+    function get() {
+        var request = new XMLHttpRequest();
+        request.open("POST", "getPublication", true);
+        request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        request.onreadystatechange = function (ev) {
+            if(this.readyState != XMLHttpRequest.DONE)
+                return;
+            var publication = JSON.parse(this.responseText);
+            publicationElement.value = publication.publicationId;
+            nameInput.value = publication.name;
+            authorInput.value = publication.author;
+            costInput.value = publication.cost;
+        };
+        request.send("publicationId=" +
+            publicationElement.value);
+    }
+
+    function getAll() {
+        var requestToSubs = new XMLHttpRequest();
+        requestToSubs.open("POST", "getAllPublication", true);
+        requestToSubs.setRequestHeader("Content-Type",
+            "application/x-www-form-urlencoded");
+        requestToSubs.onreadystatechange = function (ev) {
+            if(this.readyState != XMLHttpRequest.DONE)
+                return;
+            var publications = JSON.parse(this.responseText);
+            table.childNodes = null;
+            languageElement.value = publications[0]["languageId"];
+            for(var i = 0; i < publications.length; i++){
+                var tr = document.createElement("tr");
+                var tdId = document.createElement("td");
+                var textId = document.createTextNode(publications[i]["publicationId"]);
+                var tdName = document.createElement("td");
+                var textName = document.createTextNode(publications[i]["name"]);
+                var tdAuthor = document.createElement("td");
+                var textAuthor = document.createTextNode(publications[i]["author"]);
+                var tdCost = document.createElement("td");
+                var textCost = document.createTextNode(publications[i]["cost"]);
+                tdId.appendChild(textId);
+                tdName.appendChild(textName);
+                tdAuthor.appendChild(textAuthor);
+                tdCost.appendChild(textCost);
+                tr.appendChild(tdId);
+                tr.appendChild(tdName);
+                tr.appendChild(tdAuthor);
+                tr.appendChild(tdCost);
+                table.appendChild(tr);
+            }
+        };
+        requestToSubs.send("");
+    }
+</script>
+</html>

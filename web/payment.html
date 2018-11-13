@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+<input hidden type="text" id="languageId" value="">
+<div>
+    <a href="reader.html">Readers</a>
+    <a href="publication.html">Publications</a>
+    <a href="subs.html">Subscriptions</a>
+</div>
+<div>
+    <form>
+        <label>
+            <input hidden type="text" id="paymentId" value="">
+        </label>
+        <label>
+            <input type="number" id="summary" value="0">
+        </label><br>
+        <label>
+            <input type="checkbox" id="isPayed">
+        </label><br>
+        <input type="submit" onclick="edit()" value="Save">
+        <input type="submit" onclick="add()" value="Add">
+        <input type="submit" onclick="del()" value="Delete">
+    </form>
+</div>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>summary</td>
+            <td>is payed</td>
+        </tr>
+        </thead>
+        <tbody id="allPayments">
+
+        </tbody>
+    </table>
+</div>
+</body>
+<script>
+    var oldRow = null;
+    var paymentElement = document.getElementById("paymentId");
+    var languageElement = document.getElementById("languageId");
+    var summaryInput = document.getElementById("summary");
+    var isPayedCheckbox = document.getElementById("isPayed");
+    var table = document.getElementById("allPayments");
+    table.addEventListener('click', function (event) {
+        if(oldRow != null)
+            oldRow.style.background = "white";
+        var row = event.target.parentNode;
+        row.style.background = "blue";
+        paymentElement.value = row.childNodes[0].textContent;
+        get();
+        oldRow = row;
+    });
+
+    getAll();
+
+    function add() {
+        var request = new XMLHttpRequest();
+        request.open("POST", "addPayment", true);
+        request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        request.onreadystatechange = function (ev) {
+            if(this.readyState != XMLHttpRequest.DONE)
+                return;
+            getAll();
+        };
+        var cost = summaryInput.value;
+        var isPayed = isPayedCheckbox.value;
+        var languageId = languageElement.value;
+        var msg = "cost=" + cost + "&isPayed="
+            + isPayed.toString() + "&languageId=" + languageId;
+        request.send(msg);
+    }
+
+    function edit() {
+        var request = new XMLHttpRequest();
+        request.open("POST", "editPayment", true);
+        request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        request.onreadystatechange = function (ev) {
+            if(this.readyState != XMLHttpRequest.DONE)
+                return;
+            getAll();
+        };
+        var paymentId = paymentElement.value;
+        var cost = summaryInput.value;
+        var isPayed = isPayedCheckbox.value;
+        var languageId = languageElement.value;
+        var msg = "paymentId=" + paymentId + "&cost=" + cost + "&isPayed="
+            + isPayed.toString() + "&languageId=" + languageId;
+        request.send(msg);
+    }
+
+    function del() {
+        var request = new XMLHttpRequest();
+        request.open("POST", "deletePayment", true);
+        request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        request.onreadystatechange = function (ev) {
+            if(this.readyState != XMLHttpRequest.DONE)
+                return;
+            getAll();
+        };
+        request.send("paymentId=" +
+            paymentElement.value);
+    }
+
+    function get() {
+        var request = new XMLHttpRequest();
+        request.open("POST", "getPayment", true);
+        request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        request.onreadystatechange = function (ev) {
+            if(this.readyState != XMLHttpRequest.DONE)
+                return;
+            var reader = JSON.parse(this.responseText);
+            paymentElement.value = reader.paymentId;
+            summaryInput.value = reader.cost;
+            isPayedCheckbox.value = reader.isPayed;
+
+        };
+        request.send("paymentId=" +
+            paymentElement.value);
+    }
+
+    function getAll() {
+        var requestToSubs = new XMLHttpRequest();
+        requestToSubs.open("POST", "getAllPayment", true);
+        requestToSubs.setRequestHeader("Content-Type",
+            "application/x-www-form-urlencoded");
+        requestToSubs.onreadystatechange = function (ev) {
+            if(this.readyState != XMLHttpRequest.DONE)
+                return;
+            var payments = JSON.parse(this.responseText);
+            table.childNodes = null;
+            languageElement.value = payments[0]["languageId"];
+            for(var i = 0; i < payments.length; i++){
+                var tr = document.createElement("tr");
+                var tdId = document.createElement("td");
+                var textId = document.createTextNode(payments[i]["paymentId"]);
+                var tdCost = document.createElement("td");
+                var textCost = document.createTextNode(payments[i]["cost"]);
+                var tdPayed = document.createElement("td");
+                var textPayed = document.createTextNode(payments[i]["isPayed"].toString());
+                tdId.appendChild(textId);
+                tdCost.appendChild(textCost);
+                tdPayed.appendChild(textPayed);
+                tr.appendChild(tdId);
+                tr.appendChild(tdCost);
+                tr.appendChild(tdPayed);
+                table.appendChild(tr);
+            }
+        };
+        requestToSubs.send("");
+    }
+
+</script>
+</html>
