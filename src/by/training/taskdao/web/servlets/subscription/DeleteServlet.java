@@ -1,8 +1,7 @@
-package by.training.taskdao.servlets.publication;
+package by.training.taskdao.web.servlets.subscription;
 
 import by.training.taskdao.dao.factory.DAOFactory;
-import by.training.taskdao.dao.interfaces.PaymentDAO;
-import by.training.taskdao.dao.interfaces.PublicationDAO;
+import by.training.taskdao.dao.interfaces.SubscriptionDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,16 +14,15 @@ public class DeleteServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int publicationId = Integer.valueOf(String.valueOf(req.getParameter(
-                                                        "publicationId")));
+        int subscriptionId = Integer.valueOf(String.valueOf(req.getParameter(
+                "subscriptionId")));
         DAOFactory daoFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
-        PublicationDAO publicationDAO = daoFactory.getPublicationDAO();
+        SubscriptionDAO subscriptionDAO = daoFactory.getSubscriptionDAO();
         try {
-            publicationDAO.delete(publicationId);
+            subscriptionDAO.delete(subscriptionId);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        resp.getWriter().write("Done");
     }
 
     @Override

@@ -1,9 +1,7 @@
-package by.training.taskdao.servlets.publication;
+package by.training.taskdao.web.servlets.publication;
 
 import by.training.taskdao.dao.factory.DAOFactory;
-import by.training.taskdao.dao.interfaces.PaymentDAO;
 import by.training.taskdao.dao.interfaces.PublicationDAO;
-import by.training.taskdao.entities.Payment;
 import by.training.taskdao.entities.Publication;
 
 import javax.servlet.ServletException;
@@ -17,7 +15,6 @@ public class EditServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
         int publicationId = Integer.valueOf(String.valueOf(req.getParameter(
                                                         "publicationId")));
         String name = String.valueOf(req.getParameter("name"));
@@ -34,7 +31,6 @@ public class EditServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        resp.getWriter().write("Done");
     }
 
     @Override

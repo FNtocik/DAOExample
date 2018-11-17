@@ -1,17 +1,15 @@
-package by.training.taskdao.servlets.subscription;
+package by.training.taskdao.web.servlets.subscription;
 
 import by.training.taskdao.dao.factory.DAOFactory;
 import by.training.taskdao.dao.interfaces.SubscriptionDAO;
 import by.training.taskdao.entities.Subscription;
 import org.json.JSONObject;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 
 public class GetServlet extends HttpServlet {
@@ -35,7 +33,6 @@ public class GetServlet extends HttpServlet {
         jsonAnswer.put("languageId", entity.getLanguageId());
         jsonAnswer.put("startDate", entity.getStartSubscription().toString());
         jsonAnswer.put("endDate", entity.getEndSubscription().toString());
-        resp.setCharacterEncoding("UTF-8");
         resp.getWriter().write(jsonAnswer.toString());
     }
 

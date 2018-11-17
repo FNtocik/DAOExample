@@ -4,9 +4,18 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+    <filter>
+        <filter-name>encodeFilter</filter-name>
+        <filter-class>by.training.taskdao.web.filter.encodeFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodeFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>addSubscription</servlet-name>
-        <servlet-class>by.training.taskdao.servlets.subscription.AddServlet</servlet-class>
+        <servlet-class>by.training.taskdao.web.servlets.subscription.AddServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>addSubscription</servlet-name>
@@ -14,7 +23,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>deleteSubscription</servlet-name>
-        <servlet-class>by.training.taskdao.servlets.subscription.DeleteServlet</servlet-class>
+        <servlet-class>by.training.taskdao.web.servlets.subscription.DeleteServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>deleteSubscription</servlet-name>
@@ -22,7 +31,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>editSubscription</servlet-name>
-        <servlet-class>by.training.taskdao.servlets.subscription.EditServlet</servlet-class>
+        <servlet-class>by.training.taskdao.web.servlets.subscription.EditServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>editSubscription</servlet-name>
@@ -30,7 +39,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>getSubscription</servlet-name>
-        <servlet-class>by.training.taskdao.servlets.subscription.GetServlet</servlet-class>
+        <servlet-class>by.training.taskdao.web.servlets.subscription.GetServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>getSubscription</servlet-name>
@@ -38,7 +47,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>getAllSubscription</servlet-name>
-        <servlet-class>by.training.taskdao.servlets.subscription.GetAllServlet</servlet-class>
+        <servlet-class>by.training.taskdao.web.servlets.subscription.GetAllServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>getAllSubscription</servlet-name>
@@ -47,7 +56,7 @@
 
     <servlet>
         <servlet-name>addPublication</servlet-name>
-        <servlet-class>by.training.taskdao.servlets.publication.AddServlet</servlet-class>
+        <servlet-class>by.training.taskdao.web.servlets.publication.AddServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>addPublication</servlet-name>
@@ -55,7 +64,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>deletePublication</servlet-name>
-        <servlet-class>by.training.taskdao.servlets.publication.DeleteServlet</servlet-class>
+        <servlet-class>by.training.taskdao.web.servlets.publication.DeleteServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>deletePublication</servlet-name>
@@ -63,7 +72,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>editPublication</servlet-name>
-        <servlet-class>by.training.taskdao.servlets.publication.EditServlet</servlet-class>
+        <servlet-class>by.training.taskdao.web.servlets.publication.EditServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>editPublication</servlet-name>
@@ -71,7 +80,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>getPublication</servlet-name>
-        <servlet-class>by.training.taskdao.servlets.publication.GetServlet</servlet-class>
+        <servlet-class>by.training.taskdao.web.servlets.publication.GetServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>getPublication</servlet-name>
@@ -79,7 +88,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>getAllPublication</servlet-name>
-        <servlet-class>by.training.taskdao.servlets.publication.GetAllServlet</servlet-class>
+        <servlet-class>by.training.taskdao.web.servlets.publication.GetAllServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>getAllPublication</servlet-name>
@@ -88,7 +97,7 @@
 
     <servlet>
         <servlet-name>addReader</servlet-name>
-        <servlet-class>by.training.taskdao.servlets.reader.AddServlet</servlet-class>
+        <servlet-class>by.training.taskdao.web.servlets.reader.AddServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>addReader</servlet-name>
@@ -96,7 +105,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>deleteReader</servlet-name>
-        <servlet-class>by.training.taskdao.servlets.reader.DeleteServlet</servlet-class>
+        <servlet-class>by.training.taskdao.web.servlets.reader.DeleteServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>deleteReader</servlet-name>
@@ -104,7 +113,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>editReader</servlet-name>
-        <servlet-class>by.training.taskdao.servlets.reader.EditServlet</servlet-class>
+        <servlet-class>by.training.taskdao.web.servlets.reader.EditServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>editReader</servlet-name>
@@ -112,7 +121,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>getReader</servlet-name>
-        <servlet-class>by.training.taskdao.servlets.reader.GetServlet</servlet-class>
+        <servlet-class>by.training.taskdao.web.servlets.reader.GetServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>getReader</servlet-name>
@@ -120,7 +129,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>getAllReader</servlet-name>
-        <servlet-class>by.training.taskdao.servlets.reader.GetAllServlet</servlet-class>
+        <servlet-class>by.training.taskdao.web.servlets.reader.GetAllServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>getAllReader</servlet-name>
@@ -129,7 +138,7 @@
 
     <servlet>
         <servlet-name>addPayment</servlet-name>
-        <servlet-class>by.training.taskdao.servlets.payment.AddServlet</servlet-class>
+        <servlet-class>by.training.taskdao.web.servlets.payment.AddServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>addPayment</servlet-name>
@@ -137,7 +146,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>deletePayment</servlet-name>
-        <servlet-class>by.training.taskdao.servlets.payment.DeleteServlet</servlet-class>
+        <servlet-class>by.training.taskdao.web.servlets.payment.DeleteServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>deletePayment</servlet-name>
@@ -145,7 +154,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>editPayment</servlet-name>
-        <servlet-class>by.training.taskdao.servlets.payment.EditServlet</servlet-class>
+        <servlet-class>by.training.taskdao.web.servlets.payment.EditServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>editPayment</servlet-name>
@@ -153,7 +162,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>getPayment</servlet-name>
-        <servlet-class>by.training.taskdao.servlets.payment.GetServlet</servlet-class>
+        <servlet-class>by.training.taskdao.web.servlets.payment.GetServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>getPayment</servlet-name>
@@ -161,14 +170,23 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>getAllPayment</servlet-name>
-        <servlet-class>by.training.taskdao.servlets.payment.GetAllServlet</servlet-class>
+        <servlet-class>by.training.taskdao.web.servlets.payment.GetAllServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>getAllPayment</servlet-name>
         <url-pattern>/getAllPayment</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>getLocaleStringsServlet</servlet-name>
+        <servlet-class>by.training.taskdao.web.servlets.locale.GetServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getLocaleStringsServlet</servlet-name>
+        <url-pattern>/getLocale</url-pattern>
+    </servlet-mapping>
+
     <welcome-file-list>
-        <welcome-file>subs.html</welcome-file>
+        <welcome-file>login.html</welcome-file>
     </welcome-file-list>
 </web-app>

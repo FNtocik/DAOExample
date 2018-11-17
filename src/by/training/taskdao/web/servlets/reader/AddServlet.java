@@ -1,8 +1,8 @@
-package by.training.taskdao.servlets.payment;
+package by.training.taskdao.web.servlets.reader;
 
 import by.training.taskdao.dao.factory.DAOFactory;
-import by.training.taskdao.dao.interfaces.PaymentDAO;
-import by.training.taskdao.entities.Payment;
+import by.training.taskdao.dao.interfaces.ReaderDAO;
+import by.training.taskdao.entities.Reader;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,21 +15,18 @@ public class AddServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
-        int cost = Integer.valueOf(String.valueOf(req.getParameter("cost")));
-        boolean isPayed = Boolean.valueOf(String.valueOf(req.getParameter(
-                                                        "isPayed")));
+        String login = String.valueOf(req.getParameter("login"));
+        String password = String.valueOf(req.getParameter("password"));
         int languageId = Integer.valueOf(String.valueOf(req.getParameter(
                                                     "languageId")));
         DAOFactory daoFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
-        PaymentDAO paymentDAO = daoFactory.getPaymentDAO();
-        Payment entity = new Payment(cost, isPayed, languageId);
+        ReaderDAO readerDAO = daoFactory.getReaderDAO();
+        Reader entity = new Reader(login, password, languageId);
         try {
-            paymentDAO.create(entity);
+            readerDAO.create(entity);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        resp.getWriter().write("Done");
     }
 
     @Override

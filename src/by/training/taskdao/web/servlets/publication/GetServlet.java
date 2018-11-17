@@ -1,9 +1,7 @@
-package by.training.taskdao.servlets.publication;
+package by.training.taskdao.web.servlets.publication;
 
 import by.training.taskdao.dao.factory.DAOFactory;
-import by.training.taskdao.dao.interfaces.PaymentDAO;
 import by.training.taskdao.dao.interfaces.PublicationDAO;
-import by.training.taskdao.entities.Payment;
 import by.training.taskdao.entities.Publication;
 import org.json.JSONObject;
 
@@ -33,7 +31,6 @@ public class GetServlet extends HttpServlet {
         jsonAnswer.append("author", entity.getAuthor());
         jsonAnswer.append("cost", entity.getCost());
         jsonAnswer.append("languageId", entity.getLanguageId());
-        resp.setCharacterEncoding("UTF-8");
         resp.getWriter().write(jsonAnswer.toString());
     }
 

@@ -1,5 +1,8 @@
 package by.training.taskdao.locale;
 
+import by.training.taskdao.dao.mysql.config.ConfigurationManager;
+import by.training.taskdao.web.locale.LocaleStringsManager;
+
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -68,5 +71,7 @@ public class LocaleManager {
                 locale = new Locale(localeResourceBundle.getString("default"));
                 break;
         }
+        ConfigurationManager.getInstance().updateLocale();
+        LocaleStringsManager.getInstance().updateLocale();
     }
 }

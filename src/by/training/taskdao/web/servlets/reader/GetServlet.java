@@ -1,10 +1,8 @@
-package by.training.taskdao.servlets.payment;
+package by.training.taskdao.web.servlets.reader;
 
 import by.training.taskdao.dao.factory.DAOFactory;
-import by.training.taskdao.dao.interfaces.PaymentDAO;
-import by.training.taskdao.dao.interfaces.SubscriptionDAO;
-import by.training.taskdao.entities.Payment;
-import by.training.taskdao.entities.Subscription;
+import by.training.taskdao.dao.interfaces.ReaderDAO;
+import by.training.taskdao.entities.Reader;
 import org.json.JSONObject;
 
 import javax.servlet.ServletException;
@@ -18,21 +16,20 @@ public class GetServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int paymentId = Integer.valueOf(req.getParameter("paymentId"));
+        int readerId = Integer.valueOf(req.getParameter("readerId"));
         DAOFactory daoFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
-        PaymentDAO paymentDAO = daoFactory.getPaymentDAO();
-        Payment entity = null;
+        ReaderDAO readerDAO = daoFactory.getReaderDAO();
+        Reader entity = null;
         try {
-            entity = paymentDAO.get(paymentId);
+            entity = readerDAO.get(readerId);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         JSONObject jsonAnswer = new JSONObject();
-        jsonAnswer.append("paymentId", entity.getId());
-        jsonAnswer.append("cost", entity.getCost());
-        jsonAnswer.append("isPayed", entity.isPayed());
+        jsonAnswer.append("readerId", entity.getId());
+        jsonAnswer.append("login", entity.getLogin());
+        jsonAnswer.append("password", entity.getPassword());
         jsonAnswer.append("languageId", entity.getLanguageId());
-        resp.setCharacterEncoding("UTF-8");
         resp.getWriter().write(jsonAnswer.toString());
     }
 

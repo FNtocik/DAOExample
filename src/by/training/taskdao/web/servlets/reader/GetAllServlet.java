@@ -1,10 +1,8 @@
-package by.training.taskdao.servlets.publication;
+package by.training.taskdao.web.servlets.reader;
 
 import by.training.taskdao.dao.factory.DAOFactory;
-import by.training.taskdao.dao.interfaces.PaymentDAO;
-import by.training.taskdao.dao.interfaces.PublicationDAO;
-import by.training.taskdao.entities.Payment;
-import by.training.taskdao.entities.Publication;
+import by.training.taskdao.dao.interfaces.ReaderDAO;
+import by.training.taskdao.entities.Reader;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -20,25 +18,23 @@ public class GetAllServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
-        PublicationDAO publicationDAO = factory.getPublicationDAO();
-        List<Publication> entities= null;
+        ReaderDAO readerDAO = factory.getReaderDAO();
+        List<Reader> entities = null;
         try {
-            entities = publicationDAO.getAll();
+            entities = readerDAO.getAll();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         if(entities != null){
             JSONArray jsonArray = new JSONArray();
-            for (Publication current : entities) {
+            for (Reader current : entities) {
                 JSONObject object = new JSONObject();
-                object.append("publicationId", current.getId());
-                object.append("name", current.getName());
-                object.append("author", current.getAuthor());
-                object.append("cost", current.getCost());
+                object.append("readerId", current.getId());
+                object.append("login", current.getLogin());
+                object.append("password", current.getPassword());
                 object.append("languageId", current.getLanguageId());
                 jsonArray.put(object);
             }
-            resp.setCharacterEncoding("UTF-8");
             resp.getWriter().write(jsonArray.toString());
         }
     }

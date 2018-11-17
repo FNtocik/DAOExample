@@ -1,8 +1,8 @@
-package by.training.taskdao.servlets.payment;
+package by.training.taskdao.web.servlets.publication;
 
 import by.training.taskdao.dao.factory.DAOFactory;
-import by.training.taskdao.dao.interfaces.PaymentDAO;
-import by.training.taskdao.dao.interfaces.SubscriptionDAO;
+import by.training.taskdao.dao.interfaces.PublicationDAO;
+import by.training.taskdao.entities.Publication;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,19 +11,23 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class DeleteServlet extends HttpServlet {
+public class AddServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int paymentId = Integer.valueOf(String.valueOf(req.getParameter("paymentId")));
+        String name = String.valueOf(req.getParameter("name"));
+        String author = String.valueOf(req.getParameter("author"));
+        int cost = Integer.valueOf(String.valueOf(req.getParameter("cost")));
+        int languageId = Integer.valueOf(String.valueOf(req.getParameter(
+                                                    "languageId")));
         DAOFactory daoFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
-        PaymentDAO paymentDAO = daoFactory.getPaymentDAO();
+        PublicationDAO publicationDAO = daoFactory.getPublicationDAO();
+        Publication entity = new Publication(author, name, cost, languageId);
         try {
-            paymentDAO.delete(paymentId);
+            publicationDAO.create(entity);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        resp.getWriter().write("Done");
     }
 
     @Override

@@ -32,6 +32,13 @@ public class ConfigurationManager {
                                                             currentLocale);
     }
 
+    public void updateLocale(){
+        Locale currentLocale = LocaleManager.getInstance().getLocale();
+        dbConfigResourceBundle = ResourceBundle.getBundle("dbconfig");
+        mysqlQueryResourceBundle = ResourceBundle.getBundle("mysql_query",
+                currentLocale);
+    }
+
     /**
      * Singleton pattern realisation
      * @return instance of manager

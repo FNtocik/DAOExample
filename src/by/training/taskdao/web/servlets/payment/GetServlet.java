@@ -1,10 +1,9 @@
-package by.training.taskdao.servlets.publication;
+package by.training.taskdao.web.servlets.payment;
 
 import by.training.taskdao.dao.factory.DAOFactory;
 import by.training.taskdao.dao.interfaces.PaymentDAO;
-import by.training.taskdao.dao.interfaces.PublicationDAO;
 import by.training.taskdao.entities.Payment;
-import by.training.taskdao.entities.Publication;
+import org.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,25 +12,25 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class AddServlet extends HttpServlet {
+public class GetServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
-        String name = String.valueOf(req.getParameter("name"));
-        String author = String.valueOf(req.getParameter("author"));
-        int cost = Integer.valueOf(String.valueOf(req.getParameter("cost")));
-        int languageId = Integer.valueOf(String.valueOf(req.getParameter(
-                                                    "languageId")));
+        int paymentId = Integer.valueOf(req.getParameter("paymentId"));
         DAOFactory daoFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
-        PublicationDAO publicationDAO = daoFactory.getPublicationDAO();
-        Publication entity = new Publication(author, name, cost, languageId);
+        PaymentDAO paymentDAO = daoFactory.getPaymentDAO();
+        Payment entity = null;
         try {
-            publicationDAO.create(entity);
+            entity = paymentDAO.get(paymentId);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        resp.getWriter().write("Done");
+        JSONObject jsonAnswer = new JSONObject();
+        jsonAnswer.append("paymentId", entity.getId());
+        jsonAnswer.append("cost", entity.getCost());
+        jsonAnswer.append("isPayed", entity.isPayed());
+        jsonAnswer.append("languageId", entity.getLanguageId());
+        resp.getWriter().write(jsonAnswer.toString());
     }
 
     @Override

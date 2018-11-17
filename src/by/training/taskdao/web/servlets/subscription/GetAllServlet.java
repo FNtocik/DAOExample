@@ -1,4 +1,4 @@
-package by.training.taskdao.servlets.subscription;
+package by.training.taskdao.web.servlets.subscription;
 
 import by.training.taskdao.dao.factory.DAOFactory;
 import by.training.taskdao.dao.interfaces.PaymentDAO;
@@ -57,7 +57,6 @@ public class GetAllServlet extends HttpServlet {
                 object.append("languageId", current.getLanguageId());
                 jsonArray.put(object);
             }
-            resp.setCharacterEncoding("UTF-8");
             resp.getWriter().write(jsonArray.toString());
         }
     }
