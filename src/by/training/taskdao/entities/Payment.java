@@ -2,7 +2,7 @@ package by.training.taskdao.entities;
 
 /**
  * Payment class with properties <b>cost</b>, <b>payed</b>
- * flag, <b>language</b> locale and read only id
+ * flag, <b>language</b> config and read only id
  * @author Anton Puhachou
  */
 public class Payment {

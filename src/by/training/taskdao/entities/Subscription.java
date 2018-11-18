@@ -5,7 +5,7 @@ import java.sql.Date;
 /**
  * Subscription class with properties <b>reader ID</b>, <b>publication
  * ID</b>, <b>payment ID</b>, <b>start subscription</b> date, <b>end
- * subscription</b> date and <b>language</b> locale and read only id
+ * subscription</b> date and <b>language</b> config and read only id
  * @author Anton Puhachou
  */
 public class Subscription {

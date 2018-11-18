@@ -2,7 +2,7 @@ package by.training.taskdao.entities;
 
 /**
  * Publication class with properties <b>author</b>, <b>name</b>,
- * <b>language</b> locale and read only id
+ * <b>language</b> config and read only id
  * @author Anton Puhachou
  */
 public class Publication {

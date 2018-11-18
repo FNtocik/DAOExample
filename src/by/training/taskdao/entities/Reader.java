@@ -1,8 +1,10 @@
 package by.training.taskdao.entities;
 
+import java.util.Objects;
+
 /**
  * Reader class with properties <b>login</b>, <b>password</b>,
- * <b>language</b> locale and read only id
+ * <b>language</b> config and read only id
  * @author Anton Puhachou
  */
 public class Reader {
@@ -101,5 +103,19 @@ public class Reader {
      */
     public void setLanguageId(int languageId) {
         this.languageId = languageId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reader reader = (Reader) o;
+        return login.equals(reader.login) &&
+                password.equals(reader.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(login, password);
     }
 }

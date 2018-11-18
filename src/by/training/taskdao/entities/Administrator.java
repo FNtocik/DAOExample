@@ -1,5 +1,7 @@
 package by.training.taskdao.entities;
 
+import java.util.Objects;
+
 /**
  * Administrator class with properties <b>login</b>, <b>password</b> and read
  * only id
@@ -78,5 +80,19 @@ public class Administrator {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Administrator that = (Administrator) o;
+        return login.equals(that.login) &&
+                password.equals(that.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(login, password);
     }
 }
