@@ -1,7 +1,7 @@
 package by.training.taskdao.locale;
 
 import by.training.taskdao.dao.mysql.config.ConfigurationManager;
-import by.training.taskdao.web.locale.LocaleStringsManager;
+import by.training.taskdao.web.config.LocaleStringsManager;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -12,16 +12,16 @@ import java.util.ResourceBundle;
  */
 public class LocaleManager {
 
-    /**constants that reflect the selected en locale*/
+    /**constants that reflect the selected en config*/
     public static final int EN_LOCALE = 1;
 
-    /**constants that reflect the selected ru locale*/
+    /**constants that reflect the selected ru config*/
     public static final int RU_LOCALE = 2;
 
-    /**field current locale*/
+    /**field current config*/
     private Locale locale;
 
-    /**field locale bundle*/
+    /**field config bundle*/
     private ResourceBundle localeResourceBundle;
 
     /**static field instance of manager*/
@@ -46,16 +46,16 @@ public class LocaleManager {
     }
 
     /**
-     * get current locale
-     * @return current locale
+     * get current config
+     * @return current config
      */
     public Locale getLocale(){
         return locale;
     }
 
     /**
-     * set current locale
-     * @param which represents witch locale to set
+     * set current config
+     * @param which represents witch config to set
      * @see #EN_LOCALE
      * @see #RU_LOCALE
      */

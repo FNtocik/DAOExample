@@ -1,4 +1,4 @@
-package by.training.taskdao.web.locale;
+package by.training.taskdao.web.config;
 
 import by.training.taskdao.locale.LocaleManager;
 
@@ -31,5 +31,9 @@ public class LocaleStringsManager {
 
     public String getLoginPageStrings(){
         return webStringsResourceBundle.getString("login");
+    }
+
+    public String getDeniedPageStrings() {
+        return webStringsResourceBundle.getString("denied");
     }
 }

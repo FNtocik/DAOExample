@@ -6,175 +6,55 @@
 
     <filter>
         <filter-name>encodeFilter</filter-name>
-        <filter-class>by.training.taskdao.web.filter.encodeFilter</filter-class>
+        <filter-class>by.training.taskdao.web.filter.EncodeFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>encodeFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <filter>
+        <filter-name>SecurityFilter</filter-name>
+        <filter-class>by.training.taskdao.web.filter.SecurityFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SecurityFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
     <servlet>
-        <servlet-name>addSubscription</servlet-name>
-        <servlet-class>by.training.taskdao.web.servlets.subscription.AddServlet</servlet-class>
+        <servlet-name>SubscriptionServlet</servlet-name>
+        <servlet-class>by.training.taskdao.web.servlets.subscription.SubscriptionsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>addSubscription</servlet-name>
-        <url-pattern>/addSub</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>deleteSubscription</servlet-name>
-        <servlet-class>by.training.taskdao.web.servlets.subscription.DeleteServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>deleteSubscription</servlet-name>
-        <url-pattern>/deleteSub</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>editSubscription</servlet-name>
-        <servlet-class>by.training.taskdao.web.servlets.subscription.EditServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>editSubscription</servlet-name>
-        <url-pattern>/editSub</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>getSubscription</servlet-name>
-        <servlet-class>by.training.taskdao.web.servlets.subscription.GetServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>getSubscription</servlet-name>
-        <url-pattern>/getSub</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>getAllSubscription</servlet-name>
-        <servlet-class>by.training.taskdao.web.servlets.subscription.GetAllServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>getAllSubscription</servlet-name>
-        <url-pattern>/getAllSub</url-pattern>
+        <servlet-name>SubscriptionServlet</servlet-name>
+        <url-pattern>/subscription</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>addPublication</servlet-name>
-        <servlet-class>by.training.taskdao.web.servlets.publication.AddServlet</servlet-class>
+        <servlet-name>PublicationServlet</servlet-name>
+        <servlet-class>by.training.taskdao.web.servlets.publication.PublicationServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>addPublication</servlet-name>
-        <url-pattern>/addPublication</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>deletePublication</servlet-name>
-        <servlet-class>by.training.taskdao.web.servlets.publication.DeleteServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>deletePublication</servlet-name>
-        <url-pattern>/deletePublication</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>editPublication</servlet-name>
-        <servlet-class>by.training.taskdao.web.servlets.publication.EditServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>editPublication</servlet-name>
-        <url-pattern>/editPublication</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>getPublication</servlet-name>
-        <servlet-class>by.training.taskdao.web.servlets.publication.GetServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>getPublication</servlet-name>
-        <url-pattern>/getPublication</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>getAllPublication</servlet-name>
-        <servlet-class>by.training.taskdao.web.servlets.publication.GetAllServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>getAllPublication</servlet-name>
-        <url-pattern>/getAllPublication</url-pattern>
+        <servlet-name>PublicationServlet</servlet-name>
+        <url-pattern>/publication</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>addReader</servlet-name>
-        <servlet-class>by.training.taskdao.web.servlets.reader.AddServlet</servlet-class>
+        <servlet-name>ReaderServlet</servlet-name>
+        <servlet-class>by.training.taskdao.web.servlets.reader.ReaderServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>addReader</servlet-name>
-        <url-pattern>/addReader</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>deleteReader</servlet-name>
-        <servlet-class>by.training.taskdao.web.servlets.reader.DeleteServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>deleteReader</servlet-name>
-        <url-pattern>/deleteReader</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>editReader</servlet-name>
-        <servlet-class>by.training.taskdao.web.servlets.reader.EditServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>editReader</servlet-name>
-        <url-pattern>/editReader</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>getReader</servlet-name>
-        <servlet-class>by.training.taskdao.web.servlets.reader.GetServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>getReader</servlet-name>
-        <url-pattern>/getReader</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>getAllReader</servlet-name>
-        <servlet-class>by.training.taskdao.web.servlets.reader.GetAllServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>getAllReader</servlet-name>
-        <url-pattern>/getAllReader</url-pattern>
+        <servlet-name>ReaderServlet</servlet-name>
+        <url-pattern>/reader</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>addPayment</servlet-name>
-        <servlet-class>by.training.taskdao.web.servlets.payment.AddServlet</servlet-class>
+        <servlet-name>PaymentServlet</servlet-name>
+        <servlet-class>by.training.taskdao.web.servlets.payment.PaymentServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>addPayment</servlet-name>
-        <url-pattern>/addPayment</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>deletePayment</servlet-name>
-        <servlet-class>by.training.taskdao.web.servlets.payment.DeleteServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>deletePayment</servlet-name>
-        <url-pattern>/deletePayment</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>editPayment</servlet-name>
-        <servlet-class>by.training.taskdao.web.servlets.payment.EditServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>editPayment</servlet-name>
-        <url-pattern>/editPayment</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>getPayment</servlet-name>
-        <servlet-class>by.training.taskdao.web.servlets.payment.GetServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>getPayment</servlet-name>
-        <url-pattern>/getPayment</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>getAllPayment</servlet-name>
-        <servlet-class>by.training.taskdao.web.servlets.payment.GetAllServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>getAllPayment</servlet-name>
-        <url-pattern>/getAllPayment</url-pattern>
+        <servlet-name>PaymentServlet</servlet-name>
+        <url-pattern>/payment</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -184,6 +64,23 @@
     <servlet-mapping>
         <servlet-name>getLocaleStringsServlet</servlet-name>
         <url-pattern>/getLocale</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>by.training.taskdao.web.servlets.login.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>by.training.taskdao.web.servlets.login.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>
