@@ -7,9 +7,11 @@
 </head>
 <body>
 <input hidden type="text" id="languageId" value="">
+<a href="logout">Logout</a>
 <div>
-    <a href="publication.html">Publications</a>
-    <a href="reader.html">Readers</a>
+    <input type="button" onclick="redirectToPublications()" value="Publications">
+    <input type="button" onclick="redirectToReaders()" value="Readers">
+    <input type="button" onclick="redirectToPayment()" value="Payments">
 </div>
 <div>
     <form>
@@ -34,9 +36,9 @@
         <label>
             <input type="date" id="endDate" value=""><br>
         </label>
-        <input type="submit" onclick="edit()" value="Save">
-        <input type="submit" onclick="add()" value="Add">
-        <input type="submit" onclick="del()" value="Delete">
+        <input type="button" onclick="edit()" value="Save">
+        <input type="button" onclick="add()" value="Add">
+        <input type="button" onclick="del()" value="Delete">
     </form>
 </div>
 <div>
@@ -84,13 +86,6 @@
 
     function add() {
         var request = new XMLHttpRequest();
-        request.open("POST", "addSub", true);
-        request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        request.onreadystatechange = function (ev) {
-            if(this.readyState != XMLHttpRequest.DONE)
-                return;
-            getAll();
-        };
         var readerId = readerSelect.options[readerSelect.selectedIndex].value;
         var publicationId =
             publicationSelect.options[publicationSelect.selectedIndex].value;
@@ -99,15 +94,22 @@
         var startDate = dateStartInput.value;
         var endDate = dateEndInput.value;
         var languageId = languageElement.value;
-        var msg = "readerId=" + readerId + "&publicationId=" + publicationId
+        var params = "readerId=" + readerId + "&publicationId=" + publicationId
             + "&paymentId=" + paymentId + "&languageId=" + languageId +
             "&endDate=" + endDate + "&startDate=" + startDate;
-        request.send(msg);
+        request.open("PUT", "subscription?" + params, true);
+        request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        request.onreadystatechange = function (ev) {
+            if(this.readyState != XMLHttpRequest.DONE)
+                return;
+            getAll();
+        };
+        request.send();
     }
 
     function edit() {
         var request = new XMLHttpRequest();
-        request.open("POST", "editSub", true);
+        request.open("POST", "subscription", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
@@ -132,20 +134,21 @@
 
     function del() {
         var request = new XMLHttpRequest();
-        request.open("POST", "deleteSub", true);
+        var params = "subscriptionId=" + subscriptionElement.value;
+        request.open("DELETE", "subscription?" + params, true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
             getAll();
         };
-        request.send("subscriptionId=" +
-            subscriptionElement.value);
+        request.send();
     }
 
     function get() {
         var request = new XMLHttpRequest();
-        request.open("POST", "getSub", true);
+        var params = "subscriptionId=" + subscriptionElement.value;
+        request.open("GET", "subscription?" + params, true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
@@ -159,19 +162,20 @@
             dateEndInput.value = subscription.endDate;
 
         };
-        request.send("subscriptionId=" +
-            subscriptionElement.value);
+        request.send();
     }
 
     function getAll() {
         var requestToSubs = new XMLHttpRequest();
-        requestToSubs.open("POST", "getAllSub", true);
+        requestToSubs.open("GET", "subscription", true);
         requestToSubs.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         requestToSubs.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
+            while(table.firstChild){
+                table.removeChild(table.firstChild);
+            }
             var subscriptions = JSON.parse(this.responseText);
-            table.childNodes = null;
             languageElement.value = subscriptions[0]["languageId"];
             for(var i = 0; i < subscriptions.length; i++){
                 var tr = document.createElement("tr");
@@ -202,12 +206,12 @@
                 table.appendChild(tr);
             }
         };
-        requestToSubs.send("");
+        requestToSubs.send();
     }
 
     function fillReaderSelect() {
         var request = new XMLHttpRequest();
-        request.open("POST", "getAllReader", true);
+        request.open("GET", "reader", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if (this.readyState != XMLHttpRequest.DONE)
@@ -218,12 +222,12 @@
                 Option(readers[i]["login"], readers[i]["readerId"]);
             }
         };
-        request.send("");
+        request.send();
     }
 
     function fillPaymentSelect() {
         var request = new XMLHttpRequest();
-        request.open("POST", "getAllPayment", true);
+        request.open("GET", "payment", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if (this.readyState != XMLHttpRequest.DONE)
@@ -234,12 +238,12 @@
                 Option(payments[i]["cost"], payments[i]["paymentId"]);
             }
         };
-        request.send("");
+        request.send();
     }
 
     function fillPublicationSelect() {
         var request = new XMLHttpRequest();
-        request.open("POST", "getAllPublication", true);
+        request.open("GET", "publication", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if (this.readyState != XMLHttpRequest.DONE)
@@ -253,7 +257,7 @@
                     publications[i]["publicationId"]);
             }
         };
-        request.send("");
+        request.send();
     }
 
     function searchValueInSelect(options, valueToSelect) {
@@ -263,6 +267,42 @@
                 return;
             }
         }
+    }
+
+    function redirectToReaders() {
+        var request = new XMLHttpRequest();
+        request.open("GET", "reader.html", true);
+        request.onreadystatechange = function (ev) {
+            if(this.readyState == XMLHttpRequest.DONE)
+                window.location.href = "reader.html";
+        };
+        request.send();
+    }
+
+    function redirectToPublications() {
+        var request = new XMLHttpRequest();
+        request.open("GET", "publication.html", true);
+        request.onreadystatechange = function (ev) {
+            if(this.readyState == XMLHttpRequest.DONE)
+                window.location.href = "publication.html";
+        };
+        request.send();
+    }
+
+    function redirectToPayment() {
+        var request = new XMLHttpRequest();
+        request.open("GET", "payment.html", true);
+        request.onreadystatechange = function (ev) {
+            if(this.readyState == XMLHttpRequest.DONE)
+                window.location.href = "payment.html";
+        };
+        request.send();
+    }
+
+    function logout() {
+        var request = new XMLHttpRequest();
+        request.open("POST", "logout", true);
+        request.send();
     }
 </script>
 </html>

@@ -23,9 +23,9 @@
         <label>
             <input type="checkbox" id="isPayed">
         </label><br>
-        <input type="submit" onclick="edit()" value="Save">
-        <input type="submit" onclick="add()" value="Add">
-        <input type="submit" onclick="del()" value="Delete">
+        <input type="button" onclick="edit()" value="Save">
+        <input type="button" onclick="add()" value="Add">
+        <input type="button" onclick="del()" value="Delete">
     </form>
 </div>
 <div>
@@ -64,24 +64,24 @@
 
     function add() {
         var request = new XMLHttpRequest();
-        request.open("POST", "addPayment", true);
+        var cost = summaryInput.value;
+        var isPayed = isPayedCheckbox.value;
+        var languageId = languageElement.value;
+        var params = "cost=" + cost + "&isPayed="
+            + isPayed.toString() + "&languageId=" + languageId;
+        request.open("PUT", "payment?" + params, true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
             getAll();
         };
-        var cost = summaryInput.value;
-        var isPayed = isPayedCheckbox.value;
-        var languageId = languageElement.value;
-        var msg = "cost=" + cost + "&isPayed="
-            + isPayed.toString() + "&languageId=" + languageId;
-        request.send(msg);
+        request.send();
     }
 
     function edit() {
         var request = new XMLHttpRequest();
-        request.open("POST", "editPayment", true);
+        request.open("POST", "payment", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
@@ -99,20 +99,21 @@
 
     function del() {
         var request = new XMLHttpRequest();
-        request.open("POST", "deletePayment", true);
+        var params = "paymentId=" + paymentElement.value;
+        request.open("DELETE", "payment?" + params, true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
             getAll();
         };
-        request.send("paymentId=" +
-            paymentElement.value);
+        request.send();
     }
 
     function get() {
         var request = new XMLHttpRequest();
-        request.open("POST", "getPayment", true);
+        var params = "paymentId=" + paymentElement.value;
+        request.open("GET", "payment?" + params, true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
@@ -123,18 +124,19 @@
             isPayedCheckbox.value = reader.isPayed;
 
         };
-        request.send("paymentId=" +
-            paymentElement.value);
+        request.send();
     }
 
     function getAll() {
         var requestToSubs = new XMLHttpRequest();
-        requestToSubs.open("POST", "getAllPayment", true);
-        requestToSubs.setRequestHeader("Content-Type",
-            "application/x-www-form-urlencoded");
+        requestToSubs.open("GET", "payment", true);
+        requestToSubs.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         requestToSubs.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
+            while(table.firstChild){
+                table.removeChild(table.firstChild);
+            }
             var payments = JSON.parse(this.responseText);
             table.childNodes = null;
             languageElement.value = payments[0]["languageId"];
@@ -155,7 +157,7 @@
                 table.appendChild(tr);
             }
         };
-        requestToSubs.send("");
+        requestToSubs.send();
     }
 
 </script>

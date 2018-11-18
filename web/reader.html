@@ -22,9 +22,9 @@
         <label>
             <input type="text" id="password">
         </label><br>
-        <input type="submit" onclick="edit()" value="Save">
-        <input type="submit" onclick="add()" value="Add">
-        <input type="submit" onclick="del()" value="Delete">
+        <input type="button" onclick="edit()" value="Save">
+        <input type="button" onclick="add()" value="Add">
+        <input type="button" onclick="del()" value="Delete">
     </form>
 </div>
 <div>
@@ -63,24 +63,24 @@
 
     function add() {
         var request = new XMLHttpRequest();
-        request.open("POST", "addReader", true);
+        var login = loginInput.value;
+        var password = passwordInput.value;
+        var languageId = languageElement.value;
+        var params = "login=" + login + "&password="
+            + password + "&languageId=" + languageId;
+        request.open("PUT", "reader?" + params, true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
             getAll();
         };
-        var login = loginInput.value;
-        var password = passwordInput.value;
-        var languageId = languageElement.value;
-        var msg = "login=" + login + "&password="
-            + password + "&languageId=" + languageId;
-        request.send(msg);
+        request.send();
     }
 
     function edit() {
         var request = new XMLHttpRequest();
-        request.open("POST", "editReader", true);
+        request.open("POST", "reader", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
@@ -98,20 +98,21 @@
 
     function del() {
         var request = new XMLHttpRequest();
-        request.open("POST", "deleteReader", true);
+        var params = "readerId=" + readerElement.value;
+        request.open("DELETE", "reader?" + params, true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
             getAll();
         };
-        request.send("readerId=" +
-            readerElement.value);
+        request.send();
     }
 
     function get() {
         var request = new XMLHttpRequest();
-        request.open("POST", "getReader", true);
+        var params = "readerId=" + readerElement.value;
+        request.open("GET", "reader?" + params, true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
@@ -122,20 +123,21 @@
             passwordInput.value = reader.password;
 
         };
-        request.send("readerId=" +
-            readerElement.value);
+        request.send();
     }
 
     function getAll() {
         var requestToSubs = new XMLHttpRequest();
-        requestToSubs.open("POST", "getAllReader", true);
+        requestToSubs.open("GET", "reader", true);
         requestToSubs.setRequestHeader("Content-Type",
             "application/x-www-form-urlencoded");
         requestToSubs.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
             var readers = JSON.parse(this.responseText);
-            table.childNodes = null;
+            while(table.firstChild){
+                table.removeChild(table.firstChild);
+            }
             languageElement.value = readers[0]["languageId"];
             for(var i = 0; i < readers.length; i++){
                 var tr = document.createElement("tr");
@@ -154,7 +156,7 @@
                 table.appendChild(tr);
             }
         };
-        requestToSubs.send("");
+        requestToSubs.send();
     }
 
 </script>

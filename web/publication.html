@@ -25,9 +25,9 @@
         <label>
             <input type="number" id="cost" value="0">
         </label><br>
-        <input type="submit" onclick="edit()" value="Save">
-        <input type="submit" onclick="add()" value="Add">
-        <input type="submit" onclick="del()" value="Delete">
+        <input type="button" onclick="edit()" value="Save">
+        <input type="button" onclick="add()" value="Add">
+        <input type="button" onclick="del()" value="Delete">
     </form>
 </div>
 <div>
@@ -68,25 +68,25 @@
 
     function add() {
         var request = new XMLHttpRequest();
-        request.open("POST", "addPublication", true);
+        var name = nameInput.value;
+        var author = authorInput.value;
+        var cost = costInput.value;
+        var languageId = languageElement.value;
+        var params = "name=" + name + "&author="
+            + author + "&cost=" + cost + "&languageId=" + languageId;
+        request.open("PUT", "publication?" + params, true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
             getAll();
         };
-        var name = nameInput.value;
-        var author = authorInput.value;
-        var cost = costInput.value;
-        var languageId = languageElement.value;
-        var msg = "name=" + name + "&author="
-            + author + "&cost=" + cost + "&languageId=" + languageId;
-        request.send(msg);
+        request.send();
     }
 
     function edit() {
         var request = new XMLHttpRequest();
-        request.open("POST", "editPublication", true);
+        request.open("POST", "publication", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
@@ -105,20 +105,21 @@
 
     function del() {
         var request = new XMLHttpRequest();
-        request.open("POST", "deletePublication", true);
+        var params = "publicationId=" + publicationElement.value;
+        request.open("DELETE", "publication?" + params, true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
             getAll();
         };
-        request.send("publicationId=" +
-            publicationElement.value);
+        request.send();
     }
 
     function get() {
         var request = new XMLHttpRequest();
-        request.open("POST", "getPublication", true);
+        var params = "publicationId=" + publicationElement.value;
+        request.open("GET", "publication?" + params, true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
@@ -129,20 +130,20 @@
             authorInput.value = publication.author;
             costInput.value = publication.cost;
         };
-        request.send("publicationId=" +
-            publicationElement.value);
+        request.send();
     }
 
     function getAll() {
         var requestToSubs = new XMLHttpRequest();
-        requestToSubs.open("POST", "getAllPublication", true);
-        requestToSubs.setRequestHeader("Content-Type",
-            "application/x-www-form-urlencoded");
+        requestToSubs.open("GET", "publication", true);
+        requestToSubs.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         requestToSubs.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
             var publications = JSON.parse(this.responseText);
-            table.childNodes = null;
+            while(table.firstChild){
+                table.removeChild(table.firstChild);
+            }
             languageElement.value = publications[0]["languageId"];
             for(var i = 0; i < publications.length; i++){
                 var tr = document.createElement("tr");
@@ -165,7 +166,7 @@
                 table.appendChild(tr);
             }
         };
-        requestToSubs.send("");
+        requestToSubs.send();
     }
 </script>
 </html>
