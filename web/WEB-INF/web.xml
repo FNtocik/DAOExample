@@ -20,6 +20,14 @@
         <filter-name>SecurityFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <filter>
+        <filter-name>CacheFilter</filter-name>
+        <filter-class>by.training.taskdao.web.filter.CacheFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CacheFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
     <servlet>
         <servlet-name>SubscriptionServlet</servlet-name>
@@ -63,7 +71,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>getLocaleStringsServlet</servlet-name>
-        <url-pattern>/getLocale</url-pattern>
+        <url-pattern>/locale</url-pattern>
     </servlet-mapping>
 
     <servlet>
