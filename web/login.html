@@ -24,7 +24,7 @@
 
     function setLocaleStrings() {
         var request = new XMLHttpRequest();
-        request.open("POST", "getLocale", true);
+        request.open("POST", "locale", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
@@ -48,7 +48,7 @@
                 return;
             var response = JSON.parse(this.responseText);
             if(response.answer[0] === true)
-                window.location.replace("subs.html");
+                window.location.replace("subscription.html");
             else
                 document.getElementById("errorOutput").hidden = false;
         };

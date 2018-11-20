@@ -2,6 +2,7 @@ package by.training.taskdao.web.utils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import java.security.Principal;
 
 public class UserRoleRequest extends HttpServletRequestWrapper {
 
@@ -21,5 +22,18 @@ public class UserRoleRequest extends HttpServletRequestWrapper {
     @Override
     public boolean isUserInRole(String role) {
         return this.role.equals(role);
+    }
+
+    @Override
+    public Principal getUserPrincipal() {
+        if(this.login == null) {
+            return request.getUserPrincipal();
+        }
+        return new Principal() {
+            @Override
+            public String getName() {
+                return login;
+            }
+        };
     }
 }

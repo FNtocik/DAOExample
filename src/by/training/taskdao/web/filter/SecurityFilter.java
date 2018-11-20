@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class SecurityFilter implements Filter {
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -21,13 +22,13 @@ public class SecurityFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest)servletRequest;
         HttpServletResponse response = (HttpServletResponse)servletResponse;
         String servletPath = request.getServletPath().substring(1);
-        if(servletPath.indexOf('.') == -1){
-            filterChain.doFilter(request, response);
-            return;
-        }
         if(servletPath.equals("login.html")){
             filterChain.doFilter(servletRequest, servletResponse);
             return;
+        }
+        boolean isServlet = !servletPath.contains(".");
+        if(isServlet) {
+            servletPath += " " + request.getMethod().toLowerCase();
         }
         LoggedUser loggedUser = SessionUtil.getLoggedUserFromSession(request.getSession());
         HttpServletRequest roleRequest = request;
@@ -36,14 +37,26 @@ public class SecurityFilter implements Filter {
             String role = loggedUser.getRole();
             roleRequest = new UserRoleRequest(login, role, request);
         }
-        if(SecurityUtil.isSecurityPage(servletPath)){
+        boolean isSecurityPage;
+        if(isServlet) {
+            isSecurityPage = SecurityUtil.isSecurityServlet(servletPath.split(" "));
+        } else {
+            isSecurityPage = SecurityUtil.isSecurityPage(servletPath);
+        }
+        if(isSecurityPage){
             if(loggedUser == null){
                 response.sendRedirect(request.getContextPath() + "/login.html");
                 return;
             }
-            boolean isHavePermission = SecurityUtil.havePermission(roleRequest, servletPath);
+            boolean isHavePermission;
+            if(isServlet) {
+                isHavePermission = SecurityUtil.havePermissionToServlet(roleRequest, servletPath.split(" "));
+            } else {
+                isHavePermission = SecurityUtil.havePermissionToPage(roleRequest, servletPath);
+            }
             if(!isHavePermission){
                 response.sendRedirect(request.getContextPath() + "/denied.html");
+                return;
             }
         }
         filterChain.doFilter(roleRequest, response);

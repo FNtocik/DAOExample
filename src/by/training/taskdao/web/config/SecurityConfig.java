@@ -19,9 +19,9 @@ public class SecurityConfig {
 
     private void init(){
         String readerUrls = roleResourceBundle.getString(ROLE_READER);
-        String administratorUrld = roleResourceBundle.getString(ROLE_ADMINISTRATOR);
+        String administratorUrls = roleResourceBundle.getString(ROLE_ADMINISTRATOR);
         setToMap(ROLE_READER, readerUrls);
-        setToMap(ROLE_ADMINISTRATOR, administratorUrld);
+        setToMap(ROLE_ADMINISTRATOR, administratorUrls);
     }
 
     private void setToMap(String roleName, String urls){
