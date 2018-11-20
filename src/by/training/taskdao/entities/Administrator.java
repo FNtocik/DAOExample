@@ -82,6 +82,11 @@ public class Administrator {
         this.password = password;
     }
 
+    /**
+     * indicates whether some other object is "equal to" this one
+     * @param o object that represents other object
+     * @return true if other object equal to this, in other case false
+     * */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -91,6 +96,10 @@ public class Administrator {
                 password.equals(that.password);
     }
 
+    /**
+     * returns a hash code value for the object
+     * @return a hash code
+     */
     @Override
     public int hashCode() {
         return Objects.hash(login, password);

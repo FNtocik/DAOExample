@@ -12,10 +12,10 @@ import java.util.ResourceBundle;
  */
 public class LocaleManager {
 
-    /**constants that reflect the selected en config*/
+    /**constants that reflect selected en config*/
     public static final int EN_LOCALE = 1;
 
-    /**constants that reflect the selected ru config*/
+    /**constants that reflect selected ru config*/
     public static final int RU_LOCALE = 2;
 
     /**field current config*/
@@ -54,8 +54,8 @@ public class LocaleManager {
     }
 
     /**
-     * set current config
-     * @param which represents witch config to set
+     * set new locale with update locales in other managers
+     * @param which represents witch locale to set
      * @see #EN_LOCALE
      * @see #RU_LOCALE
      */

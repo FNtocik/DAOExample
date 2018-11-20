@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Security filter to control page and servlets requests and prevent
+ * unauthorized access
+ * @author Anton Puhachou
+ */
 public class SecurityFilter implements Filter {
 
     @Override

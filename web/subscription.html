@@ -9,9 +9,9 @@
 <input hidden type="text" id="languageId" value="">
 <a href="logout">Logout</a>
 <div>
-    <input type="button" onclick="redirectToPublications()" value="Publications">
-    <input type="button" onclick="redirectToReaders()" value="Readers">
-    <input type="button" onclick="redirectToPayment()" value="Payments">
+    <a href="publication.html">Publication</a>
+    <a href="reader.html">Reader</a>
+    <a href="payment.html">Payment</a>
 </div>
 <div>
     <form>
@@ -267,36 +267,6 @@
                 return;
             }
         }
-    }
-
-    function redirectToReaders() {
-        var request = new XMLHttpRequest();
-        request.open("GET", "reader.html", true);
-        request.onreadystatechange = function (ev) {
-            if(this.readyState == XMLHttpRequest.DONE)
-                window.location.href = "reader.html";
-        };
-        request.send();
-    }
-
-    function redirectToPublications() {
-        var request = new XMLHttpRequest();
-        request.open("GET", "publication.html", true);
-        request.onreadystatechange = function (ev) {
-            if(this.readyState == XMLHttpRequest.DONE)
-                window.location.href = "publication.html";
-        };
-        request.send();
-    }
-
-    function redirectToPayment() {
-        var request = new XMLHttpRequest();
-        request.open("GET", "payment.html", true);
-        request.onreadystatechange = function (ev) {
-            if(this.readyState == XMLHttpRequest.DONE)
-                window.location.href = "payment.html";
-        };
-        request.send();
     }
 </script>
 </html>

@@ -4,7 +4,12 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Cache filter to set headers in the response that prevent caching
+ * @author Anton Puhachou
+ */
 public class CacheFilter implements Filter {
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
