@@ -3,11 +3,13 @@ package by.training.taskdao.web.servlets.locale;
 import by.training.taskdao.web.config.LocaleStringsManager;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@WebServlet("/locale")
 public class GetServlet extends HttpServlet {
 
     @Override
