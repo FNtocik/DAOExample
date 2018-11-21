@@ -36,7 +36,7 @@ public class MySQLPaymentDAO implements PaymentDAO {
                 resultSet = preparedStatement.executeQuery();
                 if (resultSet.next()) {
                     entity = new Payment(resultSet.getInt(1), resultSet.getInt(2),
-                            resultSet.getBoolean(3), resultSet.getInt(4));
+                            resultSet.getBoolean(3));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -62,10 +62,8 @@ public class MySQLPaymentDAO implements PaymentDAO {
         if (connection != null) {
             try {
                 PreparedStatement preparedStatement = connection.prepareStatement(ConfigurationManager.getInstance().getMySQLQueryPaymentCreate());
-                preparedStatement.setInt(1, entity.getId());
-                preparedStatement.setInt(2, entity.getCost());
-                preparedStatement.setBoolean(3, entity.isPayed());
-                preparedStatement.setInt(4, entity.getLanguageId());
+                preparedStatement.setInt(1, entity.getCost());
+                preparedStatement.setBoolean(2, entity.isPayed());
                 newId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -91,8 +89,7 @@ public class MySQLPaymentDAO implements PaymentDAO {
                 PreparedStatement preparedStatement = connection.prepareStatement(ConfigurationManager.getInstance().getMySQLQueryPaymentUpdate());
                 preparedStatement.setInt(1, entity.getCost());
                 preparedStatement.setBoolean(2, entity.isPayed());
-                preparedStatement.setInt(3, entity.getLanguageId());
-                preparedStatement.setInt(4, entity.getId());
+                preparedStatement.setInt(3, entity.getId());
                 updatedId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -144,8 +141,7 @@ public class MySQLPaymentDAO implements PaymentDAO {
                 while (resultSet.next()) {
                     entities.add(new Payment(resultSet.getInt(1),
                                             resultSet.getInt(2),
-                                            resultSet.getBoolean(3),
-                                            resultSet.getInt(4)));
+                                            resultSet.getBoolean(3)));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

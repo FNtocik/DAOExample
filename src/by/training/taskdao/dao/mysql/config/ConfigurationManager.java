@@ -1,8 +1,5 @@
 package by.training.taskdao.dao.mysql.config;
 
-import by.training.taskdao.locale.LocaleManager;
-
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
@@ -26,17 +23,8 @@ public class ConfigurationManager {
      * queries to database
      */
     private ConfigurationManager() {
-        Locale currentLocale = LocaleManager.getInstance().getLocale();
         dbConfigResourceBundle = ResourceBundle.getBundle("dbconfig");
-        mysqlQueryResourceBundle = ResourceBundle.getBundle("mysql_query",
-                                                            currentLocale);
-    }
-
-    public void updateLocale(){
-        Locale currentLocale = LocaleManager.getInstance().getLocale();
-        dbConfigResourceBundle = ResourceBundle.getBundle("dbconfig");
-        mysqlQueryResourceBundle = ResourceBundle.getBundle("mysql_query",
-                currentLocale);
+        mysqlQueryResourceBundle = ResourceBundle.getBundle("mysql_query");
     }
 
     /**

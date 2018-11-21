@@ -1,8 +1,5 @@
 package by.training.taskdao.locale;
 
-import by.training.taskdao.dao.mysql.config.ConfigurationManager;
-import by.training.taskdao.web.config.LocaleStringsManager;
-
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -54,13 +51,13 @@ public class LocaleManager {
     }
 
     /**
-     * set new locale with update locales in other managers
+     * set new locale
      * @param which represents witch locale to set
      * @see #EN_LOCALE
      * @see #RU_LOCALE
      */
     public void setLocale(int which){
-        switch (which){
+        switch (which) {
             case EN_LOCALE:
                 locale = new Locale(localeResourceBundle.getString("en"));
                 break;
@@ -71,7 +68,5 @@ public class LocaleManager {
                 locale = new Locale(localeResourceBundle.getString("default"));
                 break;
         }
-        ConfigurationManager.getInstance().updateLocale();
-        LocaleStringsManager.getInstance().updateLocale();
     }
 }

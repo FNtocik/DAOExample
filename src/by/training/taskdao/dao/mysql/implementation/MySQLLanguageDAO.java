@@ -64,8 +64,7 @@ public class MySQLLanguageDAO implements LanguageDAO {
             try {
                 PreparedStatement
                         preparedStatement = connection.prepareStatement(ConfigurationManager.getInstance().getMySQLQueryLanguageCreate());
-                preparedStatement.setInt(1, entity.getId());
-                preparedStatement.setString(2, entity.getSignature());
+                preparedStatement.setString(1, entity.getSignature());
                 newId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();

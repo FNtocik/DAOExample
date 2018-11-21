@@ -16,19 +16,14 @@ public class Payment {
     /**field flag payed*/
     private boolean payed;
 
-    /**field language id*/
-    private int languageId;
-
     /**
      * Constructor to create a specific object <b>without</b> id
      * @param cost total cost of payment
      * @param payed flag is payed
-     * @param languageId bound language id
      */
-    public Payment(int cost, boolean payed, int languageId) {
+    public Payment(int cost, boolean payed) {
         this.cost = cost;
         this.payed = payed;
-        this.languageId = languageId;
     }
 
     /**
@@ -36,13 +31,11 @@ public class Payment {
      * @param id entity id
      * @param cost total cost of payment
      * @param payed flag is payed
-     * @param languageId bound language id
      */
-    public Payment(int id, int cost, boolean payed, int languageId) {
+    public Payment(int id, int cost, boolean payed) {
         this.id = id;
         this.cost = cost;
         this.payed = payed;
-        this.languageId = languageId;
     }
 
     /**
@@ -83,21 +76,5 @@ public class Payment {
      */
     public void setPayed(boolean payed) {
         this.payed = payed;
-    }
-
-    /**
-     * get method of {@link Payment#languageId}
-     * @return bound language id
-     */
-    public int getLanguageId() {
-        return languageId;
-    }
-
-    /**
-     * set method of {@link Payment#languageId}
-     * @param languageId bound language id
-     */
-    public void setLanguageId(int languageId) {
-        this.languageId = languageId;
     }
 }

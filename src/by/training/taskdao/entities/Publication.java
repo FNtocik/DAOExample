@@ -19,6 +19,7 @@ public class Publication {
     /**field language id*/
     private int languageId;
 
+    /**field cost*/
     private int cost;
 
     /**

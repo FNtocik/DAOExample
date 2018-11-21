@@ -63,9 +63,8 @@ public class MySQLAdministratorDAO implements AdministratorDAO {
         if(connection != null) {
             try {
                 PreparedStatement preparedStatement = connection.prepareStatement(ConfigurationManager.getInstance().getMySQLQueryAdminCreate());
-                preparedStatement.setInt(1, entity.getId());
-                preparedStatement.setString(2, entity.getLogin());
-                preparedStatement.setString(3, entity.getPassword());
+                preparedStatement.setString(1, entity.getLogin());
+                preparedStatement.setString(2, entity.getPassword());
                 newId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();

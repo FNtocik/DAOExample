@@ -41,8 +41,7 @@ public class MySQLSubscriptionDAO implements SubscriptionDAO {
                                             resultSet.getInt(3),
                                             resultSet.getInt(6),
                                             resultSet.getDate(4),
-                                            resultSet.getDate(5),
-                                            resultSet.getInt(7));
+                                            resultSet.getDate(5));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -69,13 +68,11 @@ public class MySQLSubscriptionDAO implements SubscriptionDAO {
             try {
                 PreparedStatement
                         preparedStatement = connection.prepareStatement(ConfigurationManager.getInstance().getMySQLQuerySubscriptionCreate());
-                preparedStatement.setInt(1, entity.getId());
-                preparedStatement.setInt(2, entity.getReaderId());
-                preparedStatement.setInt(3, entity.getPublicationId());
-                preparedStatement.setDate(4, entity.getStartSubscription());
-                preparedStatement.setDate(5, entity.getEndSubscription());
-                preparedStatement.setInt(6, entity.getPaymentId());
-                preparedStatement.setInt(7, entity.getLanguageId());
+                preparedStatement.setInt(1, entity.getReaderId());
+                preparedStatement.setInt(2, entity.getPublicationId());
+                preparedStatement.setDate(3, entity.getStartSubscription());
+                preparedStatement.setDate(4, entity.getEndSubscription());
+                preparedStatement.setInt(5, entity.getPaymentId());
                 newId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -162,8 +159,7 @@ public class MySQLSubscriptionDAO implements SubscriptionDAO {
                                                 resultSet.getInt(3),
                                                 resultSet.getInt(6),
                                                 resultSet.getDate(4),
-                                                resultSet.getDate(5),
-                                                resultSet.getInt(7)));
+                                                resultSet.getDate(5)));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

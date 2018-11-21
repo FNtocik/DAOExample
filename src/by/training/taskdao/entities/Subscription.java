@@ -28,9 +28,6 @@ public class Subscription {
     /**field end subscription date*/
     private Date endSubscription;
 
-    /**field language id*/
-    private int languageId;
-
     /**
      * Constructor to create a specific object <b>without</b> id
      * @param readerId bound reader id
@@ -38,17 +35,15 @@ public class Subscription {
      * @param paymentId bound payment id
      * @param startSubscription start subscription date
      * @param endSubscription end subscription date
-     * @param languageId bound language id
-     * @see Subscription#Subscription(int, int, int, int, Date, Date, int)
+     * @see Subscription#Subscription(int, int, int, int, Date, Date)
      */
     public Subscription(int readerId, int publicationId, int paymentId,
-                        Date startSubscription, Date endSubscription, int languageId) {
+                        Date startSubscription, Date endSubscription) {
         this.readerId = readerId;
         this.publicationId = publicationId;
         this.paymentId = paymentId;
         this.startSubscription = startSubscription;
         this.endSubscription = endSubscription;
-        this.languageId = languageId;
     }
 
     /**
@@ -59,19 +54,17 @@ public class Subscription {
      * @param paymentId bound payment id
      * @param startSubscription start subscription date
      * @param endSubscription end subscription date
-     * @param languageId bound language id
-     * @see Subscription#Subscription(int, int, int, int, Date, Date, int)
+     * @see Subscription#Subscription(int, int, int, Date, Date)
      */
     public Subscription(int id, int readerId, int publicationId,
                         int paymentId, Date startSubscription,
-                        Date endSubscription, int languageId) {
+                        Date endSubscription) {
         this.id = id;
         this.readerId = readerId;
         this.publicationId = publicationId;
         this.paymentId = paymentId;
         this.startSubscription = startSubscription;
         this.endSubscription = endSubscription;
-        this.languageId = languageId;
     }
 
     /**
@@ -160,21 +153,5 @@ public class Subscription {
      */
     public void setEndSubscription(Date endSubscription) {
         this.endSubscription = endSubscription;
-    }
-
-    /**
-     * get method of {@link Subscription#languageId}
-     * @return bound language id
-     */
-    public int getLanguageId() {
-        return languageId;
-    }
-
-    /**
-     * set method of {@link Subscription#languageId}
-     * @param languageId bound language id
-     */
-    public void setLanguageId(int languageId) {
-        this.languageId = languageId;
     }
 }

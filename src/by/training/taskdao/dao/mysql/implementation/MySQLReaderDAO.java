@@ -64,10 +64,9 @@ public class MySQLReaderDAO implements ReaderDAO {
         if(connection != null) {
             try {
                 PreparedStatement preparedStatement = connection.prepareStatement(ConfigurationManager.getInstance().getMySQLQueryReaderCreate());
-                preparedStatement.setInt(1, entity.getId());
-                preparedStatement.setString(2, entity.getLogin());
-                preparedStatement.setString(3, entity.getPassword());
-                preparedStatement.setInt(4, entity.getLanguageId());
+                preparedStatement.setString(1, entity.getLogin());
+                preparedStatement.setString(2, entity.getPassword());
+                preparedStatement.setInt(3, entity.getLanguageId());
                 newId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -93,7 +92,8 @@ public class MySQLReaderDAO implements ReaderDAO {
                 PreparedStatement preparedStatement = connection.prepareStatement(ConfigurationManager.getInstance().getMySQLQueryReaderUpdate());
                 preparedStatement.setString(1, entity.getLogin());
                 preparedStatement.setString(2, entity.getPassword());
-                preparedStatement.setInt(3, entity.getId());
+                preparedStatement.setInt(3, entity.getLanguageId());
+                preparedStatement.setInt(4, entity.getId());
                 updatedId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
