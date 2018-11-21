@@ -1,12 +1,14 @@
 package by.training.taskdao.web.filter;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
 /**
  * Encode filter to set character encode in the request
  * @author Anton Puhachou
  */
+@WebFilter("/*")
 public class EncodeFilter implements Filter {
 
     @Override

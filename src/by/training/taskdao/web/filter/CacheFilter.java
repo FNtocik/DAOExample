@@ -1,6 +1,7 @@
 package by.training.taskdao.web.filter;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -8,6 +9,7 @@ import java.io.IOException;
  * Cache filter to set headers in the response that prevent caching
  * @author Anton Puhachou
  */
+@WebFilter("/secure/*")
 public class CacheFilter implements Filter {
 
     @Override

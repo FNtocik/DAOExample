@@ -6,6 +6,7 @@ import by.training.taskdao.web.utils.SessionUtil;
 import by.training.taskdao.web.utils.UserRoleRequest;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import java.io.IOException;
  * unauthorized access
  * @author Anton Puhachou
  */
+@WebFilter("/secure/*")
 public class SecurityFilter implements Filter {
 
     @Override
