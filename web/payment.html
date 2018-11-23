@@ -66,73 +66,72 @@
         var request = new XMLHttpRequest();
         var cost = summaryInput.value;
         var isPayed = isPayedCheckbox.value;
-        var languageId = languageElement.value;
-        var params = "cost=" + cost + "&isPayed="
-            + isPayed.toString() + "&languageId=" + languageId;
-        request.open("PUT", "payment?" + params, true);
+        var params = "cost=" + cost + "&isPayed=" + isPayed.toString();
+        request.open("POST", "secure/addPayment", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
             getAll();
         };
-        request.send();
+        request.send(params);
     }
 
     function edit() {
         var request = new XMLHttpRequest();
-        request.open("POST", "payment", true);
+        var paymentId = paymentElement.value;
+        var cost = summaryInput.value;
+        var isPayed = isPayedCheckbox.value;
+        var params = "paymentId=" + paymentId + "&cost=" + cost + "&isPayed="
+            + isPayed.toString();
+        request.open("POST", "secure/editPayment", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
             getAll();
         };
-        var paymentId = paymentElement.value;
-        var cost = summaryInput.value;
-        var isPayed = isPayedCheckbox.value;
-        var languageId = languageElement.value;
-        var msg = "paymentId=" + paymentId + "&cost=" + cost + "&isPayed="
-            + isPayed.toString() + "&languageId=" + languageId;
-        request.send(msg);
+        request.send(params);
     }
 
     function del() {
         var request = new XMLHttpRequest();
         var params = "paymentId=" + paymentElement.value;
-        request.open("DELETE", "payment?" + params, true);
+        request.open("POST", "secure/deletePayment", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
             getAll();
         };
-        request.send();
+        request.send(params);
     }
 
     function get() {
         var request = new XMLHttpRequest();
         var params = "paymentId=" + paymentElement.value;
-        request.open("GET", "payment?" + params, true);
+        request.open("POST", "secure/getPayment", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
             var reader = JSON.parse(this.responseText);
-            paymentElement.value = reader.paymentId;
-            summaryInput.value = reader.cost;
-            isPayedCheckbox.value = reader.isPayed;
+            paymentElement.value = reader["id"];
+            summaryInput.value = reader["cost"];
+            isPayedCheckbox.checked = reader["payed"];
 
         };
-        request.send();
+        request.send(params);
     }
 
     function getAll() {
         var requestToSubs = new XMLHttpRequest();
-        requestToSubs.open("GET", "payment", true);
+        requestToSubs.open("POST", "secure/getAllPayment", true);
         requestToSubs.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         requestToSubs.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
+                return;
+            if (this.responseText.length == 0)
                 return;
             while(table.firstChild){
                 table.removeChild(table.firstChild);
@@ -141,13 +140,14 @@
             table.childNodes = null;
             languageElement.value = payments[0]["languageId"];
             for(var i = 0; i < payments.length; i++){
+                var currentPayment = JSON.parse(payments[i]);
                 var tr = document.createElement("tr");
                 var tdId = document.createElement("td");
-                var textId = document.createTextNode(payments[i]["paymentId"]);
+                var textId = document.createTextNode(currentPayment["id"]);
                 var tdCost = document.createElement("td");
-                var textCost = document.createTextNode(payments[i]["cost"]);
+                var textCost = document.createTextNode(currentPayment["cost"]);
                 var tdPayed = document.createElement("td");
-                var textPayed = document.createTextNode(payments[i]["isPayed"].toString());
+                var textPayed = document.createTextNode(currentPayment["payed"].toString());
                 tdId.appendChild(textId);
                 tdCost.appendChild(textCost);
                 tdPayed.appendChild(textPayed);

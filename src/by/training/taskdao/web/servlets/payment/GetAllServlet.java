@@ -4,7 +4,6 @@ import by.training.taskdao.dao.factory.DAOFactory;
 import by.training.taskdao.dao.interfaces.PaymentDAO;
 import by.training.taskdao.entities.Payment;
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,14 +27,10 @@ public class GetAllServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        if (entities != null) {
+        if (entities != null && entities.size() != 0) {
             JSONArray jsonArray = new JSONArray();
             for (Payment current : entities) {
-                JSONObject object = new JSONObject();
-                object.append("paymentId", current.getId());
-                object.append("cost", current.getCost());
-                object.append("isPayed", current.isPayed());
-                jsonArray.put(object);
+                jsonArray.put(current.toString());
             }
             resp.setCharacterEncoding("UTF-8");
             resp.getWriter().write(jsonArray.toString());

@@ -1,8 +1,8 @@
-package by.training.taskdao.web.servlets.reader;
+package by.training.taskdao.web.servlets.language;
 
 import by.training.taskdao.dao.factory.DAOFactory;
-import by.training.taskdao.dao.interfaces.ReaderDAO;
-import by.training.taskdao.entities.Reader;
+import by.training.taskdao.dao.interfaces.LanguageDAO;
+import by.training.taskdao.entities.Language;
 import org.json.JSONArray;
 
 import javax.servlet.ServletException;
@@ -14,22 +14,22 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/secure/getAllReader")
+@WebServlet("/secure/getAllLanguage")
 public class GetAllServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
-        ReaderDAO readerDAO = factory.getReaderDAO();
-        List<Reader> entities = null;
+        LanguageDAO languageDAO = factory.getLanguageDAO();
+        List<Language> languageList = null;
         try {
-            entities = readerDAO.getAll();
+            languageList = languageDAO.getAll();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        if (entities != null && entities.size() != 0) {
+        if (languageList != null && languageList.size() != 0) {
             JSONArray jsonArray = new JSONArray();
-            for (Reader current : entities) {
+            for (Language current : languageList) {
                 jsonArray.put(current.toString());
             }
             resp.setCharacterEncoding("UTF-8");

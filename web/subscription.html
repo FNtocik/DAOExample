@@ -93,29 +93,20 @@
             paymentSelect.options[paymentSelect.selectedIndex].value;
         var startDate = dateStartInput.value;
         var endDate = dateEndInput.value;
-        var languageId = languageElement.value;
         var params = "readerId=" + readerId + "&publicationId=" + publicationId
-            + "&paymentId=" + paymentId + "&languageId=" + languageId +
-            "&endDate=" + endDate + "&startDate=" + startDate;
-        request.open("PUT", "subscription?" + params, true);
+            + "&paymentId=" + paymentId + "&endDate=" + endDate + "&startDate=" + startDate;
+        request.open("POST", "secure/addSubscription", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
             getAll();
         };
-        request.send();
+        request.send(params);
     }
 
     function edit() {
         var request = new XMLHttpRequest();
-        request.open("POST", "subscription", true);
-        request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        request.onreadystatechange = function (ev) {
-            if(this.readyState != XMLHttpRequest.DONE)
-                return;
-            getAll();
-        };
         var subscriptionId = subscriptionElement.value;
         var readerId = readerSelect.options[readerSelect.selectedIndex].value;
         var publicationId =
@@ -124,102 +115,124 @@
             paymentSelect.options[paymentSelect.selectedIndex].value;
         var startDate = dateStartInput.value;
         var endDate = dateEndInput.value;
-        var languageId = languageElement.value;
-        var msg = "subscriptionId=" + subscriptionId + "&readerId=" +
+        var params = "subscriptionId=" + subscriptionId + "&readerId=" +
             readerId + "&publicationId=" + publicationId + "&paymentId=" +
-            paymentId + "&languageId=" + languageId + "&endDate=" + endDate +
+            paymentId + "&endDate=" + endDate +
             "&startDate=" + startDate;
-        request.send(msg);
+        request.open("POST", "secure/editSubscription", true);
+        request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        request.onreadystatechange = function (ev) {
+            if (this.readyState != XMLHttpRequest.DONE)
+                return;
+            getAll();
+        };
+        request.send(params);
     }
 
     function del() {
         var request = new XMLHttpRequest();
         var params = "subscriptionId=" + subscriptionElement.value;
-        request.open("DELETE", "subscription?" + params, true);
+        request.open("POST", "secure/deleteSubscription", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
             getAll();
         };
-        request.send();
+        request.send(params);
     }
 
     function get() {
         var request = new XMLHttpRequest();
         var params = "subscriptionId=" + subscriptionElement.value;
-        request.open("GET", "subscription?" + params, true);
+        request.open("POST", "secure/getSubscription", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
             var subscription = JSON.parse(this.responseText);
-            subscriptionElement.value = subscription.subscriptionId;
-            searchValueInSelect(readerSelect.options, subscription.readerId);
-            searchValueInSelect(paymentSelect.options, subscription.paymentId);
-            searchValueInSelect(publicationSelect.options, subscription.publicationId);
-            dateStartInput.value = subscription.startDate;
-            dateEndInput.value = subscription.endDate;
+            var reader = JSON.parse(subscription["reader"]);
+            var publication = JSON.parse(subscription["publication"]);
+            var payment = JSON.parse(subscription["payment"]);
+            subscriptionElement.value = subscription["id"];
+            searchValueInSelect(readerSelect.options, reader["id"]);
+            searchValueInSelect(paymentSelect.options, payment["id"]);
+            searchValueInSelect(publicationSelect.options, publication["id"]);
+            dateStartInput.value = subscription["startDate"];
+            dateEndInput.value = subscription["endDate"];
 
         };
-        request.send();
+        request.send(params);
     }
 
     function getAll() {
         var requestToSubs = new XMLHttpRequest();
-        requestToSubs.open("GET", "subscription", true);
+        requestToSubs.open("POST", "secure/getAllSubscription", true);
         requestToSubs.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         requestToSubs.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
+                return;
+            console.log(this.responseText.length);
+            if (this.responseText.length == 0)
                 return;
             while(table.firstChild){
                 table.removeChild(table.firstChild);
             }
             var subscriptions = JSON.parse(this.responseText);
             for(var i = 0; i < subscriptions.length; i++){
+                var subscription = JSON.parse(subscriptions[i]);
+                var reader = JSON.parse(subscription["reader"]);
+                var publication = JSON.parse(subscription["publication"]);
+                var payment = JSON.parse(subscription["payment"]);
+
+                console.log(subscription + ";;;" + reader + ";;;" + publication + ";;;" + payment);
+
                 var tr = document.createElement("tr");
                 var tdId = document.createElement("td");
-                var textId = document.createTextNode(subscriptions[i]["subscriptionId"]);
-                var tdReaderId = document.createElement("td");
-                var textReaderId = document.createTextNode(subscriptions[i]["readerId"]);
-                var tdPaymentId = document.createElement("td");
-                var textPaymentId = document.createTextNode(subscriptions[i]["paymentId"]);
-                var tdPublicationId = document.createElement("td");
-                var textPublicationId = document.createTextNode(subscriptions[i]["publicationId"]);
+                var textId = document.createTextNode(subscription["id"]);
+                var tdReader = document.createElement("td");
+                var textReader = document.createTextNode(reader["login"]);
+                var tdPayment = document.createElement("td");
+                var textPayment = document.createTextNode(payment["cost"]);
+                var tdPublication = document.createElement("td");
+                var publicationString = publication["name"] + " " + publication["author"];
+                var textPublication = document.createTextNode(publicationString);
                 var tdStartDate = document.createElement("td");
-                var textStartDate = document.createTextNode(subscriptions[i]["startDate"]);
+                var textStartDate = document.createTextNode(subscription["startDate"]);
                 var tdEndDate = document.createElement("td");
-                var textEndDate = document.createTextNode(subscriptions[i]["endDate"]);
+                var textEndDate = document.createTextNode(subscription["endDate"]);
+
                 tdId.appendChild(textId);
-                tdReaderId.appendChild(textReaderId);
-                tdPaymentId.appendChild(textPaymentId);
-                tdPublicationId.appendChild(textPublicationId);
+                tdReader.appendChild(textReader);
+                tdPayment.appendChild(textPayment);
+                tdPublication.appendChild(textPublication);
                 tdStartDate.appendChild(textStartDate);
                 tdEndDate.appendChild(textEndDate);
+
                 tr.appendChild(tdId);
-                tr.appendChild(tdReaderId);
-                tr.appendChild(tdPublicationId);
-                tr.appendChild(tdPaymentId);
+                tr.appendChild(tdReader);
+                tr.appendChild(tdPublication);
+                tr.appendChild(tdPayment);
                 tr.appendChild(tdStartDate);
                 tr.appendChild(tdEndDate);
                 table.appendChild(tr);
             }
-            languageElement.value = subscriptions[0]["languageId"];
         };
         requestToSubs.send();
     }
 
     function fillReaderSelect() {
         var request = new XMLHttpRequest();
-        request.open("GET", "reader", true);
+        request.open("POST", "secure/getAllReader", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if (this.readyState != XMLHttpRequest.DONE)
                 return;
             var readers = JSON.parse(this.responseText);
             for(var i = 0; i < readers.length; i++){
+                var reader = JSON.parse(readers[i]);
                 readerSelect[readerSelect.length] = new
-                Option(readers[i]["login"], readers[i]["readerId"]);
+                Option(reader["login"], reader["id"]);
             }
         };
         request.send();
@@ -227,15 +240,16 @@
 
     function fillPaymentSelect() {
         var request = new XMLHttpRequest();
-        request.open("GET", "payment", true);
+        request.open("POST", "secure/getAllPayment", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if (this.readyState != XMLHttpRequest.DONE)
                 return;
             var payments = JSON.parse(this.responseText);
             for(var i = 0; i < payments.length; i++){
+                var payment = JSON.parse(payments[i]);
                 paymentSelect[paymentSelect.length] = new
-                Option(payments[i]["cost"], payments[i]["paymentId"]);
+                Option(payment["cost"], payment["id"]);
             }
         };
         request.send();
@@ -243,18 +257,16 @@
 
     function fillPublicationSelect() {
         var request = new XMLHttpRequest();
-        request.open("GET", "publication", true);
+        request.open("POST", "secure/getAllPublication", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if (this.readyState != XMLHttpRequest.DONE)
                 return;
-            console.log(this.responseText);
             var publications = JSON.parse(this.responseText);
             for(var i = 0; i < publications.length; i++){
+                var publication = JSON.parse(publications[i]);
                 publicationSelect[publicationSelect.length] = new
-                Option(publications[i]["name"] + " " +
-                    publications[i]["author"],
-                    publications[i]["publicationId"]);
+                Option(publication["name"] + " " + publication["author"], publication["id"]);
             }
         };
         request.send();

@@ -4,7 +4,6 @@ import by.training.taskdao.dao.factory.DAOFactory;
 import by.training.taskdao.dao.interfaces.PublicationDAO;
 import by.training.taskdao.entities.Publication;
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,16 +27,10 @@ public class GetAllServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        if (entities != null) {
+        if (entities != null && entities.size() != 0) {
             JSONArray jsonArray = new JSONArray();
             for (Publication current : entities) {
-                JSONObject object = new JSONObject();
-                object.append("publicationId", current.getId());
-                object.append("name", current.getName());
-                object.append("author", current.getAuthor());
-                object.append("cost", current.getCost());
-                object.append("languageId", current.getLanguageId());
-                jsonArray.put(object);
+                jsonArray.put(current.toString());
             }
             resp.setCharacterEncoding("UTF-8");
             resp.getWriter().write(jsonArray.toString());

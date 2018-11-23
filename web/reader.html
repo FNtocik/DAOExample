@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body>
-<input hidden type="text" id="languageId" value="">
+<input hidden type="text" id="languageId" value="1">
 <div>
     <a href="publication.html">Publications</a>
     <a href="subscription.html">Subscriptions</a>
@@ -68,85 +68,88 @@
         var languageId = languageElement.value;
         var params = "login=" + login + "&password="
             + password + "&languageId=" + languageId;
-        request.open("PUT", "reader?" + params, true);
+        request.open("POST", "secure/addReader", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
             getAll();
         };
-        request.send();
+        request.send(params);
     }
 
     function edit() {
         var request = new XMLHttpRequest();
-        request.open("POST", "reader", true);
+        var readerId = readerElement.value;
+        var login = loginInput.value;
+        var password = passwordInput.value;
+        var languageId = languageElement.value;
+        var params = "readerId=" + readerId + "&login=" + login + "&password="
+            + password + "&languageId=" + languageId;
+        request.open("POST", "secure/editReader", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
             getAll();
         };
-        var readerId = readerElement.value;
-        var login = loginInput.value;
-        var password = passwordInput.value;
-        var languageId = languageElement.value;
-        var msg = "readerId=" + readerId + "&login=" + login + "&password="
-            + password + "&languageId=" + languageId;
-        request.send(msg);
+        request.send(params);
     }
 
     function del() {
         var request = new XMLHttpRequest();
         var params = "readerId=" + readerElement.value;
-        request.open("DELETE", "reader?" + params, true);
+        request.open("POST", "secure/deleteReader", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
             getAll();
         };
-        request.send();
+        request.send(params);
     }
 
     function get() {
         var request = new XMLHttpRequest();
         var params = "readerId=" + readerElement.value;
-        request.open("GET", "reader?" + params, true);
+        request.open("POST", "secure/getReader", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
             var reader = JSON.parse(this.responseText);
-            readerElement.value = reader.readerId;
-            loginInput.value = reader.login;
-            passwordInput.value = reader.password;
+            readerElement.value = reader["id"];
+            loginInput.value = reader["login"];
+            passwordInput.value = reader["password"];
 
         };
-        request.send();
+        request.send(params);
     }
 
     function getAll() {
         var requestToSubs = new XMLHttpRequest();
-        requestToSubs.open("GET", "reader", true);
+        requestToSubs.open("POST", "secure/getAllReader", true);
         requestToSubs.setRequestHeader("Content-Type",
             "application/x-www-form-urlencoded");
         requestToSubs.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
+            if (this.responseText.length == 0)
+                return;
             var readers = JSON.parse(this.responseText);
+            console.log(readers);
             while(table.firstChild){
                 table.removeChild(table.firstChild);
             }
-            languageElement.value = readers[0]["languageId"];
             for(var i = 0; i < readers.length; i++){
+                var currentReader = JSON.parse(readers[i]);
                 var tr = document.createElement("tr");
                 var tdId = document.createElement("td");
-                var textId = document.createTextNode(readers[i]["readerId"]);
+                var textId = document.createTextNode(currentReader["id"]);
                 var tdLogin = document.createElement("td");
-                var textLogin = document.createTextNode(readers[i]["login"]);
+                var textLogin = document.createTextNode(currentReader["login"]);
                 var tdPassword = document.createElement("td");
-                var textPassword = document.createTextNode(readers[i]["password"]);
+                var textPassword = document.createTextNode(currentReader["password"]);
                 tdId.appendChild(textId);
                 tdLogin.appendChild(textLogin);
                 tdPassword.appendChild(textPassword);

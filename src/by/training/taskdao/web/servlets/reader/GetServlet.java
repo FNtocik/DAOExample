@@ -3,7 +3,6 @@ package by.training.taskdao.web.servlets.reader;
 import by.training.taskdao.dao.factory.DAOFactory;
 import by.training.taskdao.dao.interfaces.ReaderDAO;
 import by.training.taskdao.entities.Reader;
-import org.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,15 +28,10 @@ public class GetServlet extends HttpServlet {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.append("readerId", entity.getId());
-            jsonObject.append("login", entity.getLogin());
-            jsonObject.append("password", entity.getPassword());
-            jsonObject.append("languageId", entity.getLanguageId());
-            resp.setCharacterEncoding("UTF-8");
-            resp.getWriter().write(jsonObject.toString());
-        } else {
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            if (entity != null) {
+                resp.setCharacterEncoding("UTF-8");
+                resp.getWriter().write(entity.toString());
+            }
         }
     }
 

@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body>
-<input hidden type="text" id="languageId" value="">
 <div>
     <a href="subscription.html">Subscriptions</a>
     <a href="reader.html">Readers</a>
@@ -25,6 +24,10 @@
         <label>
             <input type="number" id="cost" value="0">
         </label><br>
+        <label>
+            <select id="languageId">
+            </select><br>
+        </label><br>
         <input type="button" onclick="edit()" value="Save">
         <input type="button" onclick="add()" value="Add">
         <input type="button" onclick="del()" value="Delete">
@@ -38,6 +41,7 @@
             <td>name</td>
             <td>author</td>
             <td>cost per month</td>
+            <td>language</td>
         </tr>
         </thead>
         <tbody id="allPublications">
@@ -49,7 +53,7 @@
 <script>
     var oldRow = null;
     var publicationElement = document.getElementById("publicationId");
-    var languageElement = document.getElementById("languageId");
+    var languageSelect = document.getElementById("languageId");
     var nameInput = document.getElementById("name");
     var authorInput = document.getElementById("author");
     var costInput = document.getElementById("cost");
@@ -65,108 +69,143 @@
     });
 
     getAll();
+    fillLanguageSelect();
 
     function add() {
         var request = new XMLHttpRequest();
         var name = nameInput.value;
         var author = authorInput.value;
         var cost = costInput.value;
-        var languageId = languageElement.value;
+        var languageId = languageSelect[languageSelect.selectedIndex].value;
         var params = "name=" + name + "&author="
             + author + "&cost=" + cost + "&languageId=" + languageId;
-        request.open("PUT", "publication?" + params, true);
+        request.open("POST", "secure/addPublication", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
             getAll();
         };
-        request.send();
+        request.send(params);
     }
 
     function edit() {
         var request = new XMLHttpRequest();
-        request.open("POST", "publication", true);
+        var publicationId = publicationElement.value;
+        var name = nameInput.value;
+        var author = authorInput.value;
+        var cost = costInput.value;
+        var languageId = languageSelect[languageSelect.selectedIndex].value;
+        var params = "publicationId=" + publicationId + "&name=" + name +
+            "&author=" + author + "&cost=" + cost + "&languageId=" + languageId;
+        request.open("POST", "secure/editPublication", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
             getAll();
         };
-        var publicationId = publicationElement.value;
-        var name = nameInput.value;
-        var author = authorInput.value;
-        var cost = costInput.value;
-        var languageId = languageElement.value;
-        var msg = "publicationId=" + publicationId + "&name=" + name +
-            "&author=" + author + "&cost=" + cost + "&languageId=" + languageId;
-        request.send(msg);
+        request.send(params);
     }
 
     function del() {
         var request = new XMLHttpRequest();
         var params = "publicationId=" + publicationElement.value;
-        request.open("DELETE", "publication?" + params, true);
+        request.open("POST", "secure/deletePublication", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
             getAll();
         };
-        request.send();
+        request.send(params);
     }
 
     function get() {
         var request = new XMLHttpRequest();
         var params = "publicationId=" + publicationElement.value;
-        request.open("GET", "publication?" + params, true);
+        request.open("POST", "secure/getPublication", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
                 return;
             var publication = JSON.parse(this.responseText);
-            publicationElement.value = publication.publicationId;
-            nameInput.value = publication.name;
-            authorInput.value = publication.author;
-            costInput.value = publication.cost;
+            var language = JSON.parse(publicationp["language"])
+            publicationElement.value = publication["id"];
+            nameInput.value = publication["name"];
+            authorInput.value = publication["author"];
+            costInput.value = publication["cost"];
+            searchValueInSelect(languageSelect.options, language["id"]);
         };
-        request.send();
+        request.send(params);
     }
 
     function getAll() {
         var requestToSubs = new XMLHttpRequest();
-        requestToSubs.open("GET", "publication", true);
+        requestToSubs.open("POST", "secure/getAllPublication", true);
         requestToSubs.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         requestToSubs.onreadystatechange = function (ev) {
             if(this.readyState != XMLHttpRequest.DONE)
+                return;
+            if (this.responseText.length == 0)
                 return;
             var publications = JSON.parse(this.responseText);
             while(table.firstChild){
                 table.removeChild(table.firstChild);
             }
-            languageElement.value = publications[0]["languageId"];
             for(var i = 0; i < publications.length; i++){
+                var currentPublication = JSON.parse(publications[i]);
+                var currentLanguage = JSON.parse(currentPublication["language"])
                 var tr = document.createElement("tr");
                 var tdId = document.createElement("td");
-                var textId = document.createTextNode(publications[i]["publicationId"]);
+                var textId = document.createTextNode(currentPublication["id"]);
                 var tdName = document.createElement("td");
-                var textName = document.createTextNode(publications[i]["name"]);
+                var textName = document.createTextNode(currentPublication["name"]);
                 var tdAuthor = document.createElement("td");
-                var textAuthor = document.createTextNode(publications[i]["author"]);
+                var textAuthor = document.createTextNode(currentPublication["author"]);
                 var tdCost = document.createElement("td");
-                var textCost = document.createTextNode(publications[i]["cost"]);
+                var textCost = document.createTextNode(currentPublication["cost"]);
+                var tdLanguage = document.createElement("td");
+                var textLanguage = document.createTextNode(currentLanguage["signature"]);
                 tdId.appendChild(textId);
                 tdName.appendChild(textName);
                 tdAuthor.appendChild(textAuthor);
                 tdCost.appendChild(textCost);
+                tdLanguage.appendChild(textLanguage);
                 tr.appendChild(tdId);
                 tr.appendChild(tdName);
                 tr.appendChild(tdAuthor);
                 tr.appendChild(tdCost);
+                tr.appendChild(tdLanguage);
                 table.appendChild(tr);
             }
         };
         requestToSubs.send();
+    }
+
+    function fillLanguageSelect() {
+        var request = new XMLHttpRequest();
+        request.open("POST", "secure/getAllLanguage", true);
+        request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        request.onreadystatechange = function (ev) {
+            if (this.readyState != XMLHttpRequest.DONE)
+                return;
+            var languages = JSON.parse(this.responseText);
+            for (var i = 0; i < languages.length; i++) {
+                var currentLanguage = JSON.parse(languages[i]);
+                languageSelect[languageSelect.length] = new Option(currentLanguage["signature"], currentLanguage["languageId"]);
+            }
+        };
+        request.send();
+    }
+
+    function searchValueInSelect(options, valueToSelect) {
+        for (var i = 0; i < options.length; i++) {
+            if (+options[i].value === valueToSelect) {
+                options[i].selected = true;
+                return;
+            }
+        }
     }
 </script>
 </html>

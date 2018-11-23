@@ -45,7 +45,7 @@ public class SecurityFilter implements Filter {
                 response.sendRedirect(request.getContextPath() + "/login.html");
                 return;
             }
-            if (SecurityUtil.havePermissionToPage(roleRequest, servletPath)) {
+            if (!SecurityUtil.havePermissionToPage(roleRequest, servletPath)) {
                 response.sendRedirect(request.getContextPath() + "/denied.html");
                 return;
             }
