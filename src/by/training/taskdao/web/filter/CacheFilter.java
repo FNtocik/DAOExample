@@ -9,7 +9,7 @@ import java.io.IOException;
  * Cache filter to set headers in the response that prevent caching
  * @author Anton Puhachou
  */
-@WebFilter("/secure/*")
+@WebFilter("/*")
 public class CacheFilter implements Filter {
 
     @Override

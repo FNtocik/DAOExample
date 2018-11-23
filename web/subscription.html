@@ -176,7 +176,6 @@
                 table.removeChild(table.firstChild);
             }
             var subscriptions = JSON.parse(this.responseText);
-            languageElement.value = subscriptions[0]["languageId"];
             for(var i = 0; i < subscriptions.length; i++){
                 var tr = document.createElement("tr");
                 var tdId = document.createElement("td");
@@ -205,6 +204,7 @@
                 tr.appendChild(tdEndDate);
                 table.appendChild(tr);
             }
+            languageElement.value = subscriptions[0]["languageId"];
         };
         requestToSubs.send();
     }

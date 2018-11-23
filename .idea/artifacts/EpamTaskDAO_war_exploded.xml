@@ -1,0 +1,19 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="EpamTaskDAO:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/EpamTaskDAO_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="EpamTaskDAO" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="json-20180813" />
+          <element id="library" level="project" name="Java EE 6-Java EE 6" />
+          <element id="library" level="project" name="mysql-connector-java-8.0.13" />
+        </element>
+      </element>
+      <element id="library" level="module" name="JUnit4" module-name="EpamTaskDAO" />
+      <element id="javaee-facet-resources" facet="EpamTaskDAO/web/Web" />
+    </root>
+  </artifact>
+</component>

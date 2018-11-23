@@ -16,7 +16,7 @@ import java.io.IOException;
  * unauthorized access
  * @author Anton Puhachou
  */
-@WebFilter("/secure/*")
+@WebFilter("/*")
 public class SecurityFilter implements Filter {
 
     @Override
@@ -33,10 +33,6 @@ public class SecurityFilter implements Filter {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
-        boolean isServlet = !servletPath.contains(".");
-        if(isServlet) {
-            servletPath += " " + request.getMethod().toLowerCase();
-        }
         LoggedUser loggedUser = SessionUtil.getLoggedUserFromSession(request.getSession());
         HttpServletRequest roleRequest = request;
         if(loggedUser != null){
@@ -44,24 +40,12 @@ public class SecurityFilter implements Filter {
             String role = loggedUser.getRole();
             roleRequest = new UserRoleRequest(login, role, request);
         }
-        boolean isSecurityPage;
-        if(isServlet) {
-            isSecurityPage = SecurityUtil.isSecurityServlet(servletPath.split(" "));
-        } else {
-            isSecurityPage = SecurityUtil.isSecurityPage(servletPath);
-        }
-        if(isSecurityPage){
+        if (SecurityUtil.isSecurityPage(servletPath)) {
             if(loggedUser == null){
                 response.sendRedirect(request.getContextPath() + "/login.html");
                 return;
             }
-            boolean isHavePermission;
-            if(isServlet) {
-                isHavePermission = SecurityUtil.havePermissionToServlet(roleRequest, servletPath.split(" "));
-            } else {
-                isHavePermission = SecurityUtil.havePermissionToPage(roleRequest, servletPath);
-            }
-            if(!isHavePermission){
+            if (SecurityUtil.havePermissionToPage(roleRequest, servletPath)) {
                 response.sendRedirect(request.getContextPath() + "/denied.html");
                 return;
             }
