@@ -3,6 +3,9 @@ package by.training.taskdao.dao.mysql.implementation;
 import by.training.taskdao.dao.interfaces.SubscriptionDAO;
 import by.training.taskdao.dao.mysql.config.ConfigurationManager;
 import by.training.taskdao.dao.mysql.factory.MySQLDAOFactory;
+import by.training.taskdao.entities.Payment;
+import by.training.taskdao.entities.Publication;
+import by.training.taskdao.entities.Reader;
 import by.training.taskdao.entities.Subscription;
 
 import java.sql.Connection;
@@ -36,12 +39,17 @@ public class MySQLSubscriptionDAO implements SubscriptionDAO {
                 preparedStatement.setInt(1, id);
                 resultSet = preparedStatement.executeQuery();
                 if(resultSet.next()){
-                    entity = new Subscription(resultSet.getInt(1),
-                                            resultSet.getInt(2),
-                                            resultSet.getInt(3),
-                                            resultSet.getInt(6),
-                                            resultSet.getDate(4),
-                                            resultSet.getDate(5));
+                    Reader readerEntity = new Reader(resultSet.getInt("reader.id"),
+                            resultSet.getString("login"), resultSet.getString("password"),
+                            resultSet.getInt("reader.language_id"));
+                    Publication publicationEntity = new Publication(resultSet.getInt("publication.id"),
+                            resultSet.getString("author"), resultSet.getString("name"),
+                            resultSet.getInt("publication.cost"), resultSet.getInt("publication.language_id"));
+                    Payment paymentEntity = new Payment(resultSet.getInt("payment.id"), resultSet.getInt("cost"),
+                            resultSet.getBoolean("is_payed"));
+                    entity = new Subscription(resultSet.getInt("subscription.id"), readerEntity,
+                            publicationEntity, paymentEntity, resultSet.getDate("start_subs"),
+                            resultSet.getDate("end_subs"));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -154,12 +162,17 @@ public class MySQLSubscriptionDAO implements SubscriptionDAO {
                         preparedStatement = connection.prepareStatement(ConfigurationManager.getInstance().getMySQLQuerySubscriptionGetAll());
                 resultSet = preparedStatement.executeQuery();
                 while(resultSet.next()){
-                    entities.add(new Subscription(resultSet.getInt(1),
-                                                resultSet.getInt(2),
-                                                resultSet.getInt(3),
-                                                resultSet.getInt(6),
-                                                resultSet.getDate(4),
-                                                resultSet.getDate(5)));
+                    Reader readerEntity = new Reader(resultSet.getInt("reader.id"),
+                            resultSet.getString("login"), resultSet.getString("password"),
+                            resultSet.getInt("reader.language_id"));
+                    Publication publicationEntity = new Publication(resultSet.getInt("publication.id"),
+                            resultSet.getString("author"), resultSet.getString("name"),
+                            resultSet.getInt("publication.cost"), resultSet.getInt("publication.language_id"));
+                    Payment paymentEntity = new Payment(resultSet.getInt("payment.id"), resultSet.getInt("cost"),
+                            resultSet.getBoolean("is_payed"));
+                    entities.add(new Subscription(resultSet.getInt("subscription.id"), readerEntity,
+                            publicationEntity, paymentEntity, resultSet.getDate("start_subs"),
+                            resultSet.getDate("end_subs")));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

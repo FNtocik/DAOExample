@@ -1,5 +1,7 @@
 package by.training.taskdao.entities;
 
+import org.json.JSONObject;
+
 import java.sql.Date;
 
 /**
@@ -16,11 +18,26 @@ public class Subscription {
     /**field reader id*/
     private int readerId;
 
+    /**
+     * field bound reader
+     */
+    private Reader reader;
+
     /**field publication id*/
     private int publicationId;
 
+    /**
+     * field bound publication
+     */
+    private Publication publication;
+
     /**field payment id*/
     private int paymentId;
+
+    /**
+     * field bound payment
+     */
+    private Payment payment;
 
     /**field start subscription date*/
     private Date startSubscription;
@@ -56,13 +73,25 @@ public class Subscription {
      * @param endSubscription end subscription date
      * @see Subscription#Subscription(int, int, int, Date, Date)
      */
-    public Subscription(int id, int readerId, int publicationId,
-                        int paymentId, Date startSubscription,
+    public Subscription(int id, int readerId, int publicationId, int paymentId, Date startSubscription,
                         Date endSubscription) {
         this.id = id;
         this.readerId = readerId;
         this.publicationId = publicationId;
         this.paymentId = paymentId;
+        this.startSubscription = startSubscription;
+        this.endSubscription = endSubscription;
+    }
+
+    public Subscription(int id, Reader reader, Publication publication, Payment payment, Date startSubscription,
+                        Date endSubscription) {
+        this.id = id;
+        this.reader = reader;
+        this.readerId = reader.getId();
+        this.publication = publication;
+        this.publicationId = publication.getId();
+        this.payment = payment;
+        this.paymentId = payment.getId();
         this.startSubscription = startSubscription;
         this.endSubscription = endSubscription;
     }
@@ -91,6 +120,15 @@ public class Subscription {
         this.readerId = readerId;
     }
 
+    public Reader getReader() {
+        return reader;
+    }
+
+    public void setReader(Reader reader) {
+        this.reader = reader;
+        this.readerId = reader.getId();
+    }
+
     /**
      * get method of {@link Subscription#publicationId}
      * @return bound publication id
@@ -107,6 +145,15 @@ public class Subscription {
         this.publicationId = publicationId;
     }
 
+    public Publication getPublication() {
+        return publication;
+    }
+
+    public void setPublication(Publication publication) {
+        this.publication = publication;
+        this.publicationId = publication.getId();
+    }
+
     /**
      * get method of {@link Subscription#paymentId}
      * @return bound payment id
@@ -121,6 +168,15 @@ public class Subscription {
      */
     public void setPaymentId(int paymentId) {
         this.paymentId = paymentId;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+        this.paymentId = payment.getId();
     }
 
     /**
@@ -153,5 +209,17 @@ public class Subscription {
      */
     public void setEndSubscription(Date endSubscription) {
         this.endSubscription = endSubscription;
+    }
+
+    @Override
+    public String toString() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", id);
+        jsonObject.put("reader", reader.toString());
+        jsonObject.put("publication", publication.toString());
+        jsonObject.put("payment", payment.toString());
+        jsonObject.put("startDate", startSubscription.toString());
+        jsonObject.put("endDate", endSubscription.toString());
+        return jsonObject.toString();
     }
 }

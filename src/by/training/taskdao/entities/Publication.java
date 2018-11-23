@@ -1,5 +1,7 @@
 package by.training.taskdao.entities;
 
+import org.json.JSONObject;
+
 /**
  * Publication class with properties <b>author</b>, <b>name</b>,
  * <b>language</b> config and read only id
@@ -19,8 +21,21 @@ public class Publication {
     /**field language id*/
     private int languageId;
 
+    /**
+     * field bound language
+     */
+    private Language language;
+
     /**field cost*/
     private int cost;
+
+    public Publication(int id, String author, String name, int cost, int languageId) {
+        this.id = id;
+        this.author = author;
+        this.name = name;
+        this.cost = cost;
+        this.languageId = languageId;
+    }
 
     /**
      * Constructor to create a specific object <b>without</b> id
@@ -40,14 +55,15 @@ public class Publication {
      * @param id entity id
      * @param author author name
      * @param name name of publication
-     * @param languageId bound language id
+     * @param language bound language id
      */
-    public Publication(int id, String author, String name, int cost, int languageId) {
+    public Publication(int id, String author, String name, int cost, Language language) {
         this.id = id;
         this.author = author;
         this.name = name;
         this.cost = cost;
-        this.languageId = languageId;
+        this.language = language;
+        this.languageId = language.getId();
     }
 
     /**
@@ -120,5 +136,26 @@ public class Publication {
      */
     public void setLanguageId(int languageId) {
         this.languageId = languageId;
+    }
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
+        this.languageId = language.getId();
+    }
+
+    @Override
+    public String toString() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", id);
+        jsonObject.put("author", author);
+        jsonObject.put("name", name);
+        jsonObject.put("cost", cost);
+        if (language != null)
+            jsonObject.put("language", language.toString());
+        return jsonObject.toString();
     }
 }

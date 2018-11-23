@@ -3,6 +3,7 @@ package by.training.taskdao.dao.mysql.implementation;
 import by.training.taskdao.dao.interfaces.PublicationDAO;
 import by.training.taskdao.dao.mysql.config.ConfigurationManager;
 import by.training.taskdao.dao.mysql.factory.MySQLDAOFactory;
+import by.training.taskdao.entities.Language;
 import by.training.taskdao.entities.Publication;
 
 import java.sql.Connection;
@@ -31,15 +32,17 @@ public class MySQLPublicationDAO implements PublicationDAO {
         Publication entity = null;
         if(connection != null) {
             try {
-                PreparedStatement preparedStatement = connection.prepareStatement(ConfigurationManager.getInstance().getMySQLQueryPublicationGet());
+                PreparedStatement preparedStatement =
+                        connection.prepareStatement(ConfigurationManager.getInstance().getMySQLQueryPublicationGet());
                 preparedStatement.setInt(1, id);
                 resultSet = preparedStatement.executeQuery();
                 if(resultSet.next()){
+                    Language languageEntity = new Language(resultSet.getInt(6), resultSet.getString(7));
                     entity = new Publication(resultSet.getInt(1),
                                             resultSet.getString(3),
                                             resultSet.getString(2),
                                             resultSet.getInt(4),
-                                            resultSet.getInt(5));
+                            languageEntity);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -143,14 +146,16 @@ public class MySQLPublicationDAO implements PublicationDAO {
         List<Publication> entities = new ArrayList<>();
         if(connection != null) {
             try {
-                PreparedStatement preparedStatement = connection.prepareStatement(ConfigurationManager.getInstance().getMySQLQueryPublicationGetAll());
+                PreparedStatement preparedStatement =
+                        connection.prepareStatement(ConfigurationManager.getInstance().getMySQLQueryPublicationGetAll());
                 resultSet = preparedStatement.executeQuery();
                 while(resultSet.next()){
+                    Language languageEntity = new Language(resultSet.getInt(6), resultSet.getString(7));
                     entities.add(new Publication(resultSet.getInt(1),
                                                 resultSet.getString(3),
                                                 resultSet.getString(2),
                                                 resultSet.getInt(4),
-                                                resultSet.getInt(5)));
+                            languageEntity));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

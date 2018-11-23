@@ -3,6 +3,7 @@ package by.training.taskdao.dao.mysql.implementation;
 import by.training.taskdao.dao.interfaces.ReaderDAO;
 import by.training.taskdao.dao.mysql.config.ConfigurationManager;
 import by.training.taskdao.dao.mysql.factory.MySQLDAOFactory;
+import by.training.taskdao.entities.Language;
 import by.training.taskdao.entities.Reader;
 
 import java.sql.Connection;
@@ -28,17 +29,19 @@ public class MySQLReaderDAO implements ReaderDAO {
     public Reader get(int id) throws SQLException {
         Connection connection = MySQLDAOFactory.createConnection();
         ResultSet resultSet = null;
-        Reader entity = null;
+        Reader readerEntity = null;
+        Language languageEntity = null;
         if(connection != null) {
             try {
                 PreparedStatement preparedStatement = connection.prepareStatement(ConfigurationManager.getInstance().getMySQLQueryReaderGet());
                 preparedStatement.setInt(1, id);
                 resultSet = preparedStatement.executeQuery();
                 if(resultSet.next()){
-                    entity = new Reader(resultSet.getInt(1),
+                    languageEntity = new Language(resultSet.getInt(4), resultSet.getString(6));
+                    readerEntity = new Reader(resultSet.getInt(1),
                                         resultSet.getString(2),
                                         resultSet.getString(3),
-                                        resultSet.getInt(4));
+                            languageEntity);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -48,7 +51,7 @@ public class MySQLReaderDAO implements ReaderDAO {
                 connection.close();
             }
         }
-        return entity;
+        return readerEntity;
     }
 
     /**
@@ -143,10 +146,11 @@ public class MySQLReaderDAO implements ReaderDAO {
                 PreparedStatement preparedStatement = connection.prepareStatement(ConfigurationManager.getInstance().getMySQLQueryReaderGetAll());
                 resultSet = preparedStatement.executeQuery();
                 while(resultSet.next()){
+                    Language languageEntity = new Language(resultSet.getInt(4), resultSet.getString(6));
                     entities.add(new Reader(resultSet.getInt(1),
                                             resultSet.getString(2),
                                             resultSet.getString(3),
-                                            resultSet.getInt(4)));
+                            languageEntity));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

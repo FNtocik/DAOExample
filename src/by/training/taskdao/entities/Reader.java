@@ -1,5 +1,7 @@
 package by.training.taskdao.entities;
 
+import org.json.JSONObject;
+
 import java.util.Objects;
 
 /**
@@ -22,13 +24,25 @@ public class Reader {
     private int languageId;
 
     /**
+     * field bound language
+     */
+    private Language language;
+
+    public Reader(String login, String password, int languageId) {
+        this.login = login;
+        this.password = password;
+        this.languageId = languageId;
+    }
+
+    /**
      * Constructor to create a specific object <b>without</b> id
      * @param login reader login
      * @param password reader password
      * @param languageId bound language id
-     * @see Reader#Reader(int, String, String, int)
+     * @see Reader#Reader(int, String, String, Language)
      */
-    public Reader(String login, String password, int languageId) {
+    public Reader(int id, String login, String password, int languageId) {
+        this.id = id;
         this.login = login;
         this.password = password;
         this.languageId = languageId;
@@ -39,14 +53,15 @@ public class Reader {
      * @param id entity id
      * @param login reader login
      * @param password reader password
-     * @param languageId bound language id
-     * @see Reader#Reader(String, String, int)
+     * @param language bound language
+     * @see Reader#Reader(int, String, String, int)
      */
-    public Reader(int id, String login, String password, int languageId) {
+    public Reader(int id, String login, String password, Language language) {
         this.id = id;
         this.login = login;
         this.password = password;
-        this.languageId = languageId;
+        this.language = language;
+        this.languageId = language.getId();
     }
 
     /**
@@ -105,6 +120,15 @@ public class Reader {
         this.languageId = languageId;
     }
 
+    public Language getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
+        this.languageId = language.getId();
+    }
+
     /**
      * indicates whether some other object is "equal to" this one
      * @param o object that represents other object
@@ -126,5 +150,16 @@ public class Reader {
     @Override
     public int hashCode() {
         return Objects.hash(login, password);
+    }
+
+    @Override
+    public String toString() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", id);
+        jsonObject.put("login", login);
+        jsonObject.put("password", password);
+        if (language != null)
+            jsonObject.put("language", language.toString());
+        return jsonObject.toString();
     }
 }

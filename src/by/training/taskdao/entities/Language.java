@@ -1,5 +1,7 @@
 package by.training.taskdao.entities;
 
+import org.json.JSONObject;
+
 /**
  * Language class with property <b>signature</b> and read only id
  * @author Anton Puhachou
@@ -54,5 +56,13 @@ public class Language {
      */
     public void setSignature(String signature) {
         this.signature = signature;
+    }
+
+    @Override
+    public String toString() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", id);
+        jsonObject.put("signature", signature);
+        return jsonObject.toString();
     }
 }

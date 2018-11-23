@@ -1,5 +1,7 @@
 package by.training.taskdao.entities;
 
+import org.json.JSONObject;
+
 import java.util.Objects;
 
 /**
@@ -103,5 +105,14 @@ public class Administrator {
     @Override
     public int hashCode() {
         return Objects.hash(login, password);
+    }
+
+    @Override
+    public String toString() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", id);
+        jsonObject.put("login", login);
+        jsonObject.put("password", password);
+        return jsonObject.toString();
     }
 }

@@ -1,5 +1,7 @@
 package by.training.taskdao.entities;
 
+import org.json.JSONObject;
+
 /**
  * Payment class with properties <b>cost</b>, <b>payed</b>
  * flag, <b>language</b> config and read only id
@@ -76,5 +78,14 @@ public class Payment {
      */
     public void setPayed(boolean payed) {
         this.payed = payed;
+    }
+
+    @Override
+    public String toString() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", id);
+        jsonObject.put("cost", cost);
+        jsonObject.put("payed", payed);
+        return jsonObject.toString();
     }
 }
