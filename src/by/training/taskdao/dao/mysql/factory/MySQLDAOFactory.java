@@ -4,10 +4,9 @@ import by.training.taskdao.dao.factory.DAOFactory;
 import by.training.taskdao.dao.interfaces.*;
 import by.training.taskdao.dao.mysql.config.ConfigurationManager;
 import by.training.taskdao.dao.mysql.implementation.*;
+import by.training.taskdao.dao.mysql.pool.ConnectionPool;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 /**
  * Specific DAO factory pattern realization to the MySQL database
@@ -15,22 +14,26 @@ import java.sql.SQLException;
  * */
 public class MySQLDAOFactory extends DAOFactory {
 
+    private static ConnectionPool connectionPool = null;
+
     /**
      * database connection creation method
      * @return connection to database
      */
     public static Connection createConnection(){
-        ConfigurationManager configurationManager = ConfigurationManager.getInstance();
-        try {
-            Class.forName(configurationManager.getDriver());
+        if (connectionPool == null) {
+            ConfigurationManager configurationManager = ConfigurationManager.getInstance();
+            String driver = configurationManager.getDriver();
             String dburl = configurationManager.getConnectionString();
             String login = configurationManager.getLogin();
             String password = configurationManager.getPassword();
-            return DriverManager.getConnection(dburl, login, password);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            connectionPool = new ConnectionPool(dburl, driver, login, password);
         }
-        return null;
+        return connectionPool.getConnection();
+    }
+
+    public static void closeConnection(Connection connection) {
+        connectionPool.removeConnection(connection);
     }
 
     /**

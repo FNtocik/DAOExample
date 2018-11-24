@@ -48,7 +48,8 @@ public class MySQLReaderDAO implements ReaderDAO {
             } finally {
                 if(resultSet != null)
                     resultSet.close();
-                connection.close();
+                MySQLDAOFactory.closeConnection(connection);
+                ;
             }
         }
         return readerEntity;
@@ -74,7 +75,8 @@ public class MySQLReaderDAO implements ReaderDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
-                connection.close();
+                MySQLDAOFactory.closeConnection(connection);
+                ;
             }
         }
         return newId;
@@ -101,7 +103,8 @@ public class MySQLReaderDAO implements ReaderDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
-                connection.close();
+                MySQLDAOFactory.closeConnection(connection);
+                ;
             }
         }
         return updatedId;
@@ -125,7 +128,8 @@ public class MySQLReaderDAO implements ReaderDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
-                connection.close();
+                MySQLDAOFactory.closeConnection(connection);
+                ;
             }
         }
         return deletedId;
@@ -157,7 +161,8 @@ public class MySQLReaderDAO implements ReaderDAO {
             } finally {
                 if(resultSet != null)
                     resultSet.close();
-                connection.close();
+                MySQLDAOFactory.closeConnection(connection);
+                ;
             }
         }
         return entities;

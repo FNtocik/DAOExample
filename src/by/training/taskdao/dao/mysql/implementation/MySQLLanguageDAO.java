@@ -44,7 +44,8 @@ public class MySQLLanguageDAO implements LanguageDAO {
             } finally {
                 if(resultSet != null)
                     resultSet.close();
-                connection.close();
+                MySQLDAOFactory.closeConnection(connection);
+                ;
             }
         }
         return entity;
@@ -69,7 +70,8 @@ public class MySQLLanguageDAO implements LanguageDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
-                connection.close();
+                MySQLDAOFactory.closeConnection(connection);
+                ;
             }
         }
         return newId;
@@ -95,7 +97,8 @@ public class MySQLLanguageDAO implements LanguageDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
-                connection.close();
+                MySQLDAOFactory.closeConnection(connection);
+                ;
             }
         }
         return updatedId;
@@ -120,7 +123,8 @@ public class MySQLLanguageDAO implements LanguageDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
-                connection.close();
+                MySQLDAOFactory.closeConnection(connection);
+                ;
             }
         }
         return deletedId;
@@ -150,7 +154,8 @@ public class MySQLLanguageDAO implements LanguageDAO {
             } finally {
                 if(resultSet != null)
                     resultSet.close();
-                connection.close();
+                MySQLDAOFactory.closeConnection(connection);
+                ;
             }
         }
         return entities;

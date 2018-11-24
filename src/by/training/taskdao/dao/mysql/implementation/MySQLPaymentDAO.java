@@ -43,7 +43,8 @@ public class MySQLPaymentDAO implements PaymentDAO {
             } finally {
                 if (resultSet != null)
                     resultSet.close();
-                connection.close();
+                MySQLDAOFactory.closeConnection(connection);
+                ;
             }
         }
         return entity;
@@ -68,7 +69,8 @@ public class MySQLPaymentDAO implements PaymentDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
-                connection.close();
+                MySQLDAOFactory.closeConnection(connection);
+                ;
             }
         }
         return newId;
@@ -94,7 +96,8 @@ public class MySQLPaymentDAO implements PaymentDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
-                connection.close();
+                MySQLDAOFactory.closeConnection(connection);
+                ;
             }
         }
         return updatedId;
@@ -118,7 +121,8 @@ public class MySQLPaymentDAO implements PaymentDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
-                connection.close();
+                MySQLDAOFactory.closeConnection(connection);
+                ;
             }
         }
         return deletedId;
@@ -148,7 +152,8 @@ public class MySQLPaymentDAO implements PaymentDAO {
             } finally {
                 if (resultSet != null)
                     resultSet.close();
-                connection.close();
+                MySQLDAOFactory.closeConnection(connection);
+                ;
             }
         }
         return entities;

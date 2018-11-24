@@ -49,7 +49,8 @@ public class MySQLPublicationDAO implements PublicationDAO {
             } finally {
                 if(resultSet != null)
                     resultSet.close();
-                connection.close();
+                MySQLDAOFactory.closeConnection(connection);
+                ;
             }
         }
         return entity;
@@ -76,7 +77,8 @@ public class MySQLPublicationDAO implements PublicationDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
-                connection.close();
+                MySQLDAOFactory.closeConnection(connection);
+                ;
             }
         }
         return newId;
@@ -104,7 +106,8 @@ public class MySQLPublicationDAO implements PublicationDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
-                connection.close();
+                MySQLDAOFactory.closeConnection(connection);
+                ;
             }
         }
         return updatedId;
@@ -128,7 +131,8 @@ public class MySQLPublicationDAO implements PublicationDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
-                connection.close();
+                MySQLDAOFactory.closeConnection(connection);
+                ;
             }
         }
         return deletedId;
@@ -162,7 +166,8 @@ public class MySQLPublicationDAO implements PublicationDAO {
             } finally {
                 if(resultSet != null)
                     resultSet.close();
-                connection.close();
+                MySQLDAOFactory.closeConnection(connection);
+                ;
             }
         }
         return entities;
