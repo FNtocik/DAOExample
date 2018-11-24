@@ -1,6 +1,7 @@
 package by.training.taskdao.web.filter;
 
 import by.training.taskdao.entities.LoggedUser;
+import by.training.taskdao.web.config.SecurityConfig;
 import by.training.taskdao.web.utils.SecurityUtil;
 import by.training.taskdao.web.utils.SessionUtil;
 import by.training.taskdao.web.utils.UserRoleRequest;
@@ -29,7 +30,8 @@ public class SecurityFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest)servletRequest;
         HttpServletResponse response = (HttpServletResponse)servletResponse;
         String servletPath = request.getServletPath().substring(1);
-        if(servletPath.equals("login.html")){
+        servletPath = servletPath.replace("secure/", "");
+        if (servletPath.contains("login")) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
@@ -45,7 +47,8 @@ public class SecurityFilter implements Filter {
                 response.sendRedirect(request.getContextPath() + "/login.html");
                 return;
             }
-            if (!SecurityUtil.havePermissionToPage(roleRequest, servletPath)) {
+            if (!SecurityUtil.havePermissionToPage(roleRequest, servletPath)
+                    && !loggedUser.getRole().equalsIgnoreCase(SecurityConfig.ROLE_ADMINISTRATOR)) {
                 response.sendRedirect(request.getContextPath() + "/denied.html");
                 return;
             }
