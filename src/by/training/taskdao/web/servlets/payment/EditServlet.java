@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/secure/editServlet")
+@WebServlet("/secure/editPayment")
 public class EditServlet extends HttpServlet {
 
     @Override

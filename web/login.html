@@ -3,22 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" href="style/style.css" type="text/css">
 </head>
 <body>
 <div>
     <form>
-        <label>
-            <input type="text" id="loginInput" value="">
-        </label><br>
-        <label>
-            <input type="password" id="passwordInput" value="">
-        </label><br>
+        <input type="text" id="loginInput" value="" pattern="^\w+$"><br>
+        <input type="password" id="passwordInput" value="" pattern="^\w+$"><br>
         <input type="button" onclick="login()" id="loginButton" value="">
     </form>
     <br>
     <p hidden id="errorOutput">Login or password is incorrect, try again</p>
 </div>
 </body>
+<script src="javascript/validator.js"></script>
 <script>
     setLocaleStrings();
 
@@ -40,6 +38,7 @@
     }
 
     function login() {
+        if (!validateBeforePost()) return;
         var request = new XMLHttpRequest();
         request.open("POST", "login", true);
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

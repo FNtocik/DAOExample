@@ -4,3 +4,11 @@ table {
 td {
     border-left: solid 1px black;
 }
+
+.invalid {
+    border-color: red;
+}
+
+.valid {
+    border-color: green;
+}
