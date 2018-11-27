@@ -59,7 +59,8 @@ function isValidDate(date) {
     var day = parseInt(parts[2], 10);
     var month = parseInt(parts[1], 10);
     var year = parseInt(parts[0], 10);
-    if (year < 1000 || year > 3000 || month === 0 || month > 12)
+    var currentYear = (new Date()).getFullYear();
+    if (year < currentYear || month === 0 || month > 12)
         return false;
     var monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     if (year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0))
@@ -68,12 +69,13 @@ function isValidDate(date) {
 }
 
 function isValidText(text) {
-    var pattern = text.getAttribute("pattern");
+    var patterns = text.getAttribute("pattern").split("||");
     var value = text.value;
-    if (value.match(pattern))
-        return true;
-    else
-        return false;
+    for (var i = 0; i < patterns.length; i++) {
+        if (value.match(patterns[i]))
+            return true;
+    }
+    return false;
 }
 
 function isValidNumber(number) {

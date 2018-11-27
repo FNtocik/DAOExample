@@ -1,18 +1,8 @@
-var oldRow = null;
 var paymentElement = document.getElementById("paymentId");
 var languageElement = document.getElementById("languageId");
 var summaryInput = document.getElementById("summary");
 var isPayedCheckbox = document.getElementById("isPayed");
 var table = document.getElementById("allPayments");
-table.addEventListener('click', function (event) {
-    if (oldRow != null)
-        oldRow.style.background = "white";
-    var row = event.target.parentNode;
-    row.style.background = "blue";
-    paymentElement.value = row.childNodes[0].textContent;
-    get();
-    oldRow = row;
-});
 
 getAll();
 

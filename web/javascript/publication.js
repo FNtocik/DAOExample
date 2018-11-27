@@ -1,19 +1,9 @@
-var oldRow = null;
 var publicationElement = document.getElementById("publicationId");
 var languageSelect = document.getElementById("languageId");
 var nameInput = document.getElementById("name");
 var authorInput = document.getElementById("author");
 var costInput = document.getElementById("cost");
 var table = document.getElementById("allPublications");
-table.addEventListener('click', function (event) {
-    if (oldRow != null)
-        oldRow.style.background = "white";
-    var row = event.target.parentNode;
-    row.style.background = "blue";
-    publicationElement.value = row.childNodes[0].textContent;
-    get();
-    oldRow = row;
-});
 
 getAll();
 fillLanguageSelect();
@@ -79,7 +69,7 @@ function get() {
         if (this.readyState != XMLHttpRequest.DONE)
             return;
         var publication = JSON.parse(this.responseText);
-        var language = JSON.parse(publicationp["language"])
+        var language = JSON.parse(publication["language"])
         publicationElement.value = publication["id"];
         nameInput.value = publication["name"];
         authorInput.value = publication["author"];

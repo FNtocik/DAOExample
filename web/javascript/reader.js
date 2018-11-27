@@ -1,18 +1,8 @@
-var oldRow = null;
 var readerElement = document.getElementById("readerId");
 var languageElement = document.getElementById("languageId");
 var loginInput = document.getElementById("login");
 var passwordInput = document.getElementById("password");
 var table = document.getElementById("allReaders");
-table.addEventListener('click', function (event) {
-    if (oldRow != null)
-        oldRow.style.background = "white";
-    var row = event.target.parentNode;
-    row.style.background = "blue";
-    readerElement.value = row.childNodes[0].textContent;
-    get();
-    oldRow = row;
-});
 
 getAll();
 

@@ -12,3 +12,7 @@ td {
 .valid {
     border-color: green;
 }
+
+tr.select {
+    background-color: lightskyblue;
+}

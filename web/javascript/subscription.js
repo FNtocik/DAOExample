@@ -1,4 +1,3 @@
-var oldRow = null;
 var subscriptionElement = document.getElementById("subscriptionId");
 var readerSelect = document.getElementById("readerId");
 var publicationSelect = document.getElementById("publicationId");
@@ -6,16 +5,6 @@ var paymentSelect = document.getElementById("paymentId");
 var dateStartInput = document.getElementById("startDate");
 var dateEndInput = document.getElementById("endDate");
 var table = document.getElementById("allSubscriptions");
-
-table.addEventListener('click', function (event) {
-    if (oldRow != null)
-        oldRow.style.background = "white";
-    var row = event.target.parentNode;
-    row.style.background = "blue";
-    subscriptionElement.value = row.childNodes[0].textContent;
-    get();
-    oldRow = row;
-});
 
 getAll();
 fillReaderSelect();
