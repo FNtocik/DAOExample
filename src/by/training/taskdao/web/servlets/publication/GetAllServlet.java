@@ -21,6 +21,7 @@ public class GetAllServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         PublicationDAO publicationDAO = factory.getPublicationDAO();
+        String currentLocale = String.valueOf(req.getAttribute("locale"));
         List<Publication> entities = null;
         try {
             entities = publicationDAO.getAll();
@@ -28,6 +29,11 @@ public class GetAllServlet extends HttpServlet {
             e.printStackTrace();
         }
         if (entities != null && entities.size() != 0) {
+            for (int i = 0; i < entities.size(); i++) {
+                if (!entities.get(i).getLanguage().getSignature().equals(currentLocale)) {
+                    entities.remove(i);
+                }
+            }
             JSONArray jsonArray = new JSONArray();
             for (Publication current : entities) {
                 jsonArray.put(current.toString());

@@ -28,7 +28,6 @@ public class LocalisationFilter implements Filter {
             for (Cookie current : cookies) {
                 if (current.getName().equalsIgnoreCase("local")) {
                     local = current.getValue();
-                    break;
                 }
             }
         }
@@ -37,6 +36,7 @@ public class LocalisationFilter implements Filter {
             local = localeManager.getSupportedLanguage(userLocale.getLanguage());
         }
         response.addCookie(new Cookie("local", local));
+        request.setAttribute("locale", local);
         filterChain.doFilter(request, response);
     }
 
