@@ -8,7 +8,6 @@ import java.util.Set;
 
 public class SecurityUtil {
     public static boolean isSecurityPage(String url){
-        if (!url.contains(".")) return true;
         SecurityConfig securityConfig = SecurityConfig.getInstance();
         Set<String> roles = securityConfig.getAllAppRoles();
         for(String currentRole : roles){

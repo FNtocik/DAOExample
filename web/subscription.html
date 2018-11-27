@@ -6,50 +6,55 @@
     <link rel="stylesheet" href="style/style.css" type="text/css">
 </head>
 <body>
-<a href="logout">Logout</a>
+<a href="logout" id="logoutHref"></a>
 <div>
-    <a href="publication.html">Publication</a>
-    <a href="reader.html">Reader</a>
-    <a href="payment.html">Payment</a>
+    <a href="publication.html" id="publicationHref"></a>
+    <a href="reader.html" id="readerHref"></a>
+    <a href="payment.html" id="paymentHref"></a>
 </div>
 <div>
     <form>
         <label>
             <input hidden type="text" id="subscriptionId" value=""><br>
         </label>
+        <label id="readerSelectLabel"></label>
         <label>
             <select id="readerId">
             </select><br>
         </label>
+        <label id="publicationSelectLabel"></label>
         <label>
             <select id="publicationId">
             </select><br>
         </label>
+        <label id="paymentSelectLabel"></label>
         <label>
             <select id="paymentId">
             </select><br>
         </label>
+        <label id="startDateLabel"></label>
         <label>
             <input type="date" id="startDate" value=""><br>
         </label>
+        <label id="endDateLabel"></label>
         <label>
             <input type="date" id="endDate" value=""><br>
         </label>
-        <input type="button" onclick="edit()" value="Save" id="editButton">
-        <input type="button" onclick="add()" value="Add" id="addButton">
-        <input type="button" onclick="del()" value="Delete" id="deleteButton">
+        <input type="button" onclick="edit()" id="editButton">
+        <input type="button" onclick="add()" id="addButton">
+        <input type="button" onclick="del()" id="deleteButton">
     </form>
 </div>
 <div>
     <table>
-        <thead>
+        <thead id="tableHeader">
             <tr>
-                <td>id</td>
-                <td>reader</td>
-                <td>publication</td>
-                <td>payment</td>
-                <td>start date</td>
-                <td>end date</td>
+                <td datatype="number" id="headerId"></td>
+                <td datatype="string" id="headerReader"></td>
+                <td datatype="string" id="headerPublication"></td>
+                <td datatype="number" id="headerPayment"></td>
+                <td datatype="date" id="headerStartDate"></td>
+                <td datatype="date" id="headerEndDate"></td>
             </tr>
         </thead>
         <tbody id="allSubscriptions">
@@ -58,6 +63,11 @@
     </table>
 </div>
 </body>
+<script src="javascript/tableSorting.js"></script>
 <script src="javascript/validator.js"></script>
 <script src="javascript/subscription.js"></script>
+<script src="javascript/local.js"></script>
+<script>
+    setLocaleStrings("subscription");
+</script>
 </html>

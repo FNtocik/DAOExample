@@ -8,32 +8,35 @@
 <body>
 <input hidden type="text" id="languageId" value="1">
 <div>
-    <a href="publication.html">Publications</a>
-    <a href="subscription.html">Subscriptions</a>
+    <a href="publication.html" id="publicationHref"></a>
+    <a href="subscription.html" id="subscriptionHref"></a>
+    <a href="payment.html" id="paymentHref"></a>
 </div>
 <div>
     <form>
         <label>
             <input hidden type="text" id="readerId" value="">
         </label>
+        <label id="loginLabel"></label>
         <label>
             <input type="text" id="login" pattern="^\w+$">
         </label><br>
+        <label id="passwordLabel"></label>
         <label>
             <input type="text" id="password" pattern="^\w+$">
         </label><br>
-        <input type="button" onclick="edit()" value="Save">
-        <input type="button" onclick="add()" value="Add">
-        <input type="button" onclick="del()" value="Delete">
+        <input type="button" onclick="edit()" id="editButton">
+        <input type="button" onclick="add()" id="addButton">
+        <input type="button" onclick="del()" id="deleteButton">
     </form>
 </div>
 <div>
     <table>
-        <thead>
+        <thead id="tableHeader">
         <tr>
-            <td>ID</td>
-            <td>login</td>
-            <td>password</td>
+            <td datatype="number" id="headerId"></td>
+            <td datatype="string" id="headerLogin"></td>
+            <td datatype="string" id="headerPassword"></td>
         </tr>
         </thead>
         <tbody id="allReaders">
@@ -42,6 +45,11 @@
     </table>
 </div>
 </body>
+<script src="javascript/tableSorting.js"></script>
 <script src="javascript/validator.js"></script>
 <script src="javascript/reader.js"></script>
+<script src="javascript/local.js"></script>
+<script>
+    setLocaleStrings("reader");
+</script>
 </html>

@@ -15,6 +15,8 @@ public class SecurityConfig {
     /**constant for administrator role name*/
     public static final String ROLE_ADMINISTRATOR = "ADMINISTRATOR";
 
+    public static final String ROLE_GUEST = "GUEST";
+
     /**HashMap for storage urls for each role in system*/
     private final Map<String, List<String>> mapConfig = new HashMap<>();
 
@@ -37,8 +39,10 @@ public class SecurityConfig {
     private void init(){
         String readerUrls = roleResourceBundle.getString(ROLE_READER);
         String administratorUrls = roleResourceBundle.getString(ROLE_ADMINISTRATOR);
+        String guestUrls = roleResourceBundle.getString(ROLE_GUEST);
         setToMap(ROLE_READER, readerUrls);
         setToMap(ROLE_ADMINISTRATOR, administratorUrls);
+        setToMap(ROLE_GUEST, guestUrls);
     }
 
     /**

@@ -1,6 +1,5 @@
 package by.training.taskdao.locale;
 
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
@@ -8,15 +7,6 @@ import java.util.ResourceBundle;
  * @author Anton Puhachou
  */
 public class LocaleManager {
-
-    /**constants that reflect selected en config*/
-    public static final int EN_LOCALE = 1;
-
-    /**constants that reflect selected ru config*/
-    public static final int RU_LOCALE = 2;
-
-    /**field current config*/
-    private Locale locale;
 
     /**field config bundle*/
     private ResourceBundle localeResourceBundle;
@@ -29,7 +19,6 @@ public class LocaleManager {
      */
     private LocaleManager(){
         localeResourceBundle = ResourceBundle.getBundle("locale");
-        locale = new Locale(localeResourceBundle.getString("default"));
     }
 
     /**
@@ -42,31 +31,14 @@ public class LocaleManager {
         return instance;
     }
 
-    /**
-     * get current config
-     * @return current config
-     */
-    public Locale getLocale(){
-        return locale;
+    public String getSupportedLanguage(String signature) {
+        if (localeResourceBundle.keySet().contains(signature))
+            return localeResourceBundle.getString(signature);
+        else
+            return localeResourceBundle.getString("default");
     }
 
-    /**
-     * set new locale
-     * @param which represents witch locale to set
-     * @see #EN_LOCALE
-     * @see #RU_LOCALE
-     */
-    public void setLocale(int which){
-        switch (which) {
-            case EN_LOCALE:
-                locale = new Locale(localeResourceBundle.getString("en"));
-                break;
-            case RU_LOCALE:
-                locale = new Locale(localeResourceBundle.getString("ru"));
-                break;
-            default:
-                locale = new Locale(localeResourceBundle.getString("default"));
-                break;
-        }
+    public String getDefaultLanguage() {
+        return localeResourceBundle.getString("default");
     }
 }

@@ -1,0 +1,191 @@
+<local>
+    <login>
+        <loginInput>
+            <placeholder>Username</placeholder>
+        </loginInput>
+        <passwordInput>
+            <placeholder>Password</placeholder>
+        </passwordInput>
+        <loginButton>
+            <value>Log in</value>
+        </loginButton>
+    </login>
+    <denied>
+        <textElement>
+            <value>Access denied, you dont have permission</value>
+        </textElement>
+    </denied>
+    <payment>
+        <readerHref>
+            <innerText>Subscribers</innerText>
+        </readerHref>
+        <publicationHref>
+            <innerText>Publications</innerText>
+        </publicationHref>
+        <subscriptionHref>
+            <innerText>Subscriptions</innerText>
+        </subscriptionHref>
+        <summaryLabel>
+            <innerText>Payment summary</innerText>
+        </summaryLabel>
+        <payedLabel>
+            <innerText>Payed?</innerText>
+        </payedLabel>
+        <headerId>
+            <innerText>ID</innerText>
+        </headerId>
+        <headerSummary>
+            <innerText>Payment summary</innerText>
+        </headerSummary>
+        <headerPayed>
+            <innerText>Payed</innerText>
+        </headerPayed>
+        <editButton>
+            <value>Save changes</value>
+        </editButton>
+        <addButton>
+            <value>Add new</value>
+        </addButton>
+        <deleteButton>
+            <value>Delete selected</value>
+        </deleteButton>
+    </payment>
+    <publication>
+        <subscriptionHref>
+            <innerText>Subscriptions</innerText>
+        </subscriptionHref>
+        <readerHref>
+            <innerText>Subscribers</innerText>
+        </readerHref>
+        <paymentHref>
+            <innerText>Payments</innerText>
+        </paymentHref>
+        <nameLabel>
+            <innerText>Book name</innerText>
+        </nameLabel>
+        <authorLabel>
+            <innerText>Author name</innerText>
+        </authorLabel>
+        <costLabel>
+            <innerText>Subscription cost</innerText>
+        </costLabel>
+        <selectLanguageLabel>
+            <innerText>Book language</innerText>
+        </selectLanguageLabel>
+        <editButton>
+            <value>Save changes</value>
+        </editButton>
+        <addButton>
+            <value>Add new</value>
+        </addButton>
+        <deleteButton>
+            <value>Delete selected</value>
+        </deleteButton>
+        <headerId>
+            <innerText>ID</innerText>
+        </headerId>
+        <headerName>
+            <innerText>Book name</innerText>
+        </headerName>
+        <headerAuthor>
+            <innerText>Author name</innerText>
+        </headerAuthor>
+        <headerCost>
+            <innerText>Subscription cost</innerText>
+        </headerCost>
+        <headerLanguage>
+            <innerText>Book language</innerText>
+        </headerLanguage>
+    </publication>
+    <reader>
+        <publicationHref>
+            <innerText>Publications</innerText>
+        </publicationHref>
+        <subscriptionHref>
+            <innerText>Subscriptions</innerText>
+        </subscriptionHref>
+        <paymentHref>
+            <innerText>Payments</innerText>
+        </paymentHref>
+        <loginLabel>
+            <innerText>Username</innerText>
+        </loginLabel>
+        <passwordLabel>
+            <innerText>Password</innerText>
+        </passwordLabel>
+        <editButton>
+            <value>Save changes</value>
+        </editButton>
+        <addButton>
+            <value>Add new</value>
+        </addButton>
+        <deleteButton>
+            <value>Delete selected</value>
+        </deleteButton>
+        <headerId>
+            <innerText>ID</innerText>
+        </headerId>
+        <headerLogin>
+            <innerText>Username</innerText>
+        </headerLogin>
+        <headerPassword>
+            <innerText>Password</innerText>
+        </headerPassword>
+    </reader>
+    <subscription>
+        <logoutHref>
+            <innerText>Logout</innerText>
+        </logoutHref>
+        <publicationHref>
+            <innerText>Publications</innerText>
+        </publicationHref>
+        <readerHref>
+            <innerText>Subscribers</innerText>
+        </readerHref>
+        <paymentHref>
+            <innerText>Payments</innerText>
+        </paymentHref>
+        <readerSelectLabel>
+            <innerText>Subscriber:</innerText>
+        </readerSelectLabel>
+        <publicationSelectLabel>
+            <innerText>Publication:</innerText>
+        </publicationSelectLabel>
+        <paymentSelectLabel>
+            <innerText>Payment:</innerText>
+        </paymentSelectLabel>
+        <startDateLabel>
+            <innerText>Subscription start date</innerText>
+        </startDateLabel>
+        <endDateLabel>
+            <innerText>Subscription end date</innerText>
+        </endDateLabel>
+        <editButton>
+            <value>Save changes</value>
+        </editButton>
+        <addButton>
+            <value>Add new</value>
+        </addButton>
+        <deleteButton>
+            <value>Delete selected</value>
+        </deleteButton>
+        <headerId>
+            <innerText>ID</innerText>
+        </headerId>
+        <headerReader>
+            <innerText>Subscriber</innerText>
+        </headerReader>
+        <headerPublication>
+            <innerText>Publication</innerText>
+        </headerPublication>
+        <headerPayment>
+            <innerText>Payment</innerText>
+        </headerPayment>
+        <headerStartDate>
+            <innerText>Subscription start date</innerText>
+        </headerStartDate>
+        <headerEndDate>
+            <innerText>Subscription end date</innerText>
+        </headerEndDate>
+    </subscription>
+</local>

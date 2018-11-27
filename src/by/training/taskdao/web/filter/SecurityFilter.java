@@ -41,12 +41,11 @@ public class SecurityFilter implements Filter {
             String login = loggedUser.getLogin();
             String role = loggedUser.getRole();
             roleRequest = new UserRoleRequest(login, role, request);
+        } else {
+            loggedUser = new LoggedUser("", "", SecurityConfig.ROLE_GUEST);
+            roleRequest = new UserRoleRequest("", SecurityConfig.ROLE_GUEST, request);
         }
         if (SecurityUtil.isSecurityPage(servletPath)) {
-            if(loggedUser == null){
-                response.sendRedirect(request.getContextPath() + "/login.html");
-                return;
-            }
             if (!SecurityUtil.havePermissionToPage(roleRequest, servletPath)
                     && !loggedUser.getRole().equalsIgnoreCase(SecurityConfig.ROLE_ADMINISTRATOR)) {
                 response.sendRedirect(request.getContextPath() + "/denied.html");

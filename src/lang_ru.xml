@@ -1,0 +1,191 @@
+<local>
+    <login>
+        <loginInput>
+            <placeholder>Логин</placeholder>
+        </loginInput>
+        <passwordInput>
+            <placeholder>Пароль</placeholder>
+        </passwordInput>
+        <loginButton>
+            <value>Войти</value>
+        </loginButton>
+    </login>
+    <denied>
+        <textElement>
+            <value>Доступ запрещен, у вас нет необходимого уровня доступа</value>
+        </textElement>
+    </denied>
+    <payment>
+        <readerHref>
+            <innerText>Подписчики</innerText>
+        </readerHref>
+        <publicationHref>
+            <innerText>Издания</innerText>
+        </publicationHref>
+        <subscriptionHref>
+            <innerText>Подписки</innerText>
+        </subscriptionHref>
+        <summaryLabel>
+            <innerText>Сумма платежа</innerText>
+        </summaryLabel>
+        <payedLabel>
+            <innerText>Оплачено?</innerText>
+        </payedLabel>
+        <headerId>
+            <innerText>ID</innerText>
+        </headerId>
+        <headerSummary>
+            <innerText>Сумма платежа</innerText>
+        </headerSummary>
+        <headerPayed>
+            <innerText>Оплачено</innerText>
+        </headerPayed>
+        <editButton>
+            <value>Сохранить изменения</value>
+        </editButton>
+        <addButton>
+            <value>Добавить новый</value>
+        </addButton>
+        <deleteButton>
+            <value>Удалить выбранный</value>
+        </deleteButton>
+    </payment>
+    <publication>
+        <subscriptionHref>
+            <innerText>Подписки</innerText>
+        </subscriptionHref>
+        <readerHref>
+            <innerText>Подписчики</innerText>
+        </readerHref>
+        <paymentHref>
+            <innerText>Платежи</innerText>
+        </paymentHref>
+        <nameLabel>
+            <innerText>Название книги</innerText>
+        </nameLabel>
+        <authorLabel>
+            <innerText>Имя автора</innerText>
+        </authorLabel>
+        <costLabel>
+            <innerText>Стоимость подписки</innerText>
+        </costLabel>
+        <selectLanguageLabel>
+            <innerText>Язык издания</innerText>
+        </selectLanguageLabel>
+        <editButton>
+            <value>Сохранить изменения</value>
+        </editButton>
+        <addButton>
+            <value>Добавить новый</value>
+        </addButton>
+        <deleteButton>
+            <value>Удалить выбранный</value>
+        </deleteButton>
+        <headerId>
+            <innerText>ID</innerText>
+        </headerId>
+        <headerName>
+            <innerText>Название книги</innerText>
+        </headerName>
+        <headerAuthor>
+            <innerText>Имя автора</innerText>
+        </headerAuthor>
+        <headerCost>
+            <innerText>Стоимость подписки</innerText>
+        </headerCost>
+        <headerLanguage>
+            <innerText>Язык издания</innerText>
+        </headerLanguage>
+    </publication>
+    <reader>
+        <publicationHref>
+            <innerText>Издания</innerText>
+        </publicationHref>
+        <subscriptionHref>
+            <innerText>Подписки</innerText>
+        </subscriptionHref>
+        <paymentHref>
+            <innerText>Платежи</innerText>
+        </paymentHref>
+        <loginLabel>
+            <innerText>Имя пользователя</innerText>
+        </loginLabel>
+        <passwordLabel>
+            <innerText>Пароль</innerText>
+        </passwordLabel>
+        <editButton>
+            <value>Сохранить изменения</value>
+        </editButton>
+        <addButton>
+            <value>Добавить новый</value>
+        </addButton>
+        <deleteButton>
+            <value>Удалить выбранный</value>
+        </deleteButton>
+        <headerId>
+            <innerText>ID</innerText>
+        </headerId>
+        <headerLogin>
+            <innerText>Имя пользователя</innerText>
+        </headerLogin>
+        <headerPassword>
+            <innerText>Пароль</innerText>
+        </headerPassword>
+    </reader>
+    <subscription>
+        <logoutHref>
+            <innerText>Выйти</innerText>
+        </logoutHref>
+        <publicationHref>
+            <innerText>Издания</innerText>
+        </publicationHref>
+        <readerHref>
+            <innerText>Подписчики</innerText>
+        </readerHref>
+        <paymentHref>
+            <innerText>Платежи</innerText>
+        </paymentHref>
+        <readerSelectLabel>
+            <innerText>Подписчик:</innerText>
+        </readerSelectLabel>
+        <publicationSelectLabel>
+            <innerText>Издание:</innerText>
+        </publicationSelectLabel>
+        <paymentSelectLabel>
+            <innerText>Платёж:</innerText>
+        </paymentSelectLabel>
+        <startDateLabel>
+            <innerText>Начало подписки</innerText>
+        </startDateLabel>
+        <endDateLabel>
+            <innerText>Конец подписки</innerText>
+        </endDateLabel>
+        <editButton>
+            <value>Сохранить изменения</value>
+        </editButton>
+        <addButton>
+            <value>Добавить новый</value>
+        </addButton>
+        <deleteButton>
+            <value>Удалить выбранный</value>
+        </deleteButton>
+        <headerId>
+            <innerText>ID</innerText>
+        </headerId>
+        <headerReader>
+            <innerText>Подписчик</innerText>
+        </headerReader>
+        <headerPublication>
+            <innerText>Издание</innerText>
+        </headerPublication>
+        <headerPayment>
+            <innerText>Платёж</innerText>
+        </headerPayment>
+        <headerStartDate>
+            <innerText>Начало подписки</innerText>
+        </headerStartDate>
+        <headerEndDate>
+            <innerText>Конец подписки</innerText>
+        </headerEndDate>
+    </subscription>
+</local>

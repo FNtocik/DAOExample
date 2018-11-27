@@ -1,9 +1,10 @@
 package by.training.taskdao.web.servlets.locale;
 
-import by.training.taskdao.web.config.LocaleStringsManager;
+import by.training.taskdao.utils.FileReaderUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,22 +15,19 @@ public class GetServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String requestedPage = req.getParameter("page");
-        String jsonAnswer = "";
-        LocaleStringsManager manager = LocaleStringsManager.getInstance();
-        switch (requestedPage){
-            case "login":
-                jsonAnswer = manager.getLoginPageStrings();
+        Cookie[] cookies = req.getCookies();
+        String fileName = "lang_";
+        for (Cookie current : cookies) {
+            if (current.getName().equalsIgnoreCase("local")) {
+                fileName += current.getValue();
                 break;
-            case "denied":
-                jsonAnswer = manager.getDeniedPageStrings();
-                break;
-            default:
-                resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
-                break;
+            }
         }
+        fileName += ".xml";
+        String xmlLangs = FileReaderUtil.readAllFromFile(fileName);
         resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write(jsonAnswer);
+        resp.setContentType("text/xml");
+        resp.getWriter().write(xmlLangs);
     }
 
     @Override
