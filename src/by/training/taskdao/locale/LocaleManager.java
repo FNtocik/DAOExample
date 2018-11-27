@@ -41,4 +41,8 @@ public class LocaleManager {
     public String getDefaultLanguage() {
         return localeResourceBundle.getString("default");
     }
+
+    public String getPathToLocale() {
+        return localeResourceBundle.getString("langDirectory");
+    }
 }

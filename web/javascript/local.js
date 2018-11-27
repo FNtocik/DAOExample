@@ -20,3 +20,15 @@ function setLocaleStrings(page) {
     };
     request.send();
 }
+
+function changeLocale(locale) {
+    var request = new XMLHttpRequest();
+    var params = "locale=" + locale;
+    request.open("POST", "changeLocale", true);
+    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.onreadystatechange = function (ev) {
+        if (this.readyState == XMLHttpRequest.DONE)
+            location.reload();
+    };
+    request.send(params);
+}

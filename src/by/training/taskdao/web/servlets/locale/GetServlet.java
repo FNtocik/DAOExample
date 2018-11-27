@@ -1,5 +1,6 @@
 package by.training.taskdao.web.servlets.locale;
 
+import by.training.taskdao.locale.LocaleManager;
 import by.training.taskdao.utils.FileReaderUtil;
 
 import javax.servlet.ServletException;
@@ -24,7 +25,8 @@ public class GetServlet extends HttpServlet {
             }
         }
         fileName += ".xml";
-        String xmlLangs = FileReaderUtil.readAllFromFile(fileName);
+        LocaleManager localeManager = LocaleManager.getInstance();
+        String xmlLangs = FileReaderUtil.readAllFromFile(localeManager.getPathToLocale(), fileName);
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/xml");
         resp.getWriter().write(xmlLangs);

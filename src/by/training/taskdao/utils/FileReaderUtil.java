@@ -6,12 +6,10 @@ import java.nio.file.Paths;
 
 public class FileReaderUtil {
 
-    private static final String DIRECTORY = "/Users/antonpugacev/IdeaProjects/DAOExample/src/";
-
-    public static String readAllFromFile(String fileName) {
+    public static String readAllFromFile(String path, String fileName) {
         String data = "";
         try {
-            data = new String(Files.readAllBytes(Paths.get(DIRECTORY + fileName)));
+            data = new String(Files.readAllBytes(Paths.get(path + fileName)));
         } catch (IOException e) {
             e.printStackTrace();
         }
