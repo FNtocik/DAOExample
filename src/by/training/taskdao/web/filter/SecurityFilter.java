@@ -30,6 +30,7 @@ public class SecurityFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest)servletRequest;
         HttpServletResponse response = (HttpServletResponse)servletResponse;
         String servletPath = request.getServletPath().substring(1);
+        boolean isSecureServlet = servletPath.contains("secure/");
         servletPath = servletPath.replace("secure/", "");
         if (servletPath.contains("login")) {
             filterChain.doFilter(servletRequest, servletResponse);
@@ -46,11 +47,10 @@ public class SecurityFilter implements Filter {
             roleRequest = new UserRoleRequest("", SecurityConfig.ROLE_GUEST, request);
         }
         if (SecurityUtil.isSecurityPage(servletPath)) {
-            if (!SecurityUtil.havePermissionToPage(roleRequest, servletPath)
-                    && !loggedUser.getRole().equalsIgnoreCase(SecurityConfig.ROLE_ADMINISTRATOR)) {
+            if (!SecurityUtil.havePermissionToPage(roleRequest, servletPath)) {
                 response.sendRedirect(request.getContextPath() + "/denied.html");
                 return;
-            } else {
+            } else if (!isSecureServlet) {
                 request.getRequestDispatcher(servletPath + loggedUser.getRole()).forward(request, servletResponse);
             }
         }
