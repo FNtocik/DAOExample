@@ -10,12 +10,15 @@ import java.util.*;
 public class SecurityConfig {
 
     /**constant for reader role name*/
-    public static final String ROLE_READER = "READER";
+    public static final String ROLE_READER = "Reader";
 
     /**constant for administrator role name*/
-    public static final String ROLE_ADMINISTRATOR = "ADMINISTRATOR";
+    public static final String ROLE_ADMINISTRATOR = "Administrator";
 
-    public static final String ROLE_GUEST = "GUEST";
+    /**
+     * constant for administrator role name
+     */
+    public static final String ROLE_GUEST = "Guest";
 
     /**HashMap for storage urls for each role in system*/
     private final Map<String, List<String>> mapConfig = new HashMap<>();

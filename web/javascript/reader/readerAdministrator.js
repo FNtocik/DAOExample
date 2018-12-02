@@ -2,8 +2,10 @@ var readerElement = document.getElementById("readerId");
 var languageElement = document.getElementById("languageId");
 var loginInput = document.getElementById("login");
 var passwordInput = document.getElementById("password");
-var table = document.getElementById("allReaders");
+var table = document.getElementById("tableBody");
 
+
+setOnclick(table, readerElement);
 getAll();
 
 function add() {
@@ -84,7 +86,6 @@ function getAll() {
         if (this.responseText.length == 0)
             return;
         var readers = JSON.parse(this.responseText);
-        console.log(readers);
         while (table.firstChild) {
             table.removeChild(table.firstChild);
         }

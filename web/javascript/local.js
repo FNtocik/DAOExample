@@ -9,6 +9,7 @@ function setLocaleStrings(page) {
         for (var i = 0; i < curTranslate.length; i++) {
             var currentElement = document.getElementById(curTranslate[i].nodeName);
             var currentAttributes = curTranslate[i].childNodes;
+            if (currentElement == null) continue;
             for (var j = 0; j < currentAttributes.length; j++) {
                 if (currentAttributes[j].nodeName !== "innerText") {
                     currentElement.setAttribute(currentAttributes[j].nodeName, currentAttributes[j].textContent);

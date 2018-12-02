@@ -31,7 +31,7 @@
                 return;
             var response = JSON.parse(this.responseText);
             if(response.answer[0] === true)
-                window.location.replace("subscription.html");
+                window.location.replace("subscription");
             else
                 document.getElementById("errorOutput").hidden = false;
         };

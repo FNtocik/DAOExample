@@ -1,9 +1,10 @@
 var paymentElement = document.getElementById("paymentId");
-var languageElement = document.getElementById("languageId");
 var summaryInput = document.getElementById("summary");
 var isPayedCheckbox = document.getElementById("isPayed");
-var table = document.getElementById("allPayments");
+var table = document.getElementById("tableBody");
 
+
+setOnclick(table, paymentElement);
 getAll();
 
 function add() {
@@ -83,8 +84,6 @@ function getAll() {
             table.removeChild(table.firstChild);
         }
         var payments = JSON.parse(this.responseText);
-        table.childNodes = null;
-        languageElement.value = payments[0]["languageId"];
         for (var i = 0; i < payments.length; i++) {
             var currentPayment = JSON.parse(payments[i]);
             var tr = document.createElement("tr");

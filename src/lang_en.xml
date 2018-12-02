@@ -12,19 +12,25 @@
     </login>
     <denied>
         <textElement>
-            <value>Access denied, you dont have permission</value>
+            <innerText>Access denied, you dont have permission</innerText>
         </textElement>
     </denied>
     <payment>
-        <readerHref>
-            <innerText>Subscribers</innerText>
-        </readerHref>
-        <publicationHref>
-            <innerText>Publications</innerText>
-        </publicationHref>
+        <logoutHref>
+            <innerText>Logout</innerText>
+        </logoutHref>
         <subscriptionHref>
             <innerText>Subscriptions</innerText>
         </subscriptionHref>
+        <publicationHref>
+            <innerText>Publications</innerText>
+        </publicationHref>
+        <readerHref>
+            <innerText>Subscribers</innerText>
+        </readerHref>
+        <paymentHref>
+            <innerText>Payments</innerText>
+        </paymentHref>
         <summaryLabel>
             <innerText>Payment summary</innerText>
         </summaryLabel>
@@ -51,9 +57,15 @@
         </deleteButton>
     </payment>
     <publication>
+        <logoutHref>
+            <innerText>Logout</innerText>
+        </logoutHref>
         <subscriptionHref>
             <innerText>Subscriptions</innerText>
         </subscriptionHref>
+        <publicationHref>
+            <innerText>Publications</innerText>
+        </publicationHref>
         <readerHref>
             <innerText>Subscribers</innerText>
         </readerHref>
@@ -98,12 +110,18 @@
         </headerLanguage>
     </publication>
     <reader>
-        <publicationHref>
-            <innerText>Publications</innerText>
-        </publicationHref>
+        <logoutHref>
+            <innerText>Logout</innerText>
+        </logoutHref>
         <subscriptionHref>
             <innerText>Subscriptions</innerText>
         </subscriptionHref>
+        <publicationHref>
+            <innerText>Publications</innerText>
+        </publicationHref>
+        <readerHref>
+            <innerText>Subscribers</innerText>
+        </readerHref>
         <paymentHref>
             <innerText>Payments</innerText>
         </paymentHref>
@@ -136,6 +154,9 @@
         <logoutHref>
             <innerText>Logout</innerText>
         </logoutHref>
+        <subscriptionHref>
+            <innerText>Subscriptions</innerText>
+        </subscriptionHref>
         <publicationHref>
             <innerText>Publications</innerText>
         </publicationHref>

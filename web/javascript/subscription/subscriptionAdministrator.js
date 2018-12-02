@@ -1,11 +1,13 @@
 var subscriptionElement = document.getElementById("subscriptionId");
-var readerSelect = document.getElementById("readerId");
-var publicationSelect = document.getElementById("publicationId");
-var paymentSelect = document.getElementById("paymentId");
-var dateStartInput = document.getElementById("startDate");
-var dateEndInput = document.getElementById("endDate");
-var table = document.getElementById("allSubscriptions");
+var readerSelect = document.getElementById("readerSelect");
+var publicationSelect = document.getElementById("publicationSelect");
+var paymentSelect = document.getElementById("paymentSelect");
+var dateStartInput = document.getElementById("startDateInput");
+var dateEndInput = document.getElementById("endDateInput");
+var table = document.getElementById("tableBody");
 
+
+setOnclick(table, subscriptionElement);
 getAll();
 fillReaderSelect();
 fillPaymentSelect();
@@ -101,7 +103,6 @@ function getAll() {
     requestToSubs.onreadystatechange = function (ev) {
         if (this.readyState != XMLHttpRequest.DONE)
             return;
-        console.log(this.responseText.length);
         if (this.responseText.length == 0)
             return;
         while (table.firstChild) {

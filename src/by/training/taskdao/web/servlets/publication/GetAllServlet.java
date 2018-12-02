@@ -32,6 +32,7 @@ public class GetAllServlet extends HttpServlet {
             for (int i = 0; i < entities.size(); i++) {
                 if (!entities.get(i).getLanguage().getSignature().equals(currentLocale)) {
                     entities.remove(i);
+                    i--;
                 }
             }
             JSONArray jsonArray = new JSONArray();

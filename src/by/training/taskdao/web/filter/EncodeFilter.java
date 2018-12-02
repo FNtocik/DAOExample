@@ -8,7 +8,7 @@ import java.io.IOException;
  * Encode filter to set character encode in the request
  * @author Anton Puhachou
  */
-@WebFilter("/*")
+@WebFilter(filterName = "EncodeFilter")
 public class EncodeFilter implements Filter {
 
     @Override
@@ -21,6 +21,7 @@ public class EncodeFilter implements Filter {
         if(servletRequest.getCharacterEncoding() == null){
             servletRequest.setCharacterEncoding("UTF-8");
         }
+        servletResponse.setCharacterEncoding("UTF-8");
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

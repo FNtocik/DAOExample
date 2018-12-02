@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>$title</title>
+    <link rel="stylesheet" href="../style/style.css" type="text/css">
+</head>
+<body>
+<header>
+    <a href="/logout" id="logoutHref"></a>
+    <a href="/subscription" id="subscriptionHref"></a>
+    <a href="/publication" id="publicationHref"></a>
+    <a href="/reader" id="readerHref"></a>
+    <a href="/payment" id="paymentHref"></a>
+</header>
+<div class="content" id="dataDiv">
+    <table id="dataTable">
+        <thead id="tableHead">
+        $header
+        </thead>
+        <tbody id="tableBody">
+
+        </tbody>
+    </table>
+</div>
+<div class="content" id="controlDiv">
+    $control
+</div>
+<div class="footer">
+    <a onclick="changeLocale('ru')">Русский</a>
+    <a onclick="changeLocale('en')">English</a>
+</div>
+</body>
+<script src="/javascript/validator.js"></script>
+<script src="/javascript/local.js"></script>
+<script src="/javascript/tableSelector.js"></script>
+<script src="/javascript/$scriptName.js"></script>
+<script>
+    setLocaleStrings("$localeName");
+</script>
+</html>

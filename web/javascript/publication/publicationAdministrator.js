@@ -3,8 +3,10 @@ var languageSelect = document.getElementById("languageId");
 var nameInput = document.getElementById("name");
 var authorInput = document.getElementById("author");
 var costInput = document.getElementById("cost");
-var table = document.getElementById("allPublications");
+var table = document.getElementById("tableBody");
 
+
+setOnclick(table, publicationElement);
 getAll();
 fillLanguageSelect();
 
@@ -132,7 +134,7 @@ function fillLanguageSelect() {
         var languages = JSON.parse(this.responseText);
         for (var i = 0; i < languages.length; i++) {
             var currentLanguage = JSON.parse(languages[i]);
-            languageSelect[languageSelect.length] = new Option(currentLanguage["signature"], currentLanguage["languageId"]);
+            languageSelect[languageSelect.length] = new Option(currentLanguage["signature"], currentLanguage["id"]);
         }
     };
     request.send();

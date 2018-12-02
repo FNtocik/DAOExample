@@ -12,19 +12,25 @@
     </login>
     <denied>
         <textElement>
-            <value>Доступ запрещен, у вас нет необходимого уровня доступа</value>
+            <innerText>Доступ запрещен, у вас нет необходимого уровня доступа</innerText>
         </textElement>
     </denied>
     <payment>
-        <readerHref>
-            <innerText>Подписчики</innerText>
-        </readerHref>
-        <publicationHref>
-            <innerText>Издания</innerText>
-        </publicationHref>
+        <logoutHref>
+            <innerText>Выйти</innerText>
+        </logoutHref>
         <subscriptionHref>
             <innerText>Подписки</innerText>
         </subscriptionHref>
+        <publicationHref>
+            <innerText>Издания</innerText>
+        </publicationHref>
+        <readerHref>
+            <innerText>Подписчики</innerText>
+        </readerHref>
+        <paymentHref>
+            <innerText>Платежи</innerText>
+        </paymentHref>
         <summaryLabel>
             <innerText>Сумма платежа</innerText>
         </summaryLabel>
@@ -51,9 +57,15 @@
         </deleteButton>
     </payment>
     <publication>
+        <logoutHref>
+            <innerText>Выйти</innerText>
+        </logoutHref>
         <subscriptionHref>
             <innerText>Подписки</innerText>
         </subscriptionHref>
+        <publicationHref>
+            <innerText>Издания</innerText>
+        </publicationHref>
         <readerHref>
             <innerText>Подписчики</innerText>
         </readerHref>
@@ -98,12 +110,18 @@
         </headerLanguage>
     </publication>
     <reader>
-        <publicationHref>
-            <innerText>Издания</innerText>
-        </publicationHref>
+        <logoutHref>
+            <innerText>Выйти</innerText>
+        </logoutHref>
         <subscriptionHref>
             <innerText>Подписки</innerText>
         </subscriptionHref>
+        <publicationHref>
+            <innerText>Издания</innerText>
+        </publicationHref>
+        <readerHref>
+            <innerText>Подписчики</innerText>
+        </readerHref>
         <paymentHref>
             <innerText>Платежи</innerText>
         </paymentHref>
@@ -136,6 +154,9 @@
         <logoutHref>
             <innerText>Выйти</innerText>
         </logoutHref>
+        <subscriptionHref>
+            <innerText>Подписки</innerText>
+        </subscriptionHref>
         <publicationHref>
             <innerText>Издания</innerText>
         </publicationHref>

@@ -17,7 +17,7 @@ import java.io.IOException;
  * unauthorized access
  * @author Anton Puhachou
  */
-@WebFilter("/*")
+@WebFilter(filterName = "SecurityFilter")
 public class SecurityFilter implements Filter {
 
     @Override
@@ -50,6 +50,8 @@ public class SecurityFilter implements Filter {
                     && !loggedUser.getRole().equalsIgnoreCase(SecurityConfig.ROLE_ADMINISTRATOR)) {
                 response.sendRedirect(request.getContextPath() + "/denied.html");
                 return;
+            } else {
+                request.getRequestDispatcher(servletPath + loggedUser.getRole()).forward(request, servletResponse);
             }
         }
         filterChain.doFilter(roleRequest, response);
