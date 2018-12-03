@@ -1,16 +1,21 @@
 var table = document.getElementById("tableBody");
+var counter = 0;
+var numberOfItems = 10;
 
 getAll();
 
 function getAll() {
     var requestToSubs = new XMLHttpRequest();
+    var params = "counter=" + counter * numberOfItems + "&number=" + numberOfItems;
     requestToSubs.open("POST", "/secure/getAllSubscription", true);
     requestToSubs.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     requestToSubs.onreadystatechange = function (ev) {
         if (this.readyState != XMLHttpRequest.DONE)
             return;
-        if (this.responseText.length == 0)
+        if (this.responseText.length == 0) {
+            counter--;
             return;
+        }
         while (table.firstChild) {
             table.removeChild(table.firstChild);
         }
@@ -52,5 +57,16 @@ function getAll() {
             table.appendChild(tr);
         }
     };
-    requestToSubs.send();
+    requestToSubs.send(params);
+}
+
+function leftNav() {
+    if (counter - 1 >= 0)
+        counter--;
+    getAll();
+}
+
+function rightNav() {
+    counter++;
+    getAll();
 }

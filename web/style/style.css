@@ -1,5 +1,7 @@
 td {
     border-left: solid 1px black;
+    border-bottom: solid 1px black;
+    width: auto;
 }
 
 a {
@@ -19,8 +21,12 @@ table {
     width: 100%;
 }
 
-td {
-    width: auto;
+.leftButton {
+    float: left;
+}
+
+.rightButton {
+    float: right;
 }
 
 div.content {

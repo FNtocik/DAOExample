@@ -19,6 +19,10 @@ public class GetAllServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String counterParam = req.getParameter("counter");
+        String numberParam = req.getParameter("number");
+        int counter;
+        int number;
         DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         PublicationDAO publicationDAO = factory.getPublicationDAO();
         String currentLocale = String.valueOf(req.getAttribute("locale"));
@@ -35,6 +39,18 @@ public class GetAllServlet extends HttpServlet {
                     i--;
                 }
             }
+            if (counterParam == null || numberParam == null) {
+                counter = 0;
+                number = entities.size();
+            } else {
+                counter = Integer.valueOf(counterParam);
+                number = Integer.valueOf(numberParam);
+            }
+            if (counter >= entities.size()) return;
+            if (counter + number >= entities.size())
+                entities = entities.subList(counter, entities.size());
+            else
+                entities = entities.subList(counter, counter + number);
             JSONArray jsonArray = new JSONArray();
             for (Publication current : entities) {
                 jsonArray.put(current.toString());

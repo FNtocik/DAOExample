@@ -4,6 +4,8 @@ var nameInput = document.getElementById("name");
 var authorInput = document.getElementById("author");
 var costInput = document.getElementById("cost");
 var table = document.getElementById("tableBody");
+var counter = 0;
+var numberOfItems = 10;
 
 
 setOnclick(table, publicationElement);
@@ -82,14 +84,17 @@ function get() {
 }
 
 function getAll() {
-    var requestToSubs = new XMLHttpRequest();
-    requestToSubs.open("POST", "/secure/getAllPublication", true);
-    requestToSubs.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    requestToSubs.onreadystatechange = function (ev) {
+    var request = new XMLHttpRequest();
+    var params = "counter=" + counter * numberOfItems + "&number=" + numberOfItems;
+    request.open("POST", "/secure/getAllPublication", true);
+    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.onreadystatechange = function (ev) {
         if (this.readyState != XMLHttpRequest.DONE)
             return;
-        if (this.responseText.length == 0)
+        if (this.responseText.length == 0) {
+            counter--;
             return;
+        }
         var publications = JSON.parse(this.responseText);
         while (table.firstChild) {
             table.removeChild(table.firstChild);
@@ -121,7 +126,7 @@ function getAll() {
             table.appendChild(tr);
         }
     };
-    requestToSubs.send();
+    request.send(params);
 }
 
 function fillLanguageSelect() {
@@ -147,4 +152,15 @@ function searchValueInSelect(options, valueToSelect) {
             return;
         }
     }
+}
+
+function leftNav() {
+    if (counter - 1 >= 0)
+        counter--;
+    getAll();
+}
+
+function rightNav() {
+    counter++;
+    getAll();
 }
