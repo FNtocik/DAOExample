@@ -15,6 +15,14 @@ tr.select {
     background-color: lightskyblue;
 }
 
+table {
+    width: 100%;
+}
+
+td {
+    width: auto;
+}
+
 div.content {
     width: 48%;
     height: content-box;
