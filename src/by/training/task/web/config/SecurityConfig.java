@@ -16,7 +16,7 @@ public class SecurityConfig {
     public static final String ROLE_ADMINISTRATOR = "Administrator";
 
     /**
-     * constant for administrator role name
+     * constant for guest role name
      */
     public static final String ROLE_GUEST = "Guest";
 

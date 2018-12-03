@@ -15,6 +15,7 @@ import java.util.List;
 /**
  * Data access implementation class to the table language in MySQL database
  * @author Anton Puhachou
+ * @see by.training.task.dao.interfaces.LanguageDAO
  * */
 public class MySQLLanguageDAO implements LanguageDAO {
 

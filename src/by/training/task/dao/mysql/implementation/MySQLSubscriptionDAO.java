@@ -18,6 +18,7 @@ import java.util.List;
 /**
  * Data access implementation class to the table subscription in MySQL database
  * @author Anton Puhachou
+ * @see by.training.task.dao.interfaces.SubscriptionDAO
  * */
 public class MySQLSubscriptionDAO implements SubscriptionDAO {
 

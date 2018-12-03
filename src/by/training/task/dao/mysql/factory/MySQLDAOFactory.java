@@ -11,9 +11,15 @@ import java.sql.Connection;
 /**
  * Specific DAO factory pattern realization to the MySQL database
  * @author Anton Puhachou
+ * @see by.training.task.dao.factory.DAOFactory
  * */
 public class MySQLDAOFactory extends DAOFactory {
 
+    /**
+     * Instance of connection pool to MySQL database
+     *
+     * @see ConnectionPool
+     */
     private static ConnectionPool connectionPool = null;
 
     /**

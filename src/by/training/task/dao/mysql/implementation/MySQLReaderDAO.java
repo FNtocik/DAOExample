@@ -16,6 +16,7 @@ import java.util.List;
 /**
  * Data access implementation class to the table reader in MySQL database
  * @author Anton Puhachou
+ * @see by.training.task.dao.interfaces.ReaderDAO
  * */
 public class MySQLReaderDAO implements ReaderDAO {
 

@@ -15,6 +15,7 @@ import java.util.List;
 /**
  * Data access implementation class to the table administrator in MySQL database
  * @author Anton Puhachou
+ * @see by.training.task.dao.interfaces.AdministratorDAO
  * */
 public class MySQLAdministratorDAO implements AdministratorDAO {
 
