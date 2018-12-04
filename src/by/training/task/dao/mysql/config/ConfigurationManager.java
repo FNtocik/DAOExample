@@ -32,8 +32,9 @@ public class ConfigurationManager {
      * @return instance of manager
      */
     public static ConfigurationManager getInstance() {
-        if (instance == null)
+        if (instance == null) {
             instance = new ConfigurationManager();
+        }
         return instance;
     }
 

@@ -26,8 +26,9 @@ public class LocaleManager {
      * @return instance of manager
      */
     public static LocaleManager getInstance(){
-        if(instance == null)
+        if (instance == null) {
             instance = new LocaleManager();
+        }
         return instance;
     }
 
@@ -37,10 +38,11 @@ public class LocaleManager {
      * @return language signature
      */
     public String getSupportedLanguage(String signature) {
-        if (localeResourceBundle.keySet().contains(signature))
+        if (localeResourceBundle.keySet().contains(signature)) {
             return localeResourceBundle.getString(signature);
-        else
+        } else {
             return getDefaultLanguage();
+        }
     }
 
     /**

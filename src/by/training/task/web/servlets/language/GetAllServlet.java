@@ -25,18 +25,37 @@ public class GetAllServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String counterParam = req.getParameter("counter");
+        String numberParam = req.getParameter("number");
+        int counter;
+        int number;
         DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         LanguageDAO languageDAO = factory.getLanguageDAO();
-        List<Language> languageList = null;
+        List<Language> entities = null;
         try {
-            languageList = languageDAO.getAll();
+            entities = languageDAO.getAll();
         } catch (SQLException e) {
             LoggerManager loggerManager = LoggerManager.getInstance();
             loggerManager.error(this.getClass().toString(), e);
         }
-        if (languageList != null && languageList.size() != 0) {
+        if (entities != null && entities.size() != 0) {
+            if (counterParam == null || numberParam == null) {
+                counter = 0;
+                number = entities.size();
+            } else {
+                counter = Integer.valueOf(counterParam);
+                number = Integer.valueOf(numberParam);
+            }
+            if (counter >= entities.size()) {
+                return;
+            }
+            if (counter + number >= entities.size()) {
+                entities = entities.subList(counter, entities.size());
+            } else {
+                entities = entities.subList(counter, counter + number);
+            }
             JSONArray jsonArray = new JSONArray();
-            for (Language current : languageList) {
+            for (Language current : entities) {
                 jsonArray.put(current.toString());
             }
             resp.setCharacterEncoding("UTF-8");

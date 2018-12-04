@@ -40,11 +40,13 @@ public class SecurityUtil {
         SecurityConfig securityConfig = SecurityConfig.getInstance();
         Set<String> allRoles = securityConfig.getAllAppRoles();
         for(String currentRole : allRoles){
-            if(!roleRequest.isUserInRole(currentRole))
+            if (!roleRequest.isUserInRole(currentRole)) {
                 continue;
+            }
             List<String> urlForRole = securityConfig.getUrlForRole(currentRole);
-            if(urlForRole != null && urlForRole.contains(url))
+            if (urlForRole != null && urlForRole.contains(url)) {
                 return true;
+            }
         }
         return false;
     }

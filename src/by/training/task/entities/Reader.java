@@ -176,8 +176,9 @@ public class Reader {
         jsonObject.put("id", id);
         jsonObject.put("login", login);
         jsonObject.put("password", password);
-        if (language != null)
+        if (language != null) {
             jsonObject.put("language", language.toString());
+        }
         return jsonObject.toString();
     }
 }

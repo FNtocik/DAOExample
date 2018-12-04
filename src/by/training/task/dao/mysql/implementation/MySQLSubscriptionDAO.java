@@ -57,8 +57,9 @@ public class MySQLSubscriptionDAO implements SubscriptionDAO {
                 LoggerManager loggerManager = LoggerManager.getInstance();
                 loggerManager.error(this.getClass().toString(), e);
             } finally {
-                if(resultSet != null)
+                if (resultSet != null) {
                     resultSet.close();
+                }
                 MySQLDAOFactory.closeConnection(connection);
             }
         }
@@ -184,8 +185,9 @@ public class MySQLSubscriptionDAO implements SubscriptionDAO {
                 LoggerManager loggerManager = LoggerManager.getInstance();
                 loggerManager.error(this.getClass().toString(), e);
             } finally {
-                if(resultSet != null)
+                if (resultSet != null) {
                     resultSet.close();
+                }
                 MySQLDAOFactory.closeConnection(connection);
             }
         }

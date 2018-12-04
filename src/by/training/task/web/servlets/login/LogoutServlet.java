@@ -9,7 +9,6 @@ import java.io.IOException;
 
 /**
  * Servlet to logout user from system
- *
  * @author Anton Puhachou
  */
 @WebServlet("/logout")

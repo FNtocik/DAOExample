@@ -178,8 +178,9 @@ public class Publication {
         jsonObject.put("author", author);
         jsonObject.put("name", name);
         jsonObject.put("cost", cost);
-        if (language != null)
+        if (language != null) {
             jsonObject.put("language", language.toString());
+        }
         return jsonObject.toString();
     }
 }

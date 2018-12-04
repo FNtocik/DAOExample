@@ -46,11 +46,14 @@ public class GetAllServlet extends HttpServlet {
                 counter = Integer.valueOf(counterParam);
                 number = Integer.valueOf(numberParam);
             }
-            if (counter >= entities.size()) return;
-            if (counter + number >= entities.size())
+            if (counter >= entities.size()) {
+                return;
+            }
+            if (counter + number >= entities.size()) {
                 entities = entities.subList(counter, entities.size());
-            else
+            } else {
                 entities = entities.subList(counter, counter + number);
+            }
             JSONArray jsonArray = new JSONArray();
             for (Subscription current : entities) {
                 jsonArray.put(current.toString());

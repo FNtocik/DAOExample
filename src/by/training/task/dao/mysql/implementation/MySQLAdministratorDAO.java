@@ -36,7 +36,7 @@ public class MySQLAdministratorDAO implements AdministratorDAO {
                 PreparedStatement preparedStatement = connection.prepareStatement(ConfigurationManager.getInstance().getMySQLQueryAdminGet());
                 preparedStatement.setInt(1, id);
                 resultSet = preparedStatement.executeQuery();
-                if(resultSet.next()){
+                if (resultSet.next()) {
                     entity = new Administrator(resultSet.getInt(1),
                                             resultSet.getString(2),
                                             resultSet.getString(3));
@@ -45,8 +45,9 @@ public class MySQLAdministratorDAO implements AdministratorDAO {
                 LoggerManager loggerManager = LoggerManager.getInstance();
                 loggerManager.error(this.getClass().toString(), e);
             } finally {
-                if(resultSet != null)
+                if (resultSet != null) {
                     resultSet.close();
+                }
                 MySQLDAOFactory.closeConnection(connection);
             }
         }
@@ -154,8 +155,9 @@ public class MySQLAdministratorDAO implements AdministratorDAO {
                 LoggerManager loggerManager = LoggerManager.getInstance();
                 loggerManager.error(this.getClass().toString(), e);
             } finally {
-                if(resultSet != null)
+                if (resultSet != null) {
                     resultSet.close();
+                }
                 MySQLDAOFactory.closeConnection(connection);
             }
         }

@@ -25,8 +25,9 @@ public class TemplateFolderManager {
      * @return instance of manager
      */
     public static TemplateFolderManager getInstance() {
-        if (instance == null)
+        if (instance == null) {
             instance = new TemplateFolderManager();
+        }
         return instance;
     }
 

@@ -32,8 +32,9 @@ public class LoggerManager {
      * @return instance of manager
      */
     public static LoggerManager getInstance() {
-        if (instance == null)
+        if (instance == null) {
             instance = new LoggerManager();
+        }
         return instance;
     }
 
