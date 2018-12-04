@@ -11,11 +11,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Servlet to get locale strings for specific page
+ *
+ * @author Anton Puhachou
+ */
 @WebServlet("/locale")
 public class GetServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String page = "<" + req.getParameter("page") + ">";
+        String endpage = page.replace("<", "</");
         Cookie[] cookies = req.getCookies();
         String fileName = "lang_";
         for (Cookie current : cookies) {
@@ -27,6 +34,7 @@ public class GetServlet extends HttpServlet {
         fileName += ".xml";
         LocaleManager localeManager = LocaleManager.getInstance();
         String xmlLangs = FileReaderUtil.readAllFromFile(localeManager.getPathToLocale(), fileName);
+        xmlLangs = xmlLangs.substring(xmlLangs.indexOf(page), xmlLangs.indexOf(endpage) + endpage.length());
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/xml");
         resp.getWriter().write(xmlLangs);

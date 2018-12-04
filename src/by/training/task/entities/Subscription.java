@@ -52,7 +52,6 @@ public class Subscription {
      * @param paymentId bound payment id
      * @param startSubscription start subscription date
      * @param endSubscription end subscription date
-     * @see Subscription#Subscription(int, int, int, int, Date, Date)
      */
     public Subscription(int readerId, int publicationId, int paymentId,
                         Date startSubscription, Date endSubscription) {
@@ -71,7 +70,6 @@ public class Subscription {
      * @param paymentId bound payment id
      * @param startSubscription start subscription date
      * @param endSubscription end subscription date
-     * @see Subscription#Subscription(int, int, int, Date, Date)
      */
     public Subscription(int id, int readerId, int publicationId, int paymentId, Date startSubscription,
                         Date endSubscription) {
@@ -83,6 +81,16 @@ public class Subscription {
         this.endSubscription = endSubscription;
     }
 
+    /**
+     * Constructor to create a specific object <b>with</b> id
+     *
+     * @param id                entity id
+     * @param reader            bound reader object
+     * @param publication       bound publication object
+     * @param payment           bound payment object
+     * @param startSubscription start subscription date
+     * @param endSubscription   end subscription date
+     */
     public Subscription(int id, Reader reader, Publication publication, Payment payment, Date startSubscription,
                         Date endSubscription) {
         this.id = id;
@@ -120,10 +128,18 @@ public class Subscription {
         this.readerId = readerId;
     }
 
+    /**
+     * get method of {@link Subscription#reader}
+     * @return bound reader object
+     * */
     public Reader getReader() {
         return reader;
     }
 
+    /**
+     * set method of {@link Subscription#reader} with setting {@link Subscription#readerId}
+     * @param reader bound reader object
+     * */
     public void setReader(Reader reader) {
         this.reader = reader;
         this.readerId = reader.getId();
@@ -145,10 +161,18 @@ public class Subscription {
         this.publicationId = publicationId;
     }
 
+    /**
+     * get method of {@link Subscription#publication}
+     * @return bound publication object
+     * */
     public Publication getPublication() {
         return publication;
     }
 
+    /**
+     * set method of {@link Subscription#publication} with setting {@link Subscription#publicationId}
+     * @param publication bound publication object
+     * */
     public void setPublication(Publication publication) {
         this.publication = publication;
         this.publicationId = publication.getId();
@@ -170,10 +194,18 @@ public class Subscription {
         this.paymentId = paymentId;
     }
 
+    /**
+     * get method of {@link Subscription#payment}
+     * @return bound payment object
+     * */
     public Payment getPayment() {
         return payment;
     }
 
+    /**
+     * set method of {@link Subscription#payment} with setting {@link Subscription#paymentId}
+     * @param payment bound payment object
+     * */
     public void setPayment(Payment payment) {
         this.payment = payment;
         this.paymentId = payment.getId();
@@ -211,6 +243,10 @@ public class Subscription {
         this.endSubscription = endSubscription;
     }
 
+    /**
+     * returns a JSON string that represents object
+     * @return JSON string
+     * */
     @Override
     public String toString() {
         JSONObject jsonObject = new JSONObject();

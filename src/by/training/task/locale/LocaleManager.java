@@ -31,17 +31,30 @@ public class LocaleManager {
         return instance;
     }
 
+    /**
+     * Method of obtaining supported in application language
+     *
+     * @return language signature
+     */
     public String getSupportedLanguage(String signature) {
         if (localeResourceBundle.keySet().contains(signature))
             return localeResourceBundle.getString(signature);
         else
-            return localeResourceBundle.getString("default");
+            return getDefaultLanguage();
     }
 
+    /**
+     * Method of obtaining default language in application
+     * @return default language signature
+     * */
     public String getDefaultLanguage() {
         return localeResourceBundle.getString("default");
     }
 
+    /**
+     * Method of obtaining path to locale string of application
+     * @return global path
+     * */
     public String getPathToLocale() {
         return localeResourceBundle.getString("langDirectory");
     }

@@ -21,6 +21,8 @@
         <url-pattern>/payment</url-pattern>
         <url-pattern>/publication</url-pattern>
         <url-pattern>/reader</url-pattern>
+        <url-pattern>/language</url-pattern>
+        <url-pattern>/admin</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>SecurityFilter</filter-name>

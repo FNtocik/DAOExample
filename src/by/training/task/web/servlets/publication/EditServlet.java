@@ -3,6 +3,7 @@ package by.training.task.web.servlets.publication;
 import by.training.task.dao.factory.DAOFactory;
 import by.training.task.dao.interfaces.PublicationDAO;
 import by.training.task.entities.Publication;
+import by.training.task.utils.LoggerManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Servlet to edit publication entity
+ *
+ * @author Anton Puhachou
+ */
 @WebServlet("/secure/editPublication")
 public class EditServlet extends HttpServlet {
 
@@ -31,7 +37,8 @@ public class EditServlet extends HttpServlet {
         try {
             publicationDAO.update(entity);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LoggerManager loggerManager = LoggerManager.getInstance();
+            loggerManager.error(this.getClass().toString(), e);
         }
     }
 

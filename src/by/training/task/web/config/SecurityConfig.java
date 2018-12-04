@@ -1,5 +1,7 @@
 package by.training.task.web.config;
 
+import by.training.task.utils.LoggerManager;
+
 import java.util.*;
 
 /**
@@ -40,6 +42,8 @@ public class SecurityConfig {
      * urls initialization for each role
      */
     private void init(){
+        LoggerManager loggerManager = LoggerManager.getInstance();
+        loggerManager.info(this.getClass().toString() + " set security access strings");
         String readerUrls = roleResourceBundle.getString(ROLE_READER.toLowerCase());
         String administratorUrls = roleResourceBundle.getString(ROLE_ADMINISTRATOR.toLowerCase());
         String guestUrls = roleResourceBundle.getString(ROLE_GUEST.toLowerCase());

@@ -5,7 +5,7 @@ import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
 /**
- * Encode filter to set character encode in the request
+ * Encode filter to set character encode in the request and response
  * @author Anton Puhachou
  */
 @WebFilter(filterName = "EncodeFilter")

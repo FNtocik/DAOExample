@@ -3,6 +3,7 @@ package by.training.task.web.servlets.payment;
 import by.training.task.dao.factory.DAOFactory;
 import by.training.task.dao.interfaces.PaymentDAO;
 import by.training.task.entities.Payment;
+import by.training.task.utils.LoggerManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Servlet to create payment entity
+ *
+ * @author Anton Puhachou
+ */
 @WebServlet("/secure/addPayment")
 public class AddServlet extends HttpServlet {
 
@@ -26,7 +32,8 @@ public class AddServlet extends HttpServlet {
         try {
             paymentDAO.create(entity);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LoggerManager loggerManager = LoggerManager.getInstance();
+            loggerManager.error(this.getClass().toString(), e);
         }
     }
 

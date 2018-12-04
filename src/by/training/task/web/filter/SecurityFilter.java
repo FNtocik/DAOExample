@@ -1,6 +1,7 @@
 package by.training.task.web.filter;
 
 import by.training.task.entities.LoggedUser;
+import by.training.task.utils.LoggerManager;
 import by.training.task.web.config.SecurityConfig;
 import by.training.task.web.utils.SecurityUtil;
 import by.training.task.web.utils.SessionUtil;
@@ -13,8 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Security filter to control page and servlets requests and prevent
- * unauthorized access
+ * Security filter to control page and servlets requests and prevent unauthorized access
  * @author Anton Puhachou
  */
 @WebFilter(filterName = "SecurityFilter")
@@ -47,6 +47,9 @@ public class SecurityFilter implements Filter {
             roleRequest = new UserRoleRequest("", SecurityConfig.ROLE_GUEST, request);
         }
         if (SecurityUtil.isSecurityPage(servletPath)) {
+            LoggerManager loggerManager = LoggerManager.getInstance();
+            loggerManager.info(this.getClass().toString() + " user try to access: " + loggedUser.getLogin() + " Role: " +
+                    loggedUser.getRole() + " URL: " + servletPath);
             if (!SecurityUtil.havePermissionToPage(roleRequest, servletPath)) {
                 response.sendRedirect(request.getContextPath() + "/denied.html");
                 return;

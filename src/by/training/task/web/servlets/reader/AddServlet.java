@@ -5,6 +5,7 @@ import by.training.task.dao.interfaces.LanguageDAO;
 import by.training.task.dao.interfaces.ReaderDAO;
 import by.training.task.entities.Language;
 import by.training.task.entities.Reader;
+import by.training.task.utils.LoggerManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Servlet to create reader entity
+ *
+ * @author Anton Puhachou
+ */
 @WebServlet("/secure/addReader")
 public class AddServlet extends HttpServlet {
 
@@ -30,7 +36,8 @@ public class AddServlet extends HttpServlet {
                 Language current = languageDAO.getAll().get(0);
                 languageParameter = "" + current.getId();
             } catch (SQLException e) {
-                e.printStackTrace();
+                LoggerManager loggerManager = LoggerManager.getInstance();
+                loggerManager.error(this.getClass().toString(), e);
             }
         }
         int languageId = Integer.valueOf(languageParameter);

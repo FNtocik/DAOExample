@@ -3,6 +3,7 @@ package by.training.task.web.servlets.language;
 import by.training.task.dao.factory.DAOFactory;
 import by.training.task.dao.interfaces.LanguageDAO;
 import by.training.task.entities.Language;
+import by.training.task.utils.LoggerManager;
 import org.json.JSONArray;
 
 import javax.servlet.ServletException;
@@ -14,6 +15,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Servlet to get all of language entities
+ *
+ * @author Anton Puhachou
+ */
 @WebServlet("/secure/getAllLanguage")
 public class GetAllServlet extends HttpServlet {
 
@@ -25,7 +31,8 @@ public class GetAllServlet extends HttpServlet {
         try {
             languageList = languageDAO.getAll();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LoggerManager loggerManager = LoggerManager.getInstance();
+            loggerManager.error(this.getClass().toString(), e);
         }
         if (languageList != null && languageList.size() != 0) {
             JSONArray jsonArray = new JSONArray();

@@ -8,6 +8,11 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+/**
+ * Filter to get html templates of specific page and set their to sessions and attributes
+ *
+ * @author Anton Puhachou
+ */
 @WebFilter(filterName = "SetTemplatesFilter")
 public class SetTemplatesFilter implements Filter {
     @Override

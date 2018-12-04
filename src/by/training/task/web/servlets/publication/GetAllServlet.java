@@ -3,6 +3,7 @@ package by.training.task.web.servlets.publication;
 import by.training.task.dao.factory.DAOFactory;
 import by.training.task.dao.interfaces.PublicationDAO;
 import by.training.task.entities.Publication;
+import by.training.task.utils.LoggerManager;
 import org.json.JSONArray;
 
 import javax.servlet.ServletException;
@@ -14,6 +15,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Servlet to get all of publication entities
+ *
+ * @author Anton Puhachou
+ */
 @WebServlet("/secure/getAllPublication")
 public class GetAllServlet extends HttpServlet {
 
@@ -30,7 +36,8 @@ public class GetAllServlet extends HttpServlet {
         try {
             entities = publicationDAO.getAll();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LoggerManager loggerManager = LoggerManager.getInstance();
+            loggerManager.error(this.getClass().toString(), e);
         }
         if (entities != null && entities.size() != 0) {
             for (int i = 0; i < entities.size(); i++) {

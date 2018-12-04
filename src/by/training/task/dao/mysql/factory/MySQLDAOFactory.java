@@ -5,6 +5,7 @@ import by.training.task.dao.interfaces.*;
 import by.training.task.dao.mysql.config.ConfigurationManager;
 import by.training.task.dao.mysql.implementation.*;
 import by.training.task.dao.mysql.pool.ConnectionPool;
+import by.training.task.utils.LoggerManager;
 
 import java.sql.Connection;
 
@@ -17,7 +18,6 @@ public class MySQLDAOFactory extends DAOFactory {
 
     /**
      * Instance of connection pool to MySQL database
-     *
      * @see ConnectionPool
      */
     private static ConnectionPool connectionPool = null;
@@ -39,7 +39,12 @@ public class MySQLDAOFactory extends DAOFactory {
     }
 
     public static void closeConnection(Connection connection) {
-        connectionPool.removeConnection(connection);
+        try {
+            connectionPool.removeConnection(connection);
+        } catch (RuntimeException ex) {
+            LoggerManager loggerManager = LoggerManager.getInstance();
+            loggerManager.error("Connection not from connection pool", ex);
+        }
     }
 
     /**

@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Servlet to change current locale of user
+ *
+ * @author Anton Puhachou
+ */
 @WebServlet("/changeLocale")
 public class EditServlet extends HttpServlet {
 

@@ -10,6 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Locale;
 
+
+/**
+ * Localisation filter to set user locale in cookies and request attribute
+ *
+ * @author Anton Puhachou
+ */
 @WebFilter(filterName = "LocalisationFilter")
 public class LocalisationFilter implements Filter {
     @Override

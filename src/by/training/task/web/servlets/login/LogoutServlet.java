@@ -7,6 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Servlet to logout user from system
+ *
+ * @author Anton Puhachou
+ */
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
 

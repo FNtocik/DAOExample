@@ -4,6 +4,7 @@ import by.training.task.dao.interfaces.LanguageDAO;
 import by.training.task.dao.mysql.config.ConfigurationManager;
 import by.training.task.dao.mysql.factory.MySQLDAOFactory;
 import by.training.task.entities.Language;
+import by.training.task.utils.LoggerManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,12 +42,12 @@ public class MySQLLanguageDAO implements LanguageDAO {
                                         resultSet.getString(2));
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                LoggerManager loggerManager = LoggerManager.getInstance();
+                loggerManager.error(this.getClass().toString(), e);
             } finally {
                 if(resultSet != null)
                     resultSet.close();
                 MySQLDAOFactory.closeConnection(connection);
-                ;
             }
         }
         return entity;
@@ -69,10 +70,10 @@ public class MySQLLanguageDAO implements LanguageDAO {
                 preparedStatement.setString(1, entity.getSignature());
                 newId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
-                e.printStackTrace();
+                LoggerManager loggerManager = LoggerManager.getInstance();
+                loggerManager.error(this.getClass().toString(), e);
             } finally {
                 MySQLDAOFactory.closeConnection(connection);
-                ;
             }
         }
         return newId;
@@ -96,10 +97,10 @@ public class MySQLLanguageDAO implements LanguageDAO {
                 preparedStatement.setInt(2, entity.getId());
                 updatedId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
-                e.printStackTrace();
+                LoggerManager loggerManager = LoggerManager.getInstance();
+                loggerManager.error(this.getClass().toString(), e);
             } finally {
                 MySQLDAOFactory.closeConnection(connection);
-                ;
             }
         }
         return updatedId;
@@ -122,10 +123,10 @@ public class MySQLLanguageDAO implements LanguageDAO {
                 preparedStatement.setInt(1, id);
                 deletedId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
-                e.printStackTrace();
+                LoggerManager loggerManager = LoggerManager.getInstance();
+                loggerManager.error(this.getClass().toString(), e);
             } finally {
                 MySQLDAOFactory.closeConnection(connection);
-                ;
             }
         }
         return deletedId;
@@ -151,12 +152,12 @@ public class MySQLLanguageDAO implements LanguageDAO {
                                             resultSet.getString(2)));
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                LoggerManager loggerManager = LoggerManager.getInstance();
+                loggerManager.error(this.getClass().toString(), e);
             } finally {
                 if(resultSet != null)
                     resultSet.close();
                 MySQLDAOFactory.closeConnection(connection);
-                ;
             }
         }
         return entities;

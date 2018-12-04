@@ -1,5 +1,7 @@
 package by.training.task.dao.mysql.pool;
 
+import by.training.task.utils.LoggerManager;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -41,7 +43,8 @@ public class ConnectionPool {
             try {
                 connectionPool.add(DriverManager.getConnection(url, login, password));
             } catch (SQLException e) {
-                e.printStackTrace();
+                LoggerManager loggerManager = LoggerManager.getInstance();
+                loggerManager.error(ConnectionPool.class.toString(), e);
             }
         }
     }
@@ -58,6 +61,8 @@ public class ConnectionPool {
             usedConnections.add(newConnection);
             return newConnection;
         } else {
+            LoggerManager loggerManager = LoggerManager.getInstance();
+            loggerManager.info("All connections in use");
             throw new RuntimeException("All connection in use");
         }
     }
@@ -71,6 +76,8 @@ public class ConnectionPool {
             if (usedConnections.remove(connection)) {
                 connectionPool.add(connection);
             } else {
+                LoggerManager loggerManager = LoggerManager.getInstance();
+                loggerManager.info("Connection not from connection pool");
                 throw new NullPointerException("Connection not from connection pool");
             }
         }

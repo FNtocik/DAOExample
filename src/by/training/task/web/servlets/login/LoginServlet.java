@@ -6,6 +6,7 @@ import by.training.task.dao.interfaces.ReaderDAO;
 import by.training.task.entities.Administrator;
 import by.training.task.entities.LoggedUser;
 import by.training.task.entities.Reader;
+import by.training.task.utils.LoggerManager;
 import by.training.task.web.config.SecurityConfig;
 import by.training.task.web.utils.SessionUtil;
 import org.json.JSONObject;
@@ -19,6 +20,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Servlet to login user in system
+ *
+ * @author Anton Puhachou
+ */
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
@@ -35,7 +41,8 @@ public class LoginServlet extends HttpServlet {
             readerList = readerDAO.getAll();
             administratorList = administratorDAO.getAll();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LoggerManager loggerManager = LoggerManager.getInstance();
+            loggerManager.error(this.getClass().toString(), e);
         }
         LoggedUser user = null;
         if (readerList.size() != 0) {

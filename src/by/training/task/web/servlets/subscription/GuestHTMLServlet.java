@@ -7,6 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Servlet to get guest html page
+ *
+ * @author Anton Puhachou
+ */
 @WebServlet(value = "/subscriptionGuest", name = "subscriptionGuest")
 public class GuestHTMLServlet extends HttpServlet {
 

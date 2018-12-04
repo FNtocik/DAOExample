@@ -28,6 +28,13 @@ public class Reader {
      */
     private Language language;
 
+    /**
+     * Constructor to create a specific object <b>without</b> id
+     *
+     * @param login      reader login
+     * @param password   reader password
+     * @param languageId bound language id
+     */
     public Reader(String login, String password, int languageId) {
         this.login = login;
         this.password = password;
@@ -35,11 +42,11 @@ public class Reader {
     }
 
     /**
-     * Constructor to create a specific object <b>without</b> id
+     * Constructor to create a specific object <b>with</b> id
+     * @param id entity id
      * @param login reader login
      * @param password reader password
      * @param languageId bound language id
-     * @see Reader#Reader(int, String, String, Language)
      */
     public Reader(int id, String login, String password, int languageId) {
         this.id = id;
@@ -53,8 +60,7 @@ public class Reader {
      * @param id entity id
      * @param login reader login
      * @param password reader password
-     * @param language bound language
-     * @see Reader#Reader(int, String, String, int)
+     * @param language bound language object
      */
     public Reader(int id, String login, String password, Language language) {
         this.id = id;
@@ -120,10 +126,18 @@ public class Reader {
         this.languageId = languageId;
     }
 
+    /**
+     * get method of {@link Reader#language}
+     * @return bound language object
+     * */
     public Language getLanguage() {
         return language;
     }
 
+    /**
+     * set method of {@link Reader#language} with setting {@link Reader#languageId}
+     * @param language bound language object
+     * */
     public void setLanguage(Language language) {
         this.language = language;
         this.languageId = language.getId();
@@ -152,6 +166,10 @@ public class Reader {
         return Objects.hash(login, password);
     }
 
+    /**
+     * returns a JSON string that represents object
+     * @return JSON string
+     * */
     @Override
     public String toString() {
         JSONObject jsonObject = new JSONObject();

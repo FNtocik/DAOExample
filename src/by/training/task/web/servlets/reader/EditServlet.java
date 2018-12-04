@@ -3,6 +3,7 @@ package by.training.task.web.servlets.reader;
 import by.training.task.dao.factory.DAOFactory;
 import by.training.task.dao.interfaces.ReaderDAO;
 import by.training.task.entities.Reader;
+import by.training.task.utils.LoggerManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Servlet to edit reader entity
+ *
+ * @author Anton Puhachou
+ */
 @WebServlet("/secure/editReader")
 public class EditServlet extends HttpServlet {
 
@@ -29,7 +35,8 @@ public class EditServlet extends HttpServlet {
         try {
             readerDAO.update(entity);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LoggerManager loggerManager = LoggerManager.getInstance();
+            loggerManager.error(this.getClass().toString(), e);
         }
     }
 

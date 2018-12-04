@@ -5,6 +5,7 @@ import by.training.task.dao.mysql.config.ConfigurationManager;
 import by.training.task.dao.mysql.factory.MySQLDAOFactory;
 import by.training.task.entities.Language;
 import by.training.task.entities.Publication;
+import by.training.task.utils.LoggerManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -46,12 +47,12 @@ public class MySQLPublicationDAO implements PublicationDAO {
                             languageEntity);
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                LoggerManager loggerManager = LoggerManager.getInstance();
+                loggerManager.error(this.getClass().toString(), e);
             } finally {
                 if(resultSet != null)
                     resultSet.close();
                 MySQLDAOFactory.closeConnection(connection);
-                ;
             }
         }
         return entity;
@@ -76,10 +77,10 @@ public class MySQLPublicationDAO implements PublicationDAO {
                 preparedStatement.setInt(4, entity.getLanguageId());
                 newId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
-                e.printStackTrace();
+                LoggerManager loggerManager = LoggerManager.getInstance();
+                loggerManager.error(this.getClass().toString(), e);
             } finally {
                 MySQLDAOFactory.closeConnection(connection);
-                ;
             }
         }
         return newId;
@@ -105,10 +106,10 @@ public class MySQLPublicationDAO implements PublicationDAO {
                 preparedStatement.setInt(5, entity.getLanguageId());
                 updatedId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
-                e.printStackTrace();
+                LoggerManager loggerManager = LoggerManager.getInstance();
+                loggerManager.error(this.getClass().toString(), e);
             } finally {
                 MySQLDAOFactory.closeConnection(connection);
-                ;
             }
         }
         return updatedId;
@@ -130,10 +131,10 @@ public class MySQLPublicationDAO implements PublicationDAO {
                 preparedStatement.setInt(1, id);
                 deletedId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
-                e.printStackTrace();
+                LoggerManager loggerManager = LoggerManager.getInstance();
+                loggerManager.error(this.getClass().toString(), e);
             } finally {
                 MySQLDAOFactory.closeConnection(connection);
-                ;
             }
         }
         return deletedId;
@@ -163,12 +164,12 @@ public class MySQLPublicationDAO implements PublicationDAO {
                             languageEntity));
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                LoggerManager loggerManager = LoggerManager.getInstance();
+                loggerManager.error(this.getClass().toString(), e);
             } finally {
                 if(resultSet != null)
                     resultSet.close();
                 MySQLDAOFactory.closeConnection(connection);
-                ;
             }
         }
         return entities;

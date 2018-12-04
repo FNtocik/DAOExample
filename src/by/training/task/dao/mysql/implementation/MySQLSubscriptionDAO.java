@@ -7,6 +7,7 @@ import by.training.task.entities.Payment;
 import by.training.task.entities.Publication;
 import by.training.task.entities.Reader;
 import by.training.task.entities.Subscription;
+import by.training.task.utils.LoggerManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -53,12 +54,12 @@ public class MySQLSubscriptionDAO implements SubscriptionDAO {
                             resultSet.getDate("end_subs"));
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                LoggerManager loggerManager = LoggerManager.getInstance();
+                loggerManager.error(this.getClass().toString(), e);
             } finally {
                 if(resultSet != null)
                     resultSet.close();
                 MySQLDAOFactory.closeConnection(connection);
-                ;
             }
         }
         return entity;
@@ -85,10 +86,10 @@ public class MySQLSubscriptionDAO implements SubscriptionDAO {
                 preparedStatement.setInt(5, entity.getPaymentId());
                 newId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
-                e.printStackTrace();
+                LoggerManager loggerManager = LoggerManager.getInstance();
+                loggerManager.error(this.getClass().toString(), e);
             } finally {
                 MySQLDAOFactory.closeConnection(connection);
-                ;
             }
         }
         return newId;
@@ -116,10 +117,10 @@ public class MySQLSubscriptionDAO implements SubscriptionDAO {
                 preparedStatement.setInt(6, entity.getId());
                 updatedId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
-                e.printStackTrace();
+                LoggerManager loggerManager = LoggerManager.getInstance();
+                loggerManager.error(this.getClass().toString(), e);
             } finally {
                 MySQLDAOFactory.closeConnection(connection);
-                ;
             }
         }
         return updatedId;
@@ -142,10 +143,10 @@ public class MySQLSubscriptionDAO implements SubscriptionDAO {
                 preparedStatement.setInt(1, id);
                 deletedId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
-                e.printStackTrace();
+                LoggerManager loggerManager = LoggerManager.getInstance();
+                loggerManager.error(this.getClass().toString(), e);
             } finally {
                 MySQLDAOFactory.closeConnection(connection);
-                ;
             }
         }
         return deletedId;
@@ -180,12 +181,12 @@ public class MySQLSubscriptionDAO implements SubscriptionDAO {
                             resultSet.getDate("end_subs")));
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                LoggerManager loggerManager = LoggerManager.getInstance();
+                loggerManager.error(this.getClass().toString(), e);
             } finally {
                 if(resultSet != null)
                     resultSet.close();
                 MySQLDAOFactory.closeConnection(connection);
-                ;
             }
         }
         return entities;

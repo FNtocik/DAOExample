@@ -3,6 +3,7 @@ package by.training.task.web.servlets.subscription;
 import by.training.task.dao.factory.DAOFactory;
 import by.training.task.dao.interfaces.SubscriptionDAO;
 import by.training.task.entities.Subscription;
+import by.training.task.utils.LoggerManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,11 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 
+/**
+ * Servlet to edit subscription entity
+ *
+ * @author Anton Puhachou
+ */
 @WebServlet("/secure/editSubscription")
 public class EditServlet extends HttpServlet {
 
@@ -38,7 +44,8 @@ public class EditServlet extends HttpServlet {
         try {
             subscriptionDAO.update(entity);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LoggerManager loggerManager = LoggerManager.getInstance();
+            loggerManager.error(this.getClass().toString(), e);
         }
     }
 

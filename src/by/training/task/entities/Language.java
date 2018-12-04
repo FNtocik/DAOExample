@@ -58,6 +58,11 @@ public class Language {
         this.signature = signature;
     }
 
+    /**
+     * returns a JSON string that represents object
+     *
+     * @return JSON string
+     */
     @Override
     public String toString() {
         JSONObject jsonObject = new JSONObject();

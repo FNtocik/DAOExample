@@ -31,6 +31,12 @@
         <paymentHref>
             <innerText>Платежи</innerText>
         </paymentHref>
+        <languageHref>
+            <innerText>Языки</innerText>
+        </languageHref>
+        <administratorHref>
+            <innerText>Администраторы</innerText>
+        </administratorHref>
         <summaryLabel>
             <innerText>Сумма платежа</innerText>
         </summaryLabel>
@@ -72,6 +78,12 @@
         <paymentHref>
             <innerText>Платежи</innerText>
         </paymentHref>
+        <languageHref>
+            <innerText>Языки</innerText>
+        </languageHref>
+        <administratorHref>
+            <innerText>Администраторы</innerText>
+        </administratorHref>
         <nameLabel>
             <innerText>Название книги</innerText>
         </nameLabel>
@@ -125,6 +137,12 @@
         <paymentHref>
             <innerText>Платежи</innerText>
         </paymentHref>
+        <languageHref>
+            <innerText>Языки</innerText>
+        </languageHref>
+        <administratorHref>
+            <innerText>Администраторы</innerText>
+        </administratorHref>
         <loginLabel>
             <innerText>Имя пользователя</innerText>
         </loginLabel>
@@ -166,6 +184,12 @@
         <paymentHref>
             <innerText>Платежи</innerText>
         </paymentHref>
+        <languageHref>
+            <innerText>Языки</innerText>
+        </languageHref>
+        <administratorHref>
+            <innerText>Администраторы</innerText>
+        </administratorHref>
         <readerSelectLabel>
             <innerText>Подписчик:</innerText>
         </readerSelectLabel>
@@ -209,4 +233,92 @@
             <innerText>Конец подписки</innerText>
         </headerEndDate>
     </subscription>
+    <language>
+        <logoutHref>
+            <innerText>Выйти</innerText>
+        </logoutHref>
+        <subscriptionHref>
+            <innerText>Подписки</innerText>
+        </subscriptionHref>
+        <publicationHref>
+            <innerText>Издания</innerText>
+        </publicationHref>
+        <readerHref>
+            <innerText>Подписчики</innerText>
+        </readerHref>
+        <paymentHref>
+            <innerText>Платежи</innerText>
+        </paymentHref>
+        <languageHref>
+            <innerText>Языки</innerText>
+        </languageHref>
+        <administratorHref>
+            <innerText>Администраторы</innerText>
+        </administratorHref>
+        <editButton>
+            <value>Сохранить изменения</value>
+        </editButton>
+        <addButton>
+            <value>Добавить новый</value>
+        </addButton>
+        <deleteButton>
+            <value>Удалить выбранный</value>
+        </deleteButton>
+        <headerId>
+            <innerText>ID</innerText>
+        </headerId>
+        <headerSignature>
+            <innerText>Сигнатура языка</innerText>
+        </headerSignature>
+        <signatureLabel>
+            <innerText>Сигнатура языка</innerText>
+        </signatureLabel>
+    </language>
+    <administrator>
+        <logoutHref>
+            <innerText>Выйти</innerText>
+        </logoutHref>
+        <subscriptionHref>
+            <innerText>Подписки</innerText>
+        </subscriptionHref>
+        <publicationHref>
+            <innerText>Издания</innerText>
+        </publicationHref>
+        <readerHref>
+            <innerText>Подписчики</innerText>
+        </readerHref>
+        <paymentHref>
+            <innerText>Платежи</innerText>
+        </paymentHref>
+        <languageHref>
+            <innerText>Языки</innerText>
+        </languageHref>
+        <administratorHref>
+            <innerText>Администраторы</innerText>
+        </administratorHref>
+        <loginLabel>
+            <innerText>Логин</innerText>
+        </loginLabel>
+        <passwordLabel>
+            <innerText>Пароль</innerText>
+        </passwordLabel>
+        <editButton>
+            <value>Сохранить изменения</value>
+        </editButton>
+        <addButton>
+            <value>Добавить новый</value>
+        </addButton>
+        <deleteButton>
+            <value>Удалить выбранный</value>
+        </deleteButton>
+        <headerId>
+            <innerText>ID</innerText>
+        </headerId>
+        <headerLogin>
+            <innerText>Логин</innerText>
+        </headerLogin>
+        <headerPassword>
+            <innerText>Пароль</innerText>
+        </headerPassword>
+    </administrator>
 </local>

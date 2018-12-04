@@ -3,6 +3,7 @@ package by.training.task.web.servlets.subscription;
 import by.training.task.dao.factory.DAOFactory;
 import by.training.task.dao.interfaces.SubscriptionDAO;
 import by.training.task.entities.Subscription;
+import by.training.task.utils.LoggerManager;
 import org.json.JSONArray;
 
 import javax.servlet.ServletException;
@@ -14,6 +15,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Servlet to get all of subscription entities
+ *
+ * @author Anton Puhachou
+ */
 @WebServlet("/secure/getAllSubscription")
 public class GetAllServlet extends HttpServlet {
 
@@ -29,7 +35,8 @@ public class GetAllServlet extends HttpServlet {
         try {
             entities = subscriptionDAO.getAll();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LoggerManager loggerManager = LoggerManager.getInstance();
+            loggerManager.error(this.getClass().toString(), e);
         }
         if (entities != null && entities.size() != 0) {
             if (counterParam == null || numberParam == null) {

@@ -107,6 +107,11 @@ public class Administrator {
         return Objects.hash(login, password);
     }
 
+    /**
+     * returns a JSON string that represents object
+     *
+     * @return JSON string
+     */
     @Override
     public String toString() {
         JSONObject jsonObject = new JSONObject();

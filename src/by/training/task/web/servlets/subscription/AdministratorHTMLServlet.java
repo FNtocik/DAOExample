@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Servlet to get administrator html page
+ *
+ * @author Anton Puhachou
+ */
 @WebServlet(value = "/subscriptionAdministrator", name = "subscriptionAdministrator")
 public class AdministratorHTMLServlet extends HttpServlet {
 

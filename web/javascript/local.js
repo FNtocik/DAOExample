@@ -1,5 +1,6 @@
 function setLocaleStrings(page) {
     var request = new XMLHttpRequest();
+    var params = "page=" + page;
     request.open("POST", "locale", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
@@ -19,7 +20,7 @@ function setLocaleStrings(page) {
             }
         }
     };
-    request.send();
+    request.send(params);
 }
 
 function changeLocale(locale) {

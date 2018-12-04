@@ -31,6 +31,12 @@
         <paymentHref>
             <innerText>Payments</innerText>
         </paymentHref>
+        <languageHref>
+            <innerText>Languages</innerText>
+        </languageHref>
+        <administratorHref>
+            <innerText>Administrators</innerText>
+        </administratorHref>
         <summaryLabel>
             <innerText>Payment summary</innerText>
         </summaryLabel>
@@ -72,6 +78,13 @@
         <paymentHref>
             <innerText>Payments</innerText>
         </paymentHref>
+        <languageHref>
+            <innerText>Languages</innerText>
+        </languageHref>
+        <administratorHref>
+            <innerText>Administrators</innerText>
+        </administratorHref>
+
         <nameLabel>
             <innerText>Book name</innerText>
         </nameLabel>
@@ -125,6 +138,12 @@
         <paymentHref>
             <innerText>Payments</innerText>
         </paymentHref>
+        <languageHref>
+            <innerText>Languages</innerText>
+        </languageHref>
+        <administratorHref>
+            <innerText>Administrators</innerText>
+        </administratorHref>
         <loginLabel>
             <innerText>Username</innerText>
         </loginLabel>
@@ -166,6 +185,12 @@
         <paymentHref>
             <innerText>Payments</innerText>
         </paymentHref>
+        <languageHref>
+            <innerText>Languages</innerText>
+        </languageHref>
+        <administratorHref>
+            <innerText>Administrators</innerText>
+        </administratorHref>
         <readerSelectLabel>
             <innerText>Subscriber:</innerText>
         </readerSelectLabel>
@@ -209,4 +234,92 @@
             <innerText>Subscription end date</innerText>
         </headerEndDate>
     </subscription>
+    <language>
+        <logoutHref>
+            <innerText>Logout</innerText>
+        </logoutHref>
+        <subscriptionHref>
+            <innerText>Subscriptions</innerText>
+        </subscriptionHref>
+        <publicationHref>
+            <innerText>Publications</innerText>
+        </publicationHref>
+        <readerHref>
+            <innerText>Subscribers</innerText>
+        </readerHref>
+        <paymentHref>
+            <innerText>Payments</innerText>
+        </paymentHref>
+        <languageHref>
+            <innerText>Languages</innerText>
+        </languageHref>
+        <administratorHref>
+            <innerText>Administrators</innerText>
+        </administratorHref>
+        <editButton>
+            <value>Save changes</value>
+        </editButton>
+        <addButton>
+            <value>Add new</value>
+        </addButton>
+        <deleteButton>
+            <value>Delete selected</value>
+        </deleteButton>
+        <headerId>
+            <innerText>ID</innerText>
+        </headerId>
+        <headerSignature>
+            <innerText>Language signature</innerText>
+        </headerSignature>
+        <signatureLabel>
+            <innerText>Language signature</innerText>
+        </signatureLabel>
+    </language>
+    <administrator>
+        <logoutHref>
+            <innerText>Logout</innerText>
+        </logoutHref>
+        <subscriptionHref>
+            <innerText>Subscriptions</innerText>
+        </subscriptionHref>
+        <publicationHref>
+            <innerText>Publications</innerText>
+        </publicationHref>
+        <readerHref>
+            <innerText>Subscribers</innerText>
+        </readerHref>
+        <paymentHref>
+            <innerText>Payments</innerText>
+        </paymentHref>
+        <languageHref>
+            <innerText>Languages</innerText>
+        </languageHref>
+        <administratorHref>
+            <innerText>Administrators</innerText>
+        </administratorHref>
+        <loginLabel>
+            <innerText>Username</innerText>
+        </loginLabel>
+        <passwordLabel>
+            <innerText>Password</innerText>
+        </passwordLabel>
+        <editButton>
+            <value>Save changes</value>
+        </editButton>
+        <addButton>
+            <value>Add new</value>
+        </addButton>
+        <deleteButton>
+            <value>Delete selected</value>
+        </deleteButton>
+        <headerId>
+            <innerText>ID</innerText>
+        </headerId>
+        <headerLogin>
+            <innerText>Username</innerText>
+        </headerLogin>
+        <headerPassword>
+            <innerText>Password</innerText>
+        </headerPassword>
+    </administrator>
 </local>

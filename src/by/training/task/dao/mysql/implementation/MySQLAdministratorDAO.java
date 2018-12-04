@@ -4,6 +4,7 @@ import by.training.task.dao.interfaces.AdministratorDAO;
 import by.training.task.dao.mysql.config.ConfigurationManager;
 import by.training.task.dao.mysql.factory.MySQLDAOFactory;
 import by.training.task.entities.Administrator;
+import by.training.task.utils.LoggerManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,7 +42,8 @@ public class MySQLAdministratorDAO implements AdministratorDAO {
                                             resultSet.getString(3));
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                LoggerManager loggerManager = LoggerManager.getInstance();
+                loggerManager.error(this.getClass().toString(), e);
             } finally {
                 if(resultSet != null)
                     resultSet.close();
@@ -68,7 +70,8 @@ public class MySQLAdministratorDAO implements AdministratorDAO {
                 preparedStatement.setString(2, entity.getPassword());
                 newId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
-                e.printStackTrace();
+                LoggerManager loggerManager = LoggerManager.getInstance();
+                loggerManager.error(this.getClass().toString(), e);
             } finally {
                 MySQLDAOFactory.closeConnection(connection);
             }
@@ -94,7 +97,8 @@ public class MySQLAdministratorDAO implements AdministratorDAO {
                 preparedStatement.setInt(3, entity.getId());
                 updatedId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
-                e.printStackTrace();
+                LoggerManager loggerManager = LoggerManager.getInstance();
+                loggerManager.error(this.getClass().toString(), e);
             } finally {
                 MySQLDAOFactory.closeConnection(connection);
             }
@@ -118,7 +122,8 @@ public class MySQLAdministratorDAO implements AdministratorDAO {
                 preparedStatement.setInt(1, id);
                 deletedId = preparedStatement.executeUpdate();
             } catch (SQLException e) {
-                e.printStackTrace();
+                LoggerManager loggerManager = LoggerManager.getInstance();
+                loggerManager.error(this.getClass().toString(), e);
             } finally {
                 MySQLDAOFactory.closeConnection(connection);
             }
@@ -146,7 +151,8 @@ public class MySQLAdministratorDAO implements AdministratorDAO {
                                                 resultSet.getString(3)));
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                LoggerManager loggerManager = LoggerManager.getInstance();
+                loggerManager.error(this.getClass().toString(), e);
             } finally {
                 if(resultSet != null)
                     resultSet.close();

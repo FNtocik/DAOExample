@@ -29,6 +29,16 @@ public class Publication {
     /**field cost*/
     private int cost;
 
+
+    /**
+     * Constructor to create a specific object <b>with</b> id
+     *
+     * @param id         entity id
+     * @param author     author name
+     * @param name       name of publication
+     * @param cost       cost per month
+     * @param languageId bound language id
+     */
     public Publication(int id, String author, String name, int cost, int languageId) {
         this.id = id;
         this.author = author;
@@ -41,6 +51,7 @@ public class Publication {
      * Constructor to create a specific object <b>without</b> id
      * @param author author name
      * @param name name of publication
+     * @param cost cost per month
      * @param languageId bound language id
      */
     public Publication(String author, String name, int cost, int languageId) {
@@ -55,7 +66,8 @@ public class Publication {
      * @param id entity id
      * @param author author name
      * @param name name of publication
-     * @param language bound language id
+     * @param cost cost per month
+     * @param language bound language
      */
     public Publication(int id, String author, String name, int cost, Language language) {
         this.id = id;
@@ -138,15 +150,27 @@ public class Publication {
         this.languageId = languageId;
     }
 
+    /**
+     * get method of {@link Publication#language}
+     * @return bound language object
+     * */
     public Language getLanguage() {
         return language;
     }
 
+    /**
+     * set method of {@link Publication#language} with setting {@link Publication#languageId}
+     * @param language bound language object
+     * */
     public void setLanguage(Language language) {
         this.language = language;
         this.languageId = language.getId();
     }
 
+    /**
+     * returns a JSON string that represents object
+     * @return JSON string
+     * */
     @Override
     public String toString() {
         JSONObject jsonObject = new JSONObject();
