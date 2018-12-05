@@ -10,9 +10,9 @@ function getAll() {
     requestToSubs.open("POST", "/secure/getAllSubscription", true);
     requestToSubs.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     requestToSubs.onreadystatechange = function (ev) {
-        if (this.readyState != XMLHttpRequest.DONE)
+        if (this.readyState !== XMLHttpRequest.DONE)
             return;
-        if (this.responseText.length == 0) {
+        if (this.responseText.length === 0) {
             counter--;
             return;
         }

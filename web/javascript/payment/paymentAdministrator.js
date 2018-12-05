@@ -18,7 +18,7 @@ function add() {
     request.open("POST", "/secure/addPayment", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
-        if (this.readyState != XMLHttpRequest.DONE)
+        if (this.readyState !== XMLHttpRequest.DONE)
             return;
         getAll();
     };
@@ -36,7 +36,7 @@ function edit() {
     request.open("POST", "/secure/editPayment", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
-        if (this.readyState != XMLHttpRequest.DONE)
+        if (this.readyState !== XMLHttpRequest.DONE)
             return;
         getAll();
     };
@@ -49,7 +49,7 @@ function del() {
     request.open("POST", "/secure/deletePayment", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
-        if (this.readyState != XMLHttpRequest.DONE)
+        if (this.readyState !== XMLHttpRequest.DONE)
             return;
         getAll();
     };
@@ -62,7 +62,7 @@ function get() {
     request.open("POST", "/secure/getPayment", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
-        if (this.readyState != XMLHttpRequest.DONE)
+        if (this.readyState !== XMLHttpRequest.DONE)
             return;
         var reader = JSON.parse(this.responseText);
         paymentElement.value = reader["id"];
@@ -79,9 +79,9 @@ function getAll() {
     request.open("POST", "/secure/getAllPayment", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
-        if (this.readyState != XMLHttpRequest.DONE)
+        if (this.readyState !== XMLHttpRequest.DONE)
             return;
-        if (this.responseText.length == 0) {
+        if (this.responseText.length === 0) {
             counter--;
             return;
         }

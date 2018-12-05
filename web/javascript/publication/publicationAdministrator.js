@@ -24,7 +24,7 @@ function add() {
     request.open("POST", "/secure/addPublication", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
-        if (this.readyState != XMLHttpRequest.DONE)
+        if (this.readyState !== XMLHttpRequest.DONE)
             return;
         getAll();
     };
@@ -44,7 +44,7 @@ function edit() {
     request.open("POST", "/secure/editPublication", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
-        if (this.readyState != XMLHttpRequest.DONE)
+        if (this.readyState !== XMLHttpRequest.DONE)
             return;
         getAll();
     };
@@ -57,7 +57,7 @@ function del() {
     request.open("POST", "/secure/deletePublication", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
-        if (this.readyState != XMLHttpRequest.DONE)
+        if (this.readyState !== XMLHttpRequest.DONE)
             return;
         getAll();
     };
@@ -70,7 +70,7 @@ function get() {
     request.open("POST", "/secure/getPublication", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
-        if (this.readyState != XMLHttpRequest.DONE)
+        if (this.readyState !== XMLHttpRequest.DONE)
             return;
         var publication = JSON.parse(this.responseText);
         var language = JSON.parse(publication["language"]);
@@ -89,9 +89,9 @@ function getAll() {
     request.open("POST", "/secure/getAllPublication", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
-        if (this.readyState != XMLHttpRequest.DONE)
+        if (this.readyState !== XMLHttpRequest.DONE)
             return;
-        if (this.responseText.length == 0) {
+        if (this.responseText.length === 0) {
             counter--;
             return;
         }
@@ -134,7 +134,7 @@ function fillLanguageSelect() {
     request.open("POST", "/secure/getAllLanguage", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
-        if (this.readyState != XMLHttpRequest.DONE)
+        if (this.readyState !== XMLHttpRequest.DONE)
             return;
         var languages = JSON.parse(this.responseText);
         for (var i = 0; i < languages.length; i++) {

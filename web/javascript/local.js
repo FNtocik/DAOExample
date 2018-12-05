@@ -4,7 +4,7 @@ function setLocaleStrings(page) {
     request.open("POST", "locale", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
-        if (this.readyState != XMLHttpRequest.DONE)
+        if (this.readyState !== XMLHttpRequest.DONE)
             return;
         var curTranslate = request.responseXML.getElementsByTagName(page)[0].childNodes;
         for (var i = 0; i < curTranslate.length; i++) {
@@ -29,7 +29,7 @@ function changeLocale(locale) {
     request.open("POST", "changeLocale", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
-        if (this.readyState == XMLHttpRequest.DONE)
+        if (this.readyState === XMLHttpRequest.DONE)
             location.reload();
     };
     request.send(params);

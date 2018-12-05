@@ -58,7 +58,7 @@ public abstract class DAOFactory {
             case MYSQL:
                 return new MySQLDAOFactory();
             default:
-                return null;
+                return new MySQLDAOFactory();
         }
     }
 }

@@ -45,12 +45,12 @@ public class LoginServlet extends HttpServlet {
             loggerManager.error(this.getClass().toString(), e);
         }
         LoggedUser user = null;
-        if (readerList.size() != 0) {
+        if (readerList != null && readerList.size() != 0) {
             Reader tryToLog = new Reader(login, password, 0);
             if(readerList.contains(tryToLog))
                 user = new LoggedUser(login, password, SecurityConfig.ROLE_READER);
         }
-        if (user == null && administratorList.size() != 0) {
+        if (user == null && administratorList != null && administratorList.size() != 0) {
             Administrator tryToLog = new Administrator(login, password);
             if(administratorList.contains(tryToLog))
                 user = new LoggedUser(login, password, SecurityConfig.ROLE_ADMINISTRATOR);

@@ -85,7 +85,6 @@ function isValidNumber(number) {
         return false;
     if (!value)
         return false;
-    if (value < min)
-        return false;
-    return true;
+    return value >= min;
+
 }

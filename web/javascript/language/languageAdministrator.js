@@ -17,7 +17,7 @@ function add() {
     request.open("POST", "/secure/addLanguage", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
-        if (this.readyState != XMLHttpRequest.DONE)
+        if (this.readyState !== XMLHttpRequest.DONE)
             return;
         getAll();
     };

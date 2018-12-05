@@ -28,7 +28,7 @@ function add() {
     request.open("POST", "secure/addSubscription", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
-        if (this.readyState != XMLHttpRequest.DONE)
+        if (this.readyState !== XMLHttpRequest.DONE)
             return;
         getAll();
     };
@@ -41,9 +41,9 @@ function getAll() {
     requestToSubs.open("POST", "/secure/getAllSubscription", true);
     requestToSubs.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     requestToSubs.onreadystatechange = function (ev) {
-        if (this.readyState != XMLHttpRequest.DONE)
+        if (this.readyState !== XMLHttpRequest.DONE)
             return;
-        if (this.responseText.length == 0) {
+        if (this.responseText.length === 0) {
             counter--;
             return;
         }
@@ -96,7 +96,7 @@ function fillReaderSelect() {
     request.open("POST", "/secure/getAllReader", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
-        if (this.readyState != XMLHttpRequest.DONE)
+        if (this.readyState !== XMLHttpRequest.DONE)
             return;
         var readers = JSON.parse(this.responseText);
         for (var i = 0; i < readers.length; i++) {
@@ -113,7 +113,7 @@ function fillPaymentSelect() {
     request.open("POST", "/secure/getAllPayment", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
-        if (this.readyState != XMLHttpRequest.DONE)
+        if (this.readyState !== XMLHttpRequest.DONE)
             return;
         var payments = JSON.parse(this.responseText);
         for (var i = 0; i < payments.length; i++) {
@@ -130,7 +130,7 @@ function fillPublicationSelect() {
     request.open("POST", "/secure/getAllPublication", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
-        if (this.readyState != XMLHttpRequest.DONE)
+        if (this.readyState !== XMLHttpRequest.DONE)
             return;
         var publications = JSON.parse(this.responseText);
         for (var i = 0; i < publications.length; i++) {

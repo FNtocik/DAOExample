@@ -12,7 +12,7 @@
     </login>
     <denied>
         <textElement>
-            <innerText>Access denied, you dont have permission</innerText>
+            <innerText>Access denied, you don't have permission</innerText>
         </textElement>
     </denied>
     <payment>
