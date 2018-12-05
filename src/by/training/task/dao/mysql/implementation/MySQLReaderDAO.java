@@ -62,10 +62,9 @@ public class MySQLReaderDAO implements ReaderDAO {
      * method of adding an {@link Reader} entity to the database
      * @param entity to add in database
      * @return id of added entity
-     * @throws SQLException error close connection
      */
     @Override
-    public int create(Reader entity) throws SQLException {
+    public int create(Reader entity) {
         Connection connection = MySQLDAOFactory.createConnection();
         int newId = -1;
         if(connection != null) {
@@ -89,10 +88,9 @@ public class MySQLReaderDAO implements ReaderDAO {
      * method of updating an {@link Reader} entity in the database
      * @param entity to update in database
      * @return id of updated entity
-     * @throws SQLException error close connection
      */
     @Override
-    public int update(Reader entity) throws SQLException {
+    public int update(Reader entity) {
         Connection connection = MySQLDAOFactory.createConnection();
         int updatedId = -1;
         if(connection != null) {
@@ -117,10 +115,9 @@ public class MySQLReaderDAO implements ReaderDAO {
      * method of deleting an {@link Reader} entity in the database
      * @param id to delete in database
      * @return id of deleted entity
-     * @throws SQLException error close connection
      */
     @Override
-    public int delete(int id) throws SQLException {
+    public int delete(int id) {
         Connection connection = MySQLDAOFactory.createConnection();
         int deletedId = -1;
         if(connection != null) {

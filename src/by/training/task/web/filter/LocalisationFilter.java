@@ -19,7 +19,7 @@ import java.util.Locale;
 @WebFilter(filterName = "LocalisationFilter")
 public class LocalisationFilter implements Filter {
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
 
     }
 

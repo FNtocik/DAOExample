@@ -73,7 +73,7 @@ function get() {
         if (this.readyState != XMLHttpRequest.DONE)
             return;
         var publication = JSON.parse(this.responseText);
-        var language = JSON.parse(publication["language"])
+        var language = JSON.parse(publication["language"]);
         publicationElement.value = publication["id"];
         nameInput.value = publication["name"];
         authorInput.value = publication["author"];
@@ -101,7 +101,7 @@ function getAll() {
         }
         for (var i = 0; i < publications.length; i++) {
             var currentPublication = JSON.parse(publications[i]);
-            var currentLanguage = JSON.parse(currentPublication["language"])
+            var currentLanguage = JSON.parse(currentPublication["language"]);
             var tr = document.createElement("tr");
             var tdId = document.createElement("td");
             var textId = document.createTextNode(currentPublication["id"]);
