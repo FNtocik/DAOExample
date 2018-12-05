@@ -2,6 +2,7 @@ var paymentElement = document.getElementById("paymentId");
 var summaryInput = document.getElementById("summary");
 var isPayedCheckbox = document.getElementById("isPayed");
 var table = document.getElementById("tableBody");
+var totalCount = -1;
 var counter = 0;
 var numberOfItems = 10;
 
@@ -82,13 +83,15 @@ function getAll() {
         if (this.readyState !== XMLHttpRequest.DONE)
             return;
         if (this.responseText.length === 0) {
-            counter--;
             return;
         }
         while (table.firstChild) {
             table.removeChild(table.firstChild);
         }
-        var payments = JSON.parse(this.responseText);
+        var response = JSON.parse(this.responseText);
+        var payments = response["payments"];
+        var size = JSON.parse(response["size"]);
+        totalCount = Math.ceil(size / numberOfItems);
         for (var i = 0; i < payments.length; i++) {
             var currentPayment = JSON.parse(payments[i]);
             var tr = document.createElement("tr");
@@ -111,12 +114,15 @@ function getAll() {
 }
 
 function leftNav() {
-    if (counter - 1 >= 0)
+    if (counter - 1 >= 0) {
         counter--;
-    getAll();
+        getAll();
+    }
 }
 
 function rightNav() {
-    counter++;
-    getAll();
+    if (counter + 1 < totalCount) {
+        counter++;
+        getAll();
+    }
 }

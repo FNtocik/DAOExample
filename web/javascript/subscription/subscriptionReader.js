@@ -3,6 +3,7 @@ var publicationSelect = document.getElementById("publicationSelect");
 var paymentSelect = document.getElementById("paymentSelect");
 var dateStartInput = document.getElementById("startDateInput");
 var dateEndInput = document.getElementById("endDateInput");
+var totalCount = -1;
 var counter = 0;
 var numberOfItems = 10;
 
@@ -44,13 +45,15 @@ function getAll() {
         if (this.readyState !== XMLHttpRequest.DONE)
             return;
         if (this.responseText.length === 0) {
-            counter--;
             return;
         }
         while (table.firstChild) {
             table.removeChild(table.firstChild);
         }
-        var subscriptions = JSON.parse(this.responseText);
+        var response = JSON.parse(this.responseText);
+        var subscriptions = response["subscriptions"];
+        var size = JSON.parse(response["size"]);
+        totalCount = Math.ceil(size / numberOfItems);
         for (var i = 0; i < subscriptions.length; i++) {
             var subscription = JSON.parse(subscriptions[i]);
             var reader = JSON.parse(subscription["reader"]);
@@ -98,7 +101,8 @@ function fillReaderSelect() {
     request.onreadystatechange = function (ev) {
         if (this.readyState !== XMLHttpRequest.DONE)
             return;
-        var readers = JSON.parse(this.responseText);
+        var response = JSON.parse(this.responseText);
+        var readers = response["readers"];
         for (var i = 0; i < readers.length; i++) {
             var reader = JSON.parse(readers[i]);
             readerSelect[readerSelect.length] = new
@@ -115,7 +119,8 @@ function fillPaymentSelect() {
     request.onreadystatechange = function (ev) {
         if (this.readyState !== XMLHttpRequest.DONE)
             return;
-        var payments = JSON.parse(this.responseText);
+        var response = JSON.parse(this.responseText);
+        var payments = response["payments"];
         for (var i = 0; i < payments.length; i++) {
             var payment = JSON.parse(payments[i]);
             paymentSelect[paymentSelect.length] = new
@@ -132,7 +137,8 @@ function fillPublicationSelect() {
     request.onreadystatechange = function (ev) {
         if (this.readyState !== XMLHttpRequest.DONE)
             return;
-        var publications = JSON.parse(this.responseText);
+        var response = JSON.parse(this.responseText);
+        var publications = response["publications"];
         for (var i = 0; i < publications.length; i++) {
             var publication = JSON.parse(publications[i]);
             publicationSelect[publicationSelect.length] = new
@@ -143,12 +149,15 @@ function fillPublicationSelect() {
 }
 
 function leftNav() {
-    if (counter - 1 >= 0)
+    if (counter - 1 >= 0) {
         counter--;
-    getAll();
+        getAll();
+    }
 }
 
 function rightNav() {
-    counter++;
-    getAll();
+    if (counter + 1 < totalCount) {
+        counter++;
+        getAll();
+    }
 }

@@ -2,6 +2,7 @@ var adminElement = document.getElementById("administratorId");
 var loginInput = document.getElementById("login");
 var passwordInput = document.getElementById("password");
 var table = document.getElementById("tableBody");
+var totalCount = -1;
 var counter = 0;
 var numberOfItems = 10;
 
@@ -86,10 +87,13 @@ function getAll() {
             counter--;
             return;
         }
-        var administrators = JSON.parse(this.responseText);
         while (table.firstChild) {
             table.removeChild(table.firstChild);
         }
+        var response = JSON.parse(this.responseText);
+        var administrators = response["administrators"];
+        var size = JSON.parse(response["size"]);
+        totalCount = Math.ceil(size / numberOfItems);
         for (var i = 0; i < administrators.length; i++) {
             var currentAdministrator = JSON.parse(administrators[i]);
             var tr = document.createElement("tr");
@@ -112,12 +116,15 @@ function getAll() {
 }
 
 function leftNav() {
-    if (counter - 1 >= 0)
+    if (counter - 1 >= 0) {
         counter--;
-    getAll();
+        getAll();
+    }
 }
 
 function rightNav() {
-    counter++;
-    getAll();
+    if (counter + 1 < totalCount) {
+        counter++;
+        getAll();
+    }
 }

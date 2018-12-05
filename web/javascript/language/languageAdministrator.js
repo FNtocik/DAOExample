@@ -1,6 +1,7 @@
 var languageElement = document.getElementById("languageId");
 var signatureInput = document.getElementById("signatureInput");
 var table = document.getElementById("tableBody");
+var totalCount = -1;
 var counter = 0;
 var numberOfItems = 10;
 
@@ -82,10 +83,13 @@ function getAll() {
             counter--;
             return;
         }
-        var languages = JSON.parse(this.responseText);
         while (table.firstChild) {
             table.removeChild(table.firstChild);
         }
+        var response = JSON.parse(this.responseText);
+        var languages = response["languages"];
+        var size = JSON.parse(response["size"]);
+        totalCount = Math.ceil(size / numberOfItems);
         for (var i = 0; i < languages.length; i++) {
             var currentLanguage = JSON.parse(languages[i]);
             var tr = document.createElement("tr");
@@ -104,12 +108,15 @@ function getAll() {
 }
 
 function leftNav() {
-    if (counter - 1 >= 0)
+    if (counter - 1 >= 0) {
         counter--;
-    getAll();
+        getAll();
+    }
 }
 
 function rightNav() {
-    counter++;
-    getAll();
+    if (counter + 1 < totalCount) {
+        counter++;
+        getAll();
+    }
 }

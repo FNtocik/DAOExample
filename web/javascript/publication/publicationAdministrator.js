@@ -4,6 +4,7 @@ var nameInput = document.getElementById("name");
 var authorInput = document.getElementById("author");
 var costInput = document.getElementById("cost");
 var table = document.getElementById("tableBody");
+var totalCount = -1;
 var counter = 0;
 var numberOfItems = 10;
 
@@ -92,13 +93,15 @@ function getAll() {
         if (this.readyState !== XMLHttpRequest.DONE)
             return;
         if (this.responseText.length === 0) {
-            counter--;
             return;
         }
-        var publications = JSON.parse(this.responseText);
         while (table.firstChild) {
             table.removeChild(table.firstChild);
         }
+        var response = JSON.parse(this.responseText);
+        var publications = response["publications"];
+        var size = JSON.parse(response["size"]);
+        totalCount = Math.ceil(size / numberOfItems);
         for (var i = 0; i < publications.length; i++) {
             var currentPublication = JSON.parse(publications[i]);
             var currentLanguage = JSON.parse(currentPublication["language"]);
@@ -136,7 +139,8 @@ function fillLanguageSelect() {
     request.onreadystatechange = function (ev) {
         if (this.readyState !== XMLHttpRequest.DONE)
             return;
-        var languages = JSON.parse(this.responseText);
+        var response = JSON.parse(this.responseText);
+        var languages = response["languages"];
         for (var i = 0; i < languages.length; i++) {
             var currentLanguage = JSON.parse(languages[i]);
             languageSelect[languageSelect.length] = new Option(currentLanguage["signature"], currentLanguage["id"]);
@@ -155,12 +159,15 @@ function searchValueInSelect(options, valueToSelect) {
 }
 
 function leftNav() {
-    if (counter - 1 >= 0)
+    if (counter - 1 >= 0) {
         counter--;
-    getAll();
+        getAll();
+    }
 }
 
 function rightNav() {
-    counter++;
-    getAll();
+    if (counter + 1 < totalCount) {
+        counter++;
+        getAll();
+    }
 }

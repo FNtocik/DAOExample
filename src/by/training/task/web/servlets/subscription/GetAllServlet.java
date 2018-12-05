@@ -5,6 +5,7 @@ import by.training.task.dao.interfaces.SubscriptionDAO;
 import by.training.task.entities.Subscription;
 import by.training.task.utils.LoggerManager;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,6 +40,7 @@ public class GetAllServlet extends HttpServlet {
             loggerManager.error(this.getClass().toString(), e);
         }
         if (entities != null && entities.size() != 0) {
+            int size = entities.size();
             if (counterParam == null || numberParam == null) {
                 counter = 0;
                 number = entities.size();
@@ -58,7 +60,10 @@ public class GetAllServlet extends HttpServlet {
             for (Subscription current : entities) {
                 jsonArray.put(current.toString());
             }
-            resp.getWriter().write(jsonArray.toString());
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("size", size);
+            jsonObject.put("subscriptions", jsonArray);
+            resp.getWriter().write(jsonObject.toString());
         }
     }
 
