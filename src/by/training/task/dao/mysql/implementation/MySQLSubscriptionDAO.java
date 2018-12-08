@@ -47,7 +47,7 @@ public class MySQLSubscriptionDAO implements SubscriptionDAO {
                     Publication publicationEntity = new Publication(resultSet.getInt("publication.id"),
                             resultSet.getString("author"), resultSet.getString("name"),
                             resultSet.getInt("publication.cost"), resultSet.getInt("publication.language_id"));
-                    Payment paymentEntity = new Payment(resultSet.getInt("payment.id"), resultSet.getInt("cost"),
+                    Payment paymentEntity = new Payment(resultSet.getInt("payment.id"), resultSet.getInt("payment.cost"),
                             resultSet.getBoolean("is_payed"));
                     entity = new Subscription(resultSet.getInt("subscription.id"), readerEntity,
                             publicationEntity, paymentEntity, resultSet.getDate("start_subs"),
@@ -172,7 +172,7 @@ public class MySQLSubscriptionDAO implements SubscriptionDAO {
                     Publication publicationEntity = new Publication(resultSet.getInt("publication.id"),
                             resultSet.getString("author"), resultSet.getString("name"),
                             resultSet.getInt("publication.cost"), resultSet.getInt("publication.language_id"));
-                    Payment paymentEntity = new Payment(resultSet.getInt("payment.id"), resultSet.getInt("cost"),
+                    Payment paymentEntity = new Payment(resultSet.getInt("payment.id"), resultSet.getInt("payment.cost"),
                             resultSet.getBoolean("is_payed"));
                     entities.add(new Subscription(resultSet.getInt("subscription.id"), readerEntity,
                             publicationEntity, paymentEntity, resultSet.getDate("start_subs"),
