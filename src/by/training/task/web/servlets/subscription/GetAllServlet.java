@@ -4,6 +4,7 @@ import by.training.task.dao.factory.DAOFactory;
 import by.training.task.dao.interfaces.SubscriptionDAO;
 import by.training.task.entities.Subscription;
 import by.training.task.utils.LoggerManager;
+import by.training.task.web.utils.ListConfigUtil;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -48,14 +49,7 @@ public class GetAllServlet extends HttpServlet {
                 counter = Integer.valueOf(counterParam);
                 number = Integer.valueOf(numberParam);
             }
-            if (counter >= entities.size()) {
-                return;
-            }
-            if (counter + number >= entities.size()) {
-                entities = entities.subList(counter, entities.size());
-            } else {
-                entities = entities.subList(counter, counter + number);
-            }
+            entities = ListConfigUtil.getPartOfList(entities, counter, number);
             JSONArray jsonArray = new JSONArray();
             for (Subscription current : entities) {
                 jsonArray.put(current.toString());

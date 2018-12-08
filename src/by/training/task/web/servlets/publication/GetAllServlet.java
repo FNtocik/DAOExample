@@ -4,6 +4,7 @@ import by.training.task.dao.factory.DAOFactory;
 import by.training.task.dao.interfaces.PublicationDAO;
 import by.training.task.entities.Publication;
 import by.training.task.utils.LoggerManager;
+import by.training.task.web.utils.ListConfigUtil;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -58,11 +59,7 @@ public class GetAllServlet extends HttpServlet {
             if (counter >= entities.size()) {
                 return;
             }
-            if (counter + number >= entities.size()) {
-                entities = entities.subList(counter, entities.size());
-            } else {
-                entities = entities.subList(counter, counter + number);
-            }
+            entities = ListConfigUtil.getPartOfList(entities, counter, number);
             JSONArray jsonArray = new JSONArray();
             for (Publication current : entities) {
                 jsonArray.put(current.toString());

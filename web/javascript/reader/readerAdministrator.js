@@ -8,7 +8,7 @@ var counter = 0;
 var numberOfItems = 10;
 
 
-setOnclick(table, readerElement);
+setOnclick(table);
 getAll();
 
 function add() {
@@ -61,9 +61,9 @@ function del() {
     request.send(params);
 }
 
-function get() {
+function get(index) {
     var request = new XMLHttpRequest();
-    var params = "readerId=" + readerElement.value;
+    var params = "readerIndex=" + index + "&counter=" + counter * numberOfItems + "&number=" + numberOfItems;
     request.open("POST", "/secure/getReader", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
@@ -100,16 +100,12 @@ function getAll() {
         for (var i = 0; i < readers.length; i++) {
             var currentReader = JSON.parse(readers[i]);
             var tr = document.createElement("tr");
-            var tdId = document.createElement("td");
-            var textId = document.createTextNode(currentReader["id"]);
             var tdLogin = document.createElement("td");
             var textLogin = document.createTextNode(currentReader["login"]);
             var tdPassword = document.createElement("td");
             var textPassword = document.createTextNode(currentReader["password"]);
-            tdId.appendChild(textId);
             tdLogin.appendChild(textLogin);
             tdPassword.appendChild(textPassword);
-            tr.appendChild(tdId);
             tr.appendChild(tdLogin);
             tr.appendChild(tdPassword);
             table.appendChild(tr);

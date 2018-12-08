@@ -9,7 +9,7 @@ var counter = 0;
 var numberOfItems = 10;
 
 
-setOnclick(table, publicationElement);
+setOnclick(table);
 getAll();
 fillLanguageSelect();
 
@@ -65,9 +65,9 @@ function del() {
     request.send(params);
 }
 
-function get() {
+function get(index) {
     var request = new XMLHttpRequest();
-    var params = "publicationId=" + publicationElement.value;
+    var params = "publicationIndex=" + index + "&counter=" + counter * numberOfItems + "&number=" + numberOfItems;
     request.open("POST", "/secure/getPublication", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
@@ -106,8 +106,6 @@ function getAll() {
             var currentPublication = JSON.parse(publications[i]);
             var currentLanguage = JSON.parse(currentPublication["language"]);
             var tr = document.createElement("tr");
-            var tdId = document.createElement("td");
-            var textId = document.createTextNode(currentPublication["id"]);
             var tdName = document.createElement("td");
             var textName = document.createTextNode(currentPublication["name"]);
             var tdAuthor = document.createElement("td");
@@ -116,12 +114,10 @@ function getAll() {
             var textCost = document.createTextNode(currentPublication["cost"]);
             var tdLanguage = document.createElement("td");
             var textLanguage = document.createTextNode(currentLanguage["signature"]);
-            tdId.appendChild(textId);
             tdName.appendChild(textName);
             tdAuthor.appendChild(textAuthor);
             tdCost.appendChild(textCost);
             tdLanguage.appendChild(textLanguage);
-            tr.appendChild(tdId);
             tr.appendChild(tdName);
             tr.appendChild(tdAuthor);
             tr.appendChild(tdCost);
