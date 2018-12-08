@@ -94,6 +94,7 @@ function getAll() {
             var currentLanguage = JSON.parse(languages[i]);
             var tr = document.createElement("tr");
             var tdId = document.createElement("td");
+            tdId.setAttribute("hidden", "true");
             var textId = document.createTextNode(currentLanguage["id"]);
             var tdSignature = document.createElement("td");
             var textSignature = document.createTextNode(currentLanguage["signature"]);

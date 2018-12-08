@@ -96,6 +96,7 @@ function getAll() {
             var currentPayment = JSON.parse(payments[i]);
             var tr = document.createElement("tr");
             var tdId = document.createElement("td");
+            tdId.setAttribute("hidden", "true");
             var textId = document.createTextNode(currentPayment["id"]);
             var tdCost = document.createElement("td");
             var textCost = document.createTextNode(currentPayment["cost"]);

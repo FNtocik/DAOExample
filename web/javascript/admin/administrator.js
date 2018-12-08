@@ -98,6 +98,7 @@ function getAll() {
             var currentAdministrator = JSON.parse(administrators[i]);
             var tr = document.createElement("tr");
             var tdId = document.createElement("td");
+            tdId.setAttribute("hidden", "true");
             var textId = document.createTextNode(currentAdministrator["id"]);
             var tdLogin = document.createElement("td");
             var textLogin = document.createTextNode(currentAdministrator["login"]);

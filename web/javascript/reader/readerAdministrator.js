@@ -101,6 +101,7 @@ function getAll() {
             var currentReader = JSON.parse(readers[i]);
             var tr = document.createElement("tr");
             var tdId = document.createElement("td");
+            tdId.setAttribute("hidden", "true");
             var textId = document.createTextNode(currentReader["id"]);
             var tdLogin = document.createElement("td");
             var textLogin = document.createTextNode(currentReader["login"]);

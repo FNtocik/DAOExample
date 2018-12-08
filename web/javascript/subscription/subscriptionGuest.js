@@ -31,6 +31,7 @@ function getAll() {
 
             var tr = document.createElement("tr");
             var tdId = document.createElement("td");
+            tdId.setAttribute("hidden", "true");
             var textId = document.createTextNode(subscription["id"]);
             var tdReader = document.createElement("td");
             var textReader = document.createTextNode(reader["login"]);

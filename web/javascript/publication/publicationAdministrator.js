@@ -107,6 +107,7 @@ function getAll() {
             var currentLanguage = JSON.parse(currentPublication["language"]);
             var tr = document.createElement("tr");
             var tdId = document.createElement("td");
+            tdId.setAttribute("hidden", "true");
             var textId = document.createTextNode(currentPublication["id"]);
             var tdName = document.createElement("td");
             var textName = document.createTextNode(currentPublication["name"]);
