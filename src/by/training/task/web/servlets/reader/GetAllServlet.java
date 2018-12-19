@@ -47,7 +47,6 @@ public class GetAllServlet extends HttpServlet {
         }
         if (entities != null) {
             if (sortParam != null) {
-                sortParam = sortParam.replace("header", "");
                 SortOrder orderFromSession = SessionUtil.getSortOrderFromSession(req.getSession());
                 ReaderSortOrder oldOrder = orderFromSession instanceof ReaderSortOrder ?
                         (ReaderSortOrder) orderFromSession : ReaderSortOrder.NONE;

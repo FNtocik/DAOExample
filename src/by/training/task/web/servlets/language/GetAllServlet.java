@@ -47,7 +47,6 @@ public class GetAllServlet extends HttpServlet {
         }
         if (entities != null) {
             if (sortParam != null) {
-                sortParam = sortParam.replace("header", "");
                 SortOrder orderFromSession = SessionUtil.getSortOrderFromSession(req.getSession());
                 LanguageSortOrder oldOrder = orderFromSession instanceof LanguageSortOrder ?
                         (LanguageSortOrder) orderFromSession : LanguageSortOrder.NONE;
