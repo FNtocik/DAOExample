@@ -1,4 +1,5 @@
 var oldRow = null;
+var header = "";
 
 function setOnclick(table) {
     table.addEventListener('click', function (event) {
@@ -10,4 +11,12 @@ function setOnclick(table) {
         get(row.rowIndex - 1);
         oldRow = row;
     });
+}
+
+function setHeadersOnClick(headers) {
+    headers.addEventListener('click', function (event) {
+        var clickedHeader = event.target;
+        header = clickedHeader.getAttribute("id").replace("header", "");
+        getAll();
+    })
 }

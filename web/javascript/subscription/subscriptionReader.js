@@ -8,7 +8,9 @@ var counter = 0;
 var numberOfItems = 10;
 
 var table = document.getElementById("tableBody");
+var headers = document.getElementById("tableHead");
 
+setHeadersOnClick(headers);
 getAll();
 fillReaderSelect();
 fillPaymentSelect();
@@ -38,7 +40,7 @@ function add() {
 
 function getAll() {
     var requestToSubs = new XMLHttpRequest();
-    var params = "counter=" + counter * numberOfItems + "&number=" + numberOfItems;
+    var params = "counter=" + counter * numberOfItems + "&number=" + numberOfItems + "&sortOrder=" + header;
     requestToSubs.open("POST", "/secure/getAllSubscription", true);
     requestToSubs.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     requestToSubs.onreadystatechange = function (ev) {

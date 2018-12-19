@@ -5,12 +5,14 @@ var paymentSelect = document.getElementById("paymentSelect");
 var dateStartInput = document.getElementById("startDateInput");
 var dateEndInput = document.getElementById("endDateInput");
 var table = document.getElementById("tableBody");
+var headers = document.getElementById("tableHead");
 var totalCount = -1;
 var counter = 0;
 var numberOfItems = 10;
 
 
 setOnclick(table);
+setHeadersOnClick(headers);
 getAll();
 fillReaderSelect();
 fillPaymentSelect();
@@ -78,7 +80,8 @@ function del() {
 
 function get(index) {
     var request = new XMLHttpRequest();
-    var params = "subscriptionIndex=" + index + "&counter=" + counter * numberOfItems + "&number=" + numberOfItems;
+    var params = "subscriptionIndex=" + index + "&counter=" + counter * numberOfItems + "&number=" + numberOfItems
+        + "&sortOrder=" + header;
     request.open("POST", "secure/getSubscription", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
@@ -101,7 +104,7 @@ function get(index) {
 
 function getAll() {
     var request = new XMLHttpRequest();
-    var params = "counter=" + counter * numberOfItems + "&number=" + numberOfItems;
+    var params = "counter=" + counter * numberOfItems + "&number=" + numberOfItems + "&sortOrder=" + header;
     request.open("POST", "/secure/getAllSubscription", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {

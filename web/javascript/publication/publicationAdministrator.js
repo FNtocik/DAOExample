@@ -4,12 +4,14 @@ var nameInput = document.getElementById("name");
 var authorInput = document.getElementById("author");
 var costInput = document.getElementById("cost");
 var table = document.getElementById("tableBody");
+var headers = document.getElementById("tableHead");
 var totalCount = -1;
 var counter = 0;
 var numberOfItems = 10;
 
 
 setOnclick(table);
+setHeadersOnClick(headers);
 getAll();
 fillLanguageSelect();
 
@@ -67,7 +69,8 @@ function del() {
 
 function get(index) {
     var request = new XMLHttpRequest();
-    var params = "publicationIndex=" + index + "&counter=" + counter * numberOfItems + "&number=" + numberOfItems;
+    var params = "publicationIndex=" + index + "&counter=" + counter * numberOfItems + "&number=" + numberOfItems
+        + "&sortOrder=" + header;
     request.open("POST", "/secure/getPublication", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
@@ -86,7 +89,7 @@ function get(index) {
 
 function getAll() {
     var request = new XMLHttpRequest();
-    var params = "counter=" + counter * numberOfItems + "&number=" + numberOfItems;
+    var params = "counter=" + counter * numberOfItems + "&number=" + numberOfItems + "&sortOrder=" + header;
     request.open("POST", "/secure/getAllPublication", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {

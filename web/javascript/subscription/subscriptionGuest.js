@@ -1,13 +1,15 @@
 var table = document.getElementById("tableBody");
+var headers = document.getElementById("tableHead");
 var totalCount = -1;
 var counter = 0;
 var numberOfItems = 10;
 
+setHeadersOnClick(headers);
 getAll();
 
 function getAll() {
     var requestToSubs = new XMLHttpRequest();
-    var params = "counter=" + counter * numberOfItems + "&number=" + numberOfItems;
+    var params = "counter=" + counter * numberOfItems + "&number=" + numberOfItems + "&sortOrder=" + header;
     requestToSubs.open("POST", "/secure/getAllSubscription", true);
     requestToSubs.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     requestToSubs.onreadystatechange = function (ev) {

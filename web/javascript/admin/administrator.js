@@ -2,12 +2,14 @@ var adminElement = document.getElementById("administratorId");
 var loginInput = document.getElementById("login");
 var passwordInput = document.getElementById("password");
 var table = document.getElementById("tableBody");
+var headers = document.getElementById("tableHead");
 var totalCount = -1;
 var counter = 0;
 var numberOfItems = 10;
 
 
 setOnclick(table);
+setHeadersOnClick(headers);
 getAll();
 
 function add() {
@@ -59,7 +61,8 @@ function del() {
 
 function get(index) {
     var request = new XMLHttpRequest();
-    var params = "administratorIndex=" + index + "&counter=" + counter * numberOfItems + "&number=" + numberOfItems;
+    var params = "administratorIndex=" + index + "&counter=" + counter * numberOfItems + "&number=" + numberOfItems
+        + "&sortOrder=" + header;
     request.open("POST", "/secure/getAdministrator", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
@@ -76,7 +79,7 @@ function get(index) {
 
 function getAll() {
     var request = new XMLHttpRequest();
-    var params = "counter=" + counter * numberOfItems + "&number=" + numberOfItems;
+    var params = "counter=" + counter * numberOfItems + "&number=" + numberOfItems + "&sortOrder=" + header;
     request.open("POST", "/secure/getAllAdministrator", true);
     request.setRequestHeader("Content-Type",
         "application/x-www-form-urlencoded");
