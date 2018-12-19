@@ -4,7 +4,10 @@ import by.training.task.dao.factory.DAOFactory;
 import by.training.task.dao.interfaces.AdministratorDAO;
 import by.training.task.entities.Administrator;
 import by.training.task.utils.LoggerManager;
+import by.training.task.web.sort.enums.AdministratorSortOrder;
+import by.training.task.web.sort.util.AdministratorSortUtil;
 import by.training.task.web.utils.ListConfigUtil;
+import by.training.task.web.utils.SessionUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +27,7 @@ public class GetServlet extends HttpServlet {
         AdministratorDAO administratorDAO = factory.getAdministratorDAO();
         String counterParam = req.getParameter("counter");
         String numberParam = req.getParameter("number");
+        AdministratorSortOrder sortOrderFromSession = (AdministratorSortOrder) SessionUtil.getSortOrderFromSession(req.getSession());
         int counter;
         int number;
         String parameterIndex = req.getParameter("administratorIndex");
@@ -37,19 +41,24 @@ public class GetServlet extends HttpServlet {
                 LoggerManager loggerManager = LoggerManager.getInstance();
                 loggerManager.error(this.getClass().toString(), e);
             }
-            if (entities != null && entities.size() != 0) {
-                if (counterParam == null || numberParam == null) {
-                    counter = 0;
-                    number = entities.size();
-                } else {
-                    counter = Integer.valueOf(counterParam);
-                    number = Integer.valueOf(numberParam);
+            if (entities != null) {
+                if (sortOrderFromSession != null) {
+                    entities = AdministratorSortUtil.sort(entities, sortOrderFromSession);
                 }
-                entities = ListConfigUtil.getPartOfList(entities, counter, number);
-                entity = entities.get(administratorIndex);
-                if (entity != null) {
-                    resp.setCharacterEncoding("UTF-8");
-                    resp.getWriter().write(entity.toString());
+                if (entities.size() != 0) {
+                    if (counterParam == null || numberParam == null) {
+                        counter = 0;
+                        number = entities.size();
+                    } else {
+                        counter = Integer.valueOf(counterParam);
+                        number = Integer.valueOf(numberParam);
+                    }
+                    entities = ListConfigUtil.getPartOfList(entities, counter, number);
+                    entity = entities.get(administratorIndex);
+                    if (entity != null) {
+                        resp.setCharacterEncoding("UTF-8");
+                        resp.getWriter().write(entity.toString());
+                    }
                 }
             }
         }

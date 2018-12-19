@@ -4,7 +4,10 @@ import by.training.task.dao.factory.DAOFactory;
 import by.training.task.dao.interfaces.SubscriptionDAO;
 import by.training.task.entities.Subscription;
 import by.training.task.utils.LoggerManager;
+import by.training.task.web.sort.enums.SubscriptionSortOrder;
+import by.training.task.web.sort.util.SubscriptionSortUtil;
 import by.training.task.web.utils.ListConfigUtil;
+import by.training.task.web.utils.SessionUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,6 +32,7 @@ public class GetServlet extends HttpServlet {
         SubscriptionDAO subscriptionDAO = factory.getSubscriptionDAO();
         String counterParam = req.getParameter("counter");
         String numberParam = req.getParameter("number");
+        SubscriptionSortOrder sortOrderFromSession = (SubscriptionSortOrder) SessionUtil.getSortOrderFromSession(req.getSession());
         int counter;
         int number;
         String parameterIndex = req.getParameter("subscriptionIndex");
@@ -42,19 +46,24 @@ public class GetServlet extends HttpServlet {
                 LoggerManager loggerManager = LoggerManager.getInstance();
                 loggerManager.error(this.getClass().toString(), e);
             }
-            if (entities != null && entities.size() != 0) {
-                if (counterParam == null || numberParam == null) {
-                    counter = 0;
-                    number = entities.size();
-                } else {
-                    counter = Integer.valueOf(counterParam);
-                    number = Integer.valueOf(numberParam);
+            if (entities != null) {
+                if (sortOrderFromSession != null) {
+                    SubscriptionSortUtil.sort(entities, sortOrderFromSession);
                 }
-                entities = ListConfigUtil.getPartOfList(entities, counter, number);
-                entity = entities.get(subscriptionIndex);
-                if (entity != null) {
-                    resp.setCharacterEncoding("UTF-8");
-                    resp.getWriter().write(entity.toString());
+                if (entities.size() != 0) {
+                    if (counterParam == null || numberParam == null) {
+                        counter = 0;
+                        number = entities.size();
+                    } else {
+                        counter = Integer.valueOf(counterParam);
+                        number = Integer.valueOf(numberParam);
+                    }
+                    entities = ListConfigUtil.getPartOfList(entities, counter, number);
+                    entity = entities.get(subscriptionIndex);
+                    if (entity != null) {
+                        resp.setCharacterEncoding("UTF-8");
+                        resp.getWriter().write(entity.toString());
+                    }
                 }
             }
         }

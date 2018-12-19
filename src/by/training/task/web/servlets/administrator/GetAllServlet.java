@@ -4,7 +4,11 @@ import by.training.task.dao.factory.DAOFactory;
 import by.training.task.dao.interfaces.AdministratorDAO;
 import by.training.task.entities.Administrator;
 import by.training.task.utils.LoggerManager;
+import by.training.task.web.sort.SortOrder;
+import by.training.task.web.sort.enums.AdministratorSortOrder;
+import by.training.task.web.sort.util.AdministratorSortUtil;
 import by.training.task.web.utils.ListConfigUtil;
+import by.training.task.web.utils.SessionUtil;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -29,6 +33,7 @@ public class GetAllServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String counterParam = req.getParameter("counter");
         String numberParam = req.getParameter("number");
+        String sortParam = req.getParameter("sortOrder");
         int counter;
         int number;
         DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
@@ -40,28 +45,41 @@ public class GetAllServlet extends HttpServlet {
             LoggerManager loggerManager = LoggerManager.getInstance();
             loggerManager.error(this.getClass().toString(), e);
         }
-        if (entities != null && entities.size() != 0) {
-            int size = entities.size();
-            if (counterParam == null || numberParam == null) {
-                counter = 0;
-                number = entities.size();
+        if (entities != null) {
+            if (sortParam != null) {
+                sortParam = sortParam.replace("header", "");
+                SortOrder orderFromSession = SessionUtil.getSortOrderFromSession(req.getSession());
+                AdministratorSortOrder oldOrder = orderFromSession instanceof AdministratorSortOrder ?
+                        (AdministratorSortOrder) orderFromSession : AdministratorSortOrder.NONE;
+                AdministratorSortOrder newOrder = AdministratorSortOrder.valueOf(sortParam, oldOrder);
+                SessionUtil.setSortOrderToSession(req.getSession(), newOrder);
+                entities = AdministratorSortUtil.sort(entities, newOrder);
             } else {
-                counter = Integer.valueOf(counterParam);
-                number = Integer.valueOf(numberParam);
+                SessionUtil.setSortOrderToSession(req.getSession(), AdministratorSortOrder.NONE);
             }
-            if (counter >= entities.size()) {
-                return;
+            if (entities.size() != 0) {
+                int size = entities.size();
+                if (counterParam == null || numberParam == null) {
+                    counter = 0;
+                    number = entities.size();
+                } else {
+                    counter = Integer.valueOf(counterParam);
+                    number = Integer.valueOf(numberParam);
+                }
+                if (counter >= entities.size()) {
+                    return;
+                }
+                entities = ListConfigUtil.getPartOfList(entities, counter, number);
+                JSONArray jsonArray = new JSONArray();
+                for (Administrator current : entities) {
+                    jsonArray.put(current.toString());
+                }
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("size", size);
+                jsonObject.put("administrators", jsonArray);
+                resp.setCharacterEncoding("UTF-8");
+                resp.getWriter().write(jsonObject.toString());
             }
-            entities = ListConfigUtil.getPartOfList(entities, counter, number);
-            JSONArray jsonArray = new JSONArray();
-            for (Administrator current : entities) {
-                jsonArray.put(current.toString());
-            }
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("size", size);
-            jsonObject.put("administrators", jsonArray);
-            resp.setCharacterEncoding("UTF-8");
-            resp.getWriter().write(jsonObject.toString());
         }
     }
 
