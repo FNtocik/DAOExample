@@ -6,8 +6,20 @@ import by.training.task.web.sort.enums.SubscriptionSortOrder;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Util class to sort {@link List} of {@link Subscription}'s in certain {@link SubscriptionSortOrder}
+ *
+ * @author Anton Puhachou
+ */
 public class SubscriptionSortUtil {
 
+    /**
+     * Static method of sorting in certain {@link SubscriptionSortOrder}
+     *
+     * @param entities  list to sort
+     * @param sortOrder sort order
+     * @return sorted list of entities
+     */
     public static List<Subscription> sort(List<Subscription> entities, SubscriptionSortOrder sortOrder) {
         switch (sortOrder) {
             case ID_ASC:

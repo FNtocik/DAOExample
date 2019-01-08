@@ -2,6 +2,12 @@ package by.training.task.web.sort.enums;
 
 import by.training.task.web.sort.SortOrder;
 
+/**
+ * Enum with possible sort order to subscription table
+ *
+ * @author Anton Puhachou
+ * @see by.training.task.web.sort.SortOrder
+ */
 public enum SubscriptionSortOrder implements SortOrder {
     NONE,
     ID_DESC, ID_ASC,
@@ -11,6 +17,13 @@ public enum SubscriptionSortOrder implements SortOrder {
     START_SUBSCRIPTION_DESC, START_SUBSCRIPTION_ASC,
     END_SUBSCRIPTION_DESC, END_SUBSCRIPTION_ASC;
 
+    /**
+     * get sort order by name of new sort order and previous sort order
+     *
+     * @param value    name of order in String
+     * @param oldOrder previous sort order
+     * @return new sort order
+     */
     public static SubscriptionSortOrder valueOf(String value, SubscriptionSortOrder oldOrder) {
         SubscriptionSortOrder newOrder;
         switch (value.toLowerCase()) {
@@ -42,6 +55,12 @@ public enum SubscriptionSortOrder implements SortOrder {
         }
     }
 
+    /**
+     * Method to obtain reversed sort order to this sort order
+     *
+     * @return backward order
+     * @see SortOrder#reversalOrder()
+     */
     @Override
     public SubscriptionSortOrder reversalOrder() {
         switch (this) {

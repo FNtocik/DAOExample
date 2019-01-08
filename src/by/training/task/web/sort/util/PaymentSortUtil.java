@@ -6,8 +6,20 @@ import by.training.task.web.sort.enums.PaymentSortOrder;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Util class to sort {@link List} of {@link Payment}'s in certain {@link PaymentSortOrder}
+ *
+ * @author Anton Puhachou
+ */
 public class PaymentSortUtil {
 
+    /**
+     * Static method of sorting in certain {@link PaymentSortOrder}
+     *
+     * @param entities  list to sort
+     * @param sortOrder sort order
+     * @return sorted list of entities
+     */
     public static List<Payment> sort(List<Payment> entities, PaymentSortOrder sortOrder) {
         switch (sortOrder) {
             case ID_ASC:

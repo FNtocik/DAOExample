@@ -6,8 +6,20 @@ import by.training.task.web.sort.enums.AdministratorSortOrder;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Util class to sort {@link List} of {@link Administrator}'s in certain {@link AdministratorSortOrder}
+ *
+ * @author Anton Puhachou
+ */
 public class AdministratorSortUtil {
 
+    /**
+     * Static method of sorting in certain {@link AdministratorSortOrder}
+     *
+     * @param entities  list to sort
+     * @param sortOrder sort order
+     * @return sorted list of entities
+     */
     public static List<Administrator> sort(List<Administrator> entities, AdministratorSortOrder sortOrder) {
         switch (sortOrder) {
             case ID_ASC:

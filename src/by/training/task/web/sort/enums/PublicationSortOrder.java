@@ -2,6 +2,12 @@ package by.training.task.web.sort.enums;
 
 import by.training.task.web.sort.SortOrder;
 
+/**
+ * Enum with possible sort order to publication table
+ *
+ * @author Anton Puhachou
+ * @see by.training.task.web.sort.SortOrder
+ */
 public enum PublicationSortOrder implements SortOrder {
 
     NONE,
@@ -11,6 +17,13 @@ public enum PublicationSortOrder implements SortOrder {
     LANGUAGE_DESC, LANGUAGE_ASC,
     COST_DESC, COST_ASC;
 
+    /**
+     * get sort order by name of new sort order and previous sort order
+     *
+     * @param value    name of order in String
+     * @param oldOrder previous sort order
+     * @return new sort order
+     */
     public static PublicationSortOrder valueOf(String value, PublicationSortOrder oldOrder) {
         PublicationSortOrder newOrder;
         switch (value.toLowerCase()) {
@@ -40,6 +53,12 @@ public enum PublicationSortOrder implements SortOrder {
         }
     }
 
+    /**
+     * Method to obtain reversed sort order to this sort order
+     *
+     * @return backward order
+     * @see SortOrder#reversalOrder()
+     */
     @Override
     public PublicationSortOrder reversalOrder() {
         switch (this) {

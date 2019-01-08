@@ -6,8 +6,20 @@ import by.training.task.web.sort.enums.PublicationSortOrder;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Util class to sort {@link List} of {@link Publication}'s in certain {@link PublicationSortOrder}
+ *
+ * @author Anton Puhachou
+ */
 public class PublicationSortUtil {
 
+    /**
+     * Static method of sorting in certain {@link PublicationSortOrder}
+     *
+     * @param entities  list to sort
+     * @param sortOrder sort order
+     * @return sorted list of entities
+     */
     public static List<Publication> sort(List<Publication> entities, PublicationSortOrder sortOrder) {
         switch (sortOrder) {
             case ID_ASC:

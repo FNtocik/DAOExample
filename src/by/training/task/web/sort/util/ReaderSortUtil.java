@@ -6,8 +6,20 @@ import by.training.task.web.sort.enums.ReaderSortOrder;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Util class to sort {@link List} of {@link Reader}'s in certain {@link ReaderSortOrder}
+ *
+ * @author Anton Puhachou
+ */
 public class ReaderSortUtil {
 
+    /**
+     * Static method of sorting in certain {@link ReaderSortOrder}
+     *
+     * @param entities  list to sort
+     * @param sortOrder sort order
+     * @return sorted list of entities
+     */
     public static List<Reader> sort(List<Reader> entities, ReaderSortOrder sortOrder) {
         switch (sortOrder) {
             case ID_ASC:

@@ -6,8 +6,20 @@ import by.training.task.web.sort.enums.LanguageSortOrder;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Util class to sort {@link List} of {@link Language}'s in certain {@link LanguageSortOrder}
+ *
+ * @author Anton Puhachou
+ */
 public class LanguageSortUtil {
 
+    /**
+     * Static method of sorting in certain {@link LanguageSortOrder}
+     *
+     * @param entities  list to sort
+     * @param sortOrder sort order
+     * @return sorted list of entities
+     */
     public static List<Language> sort(List<Language> entities, LanguageSortOrder sortOrder) {
         switch (sortOrder) {
             case ID_ASC:
