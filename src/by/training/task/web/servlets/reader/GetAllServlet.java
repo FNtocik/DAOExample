@@ -47,14 +47,16 @@ public class GetAllServlet extends HttpServlet {
         }
         if (entities != null) {
             if (sortParam != null) {
-                SortOrder orderFromSession = SessionUtil.getSortOrderFromSession(req.getSession());
-                ReaderSortOrder oldOrder = orderFromSession instanceof ReaderSortOrder ?
-                        (ReaderSortOrder) orderFromSession : ReaderSortOrder.NONE;
-                ReaderSortOrder newOrder = ReaderSortOrder.valueOf(sortParam, oldOrder);
-                SessionUtil.setSortOrderToSession(req.getSession(), newOrder);
-                entities = ReaderSortUtil.sort(entities, newOrder);
-            } else {
-                SessionUtil.setSortOrderToSession(req.getSession(), ReaderSortOrder.NONE);
+                if (!sortParam.isEmpty()) {
+                    SortOrder orderFromSession = SessionUtil.getSortOrderFromSession(req.getSession());
+                    ReaderSortOrder oldOrder = orderFromSession instanceof ReaderSortOrder ?
+                            (ReaderSortOrder) orderFromSession : ReaderSortOrder.NONE;
+                    ReaderSortOrder newOrder = ReaderSortOrder.valueOf(sortParam, oldOrder);
+                    SessionUtil.setSortOrderToSession(req.getSession(), newOrder);
+                    entities = ReaderSortUtil.sort(entities, newOrder);
+                } else {
+                    SessionUtil.setSortOrderToSession(req.getSession(), ReaderSortOrder.NONE);
+                }
             }
             if (entities.size() != 0) {
                 int size = entities.size();

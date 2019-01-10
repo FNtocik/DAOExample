@@ -3,6 +3,8 @@ package by.training.task.entities;
 import org.json.JSONObject;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.util.Locale;
 
 /**
  * Subscription class with properties <b>reader ID</b>, <b>publication
@@ -256,6 +258,18 @@ public class Subscription {
         jsonObject.put("payment", payment.toString());
         jsonObject.put("startDate", startSubscription.toString());
         jsonObject.put("endDate", endSubscription.toString());
+        return jsonObject.toString();
+    }
+
+    public String toLocaleString(Locale locale) {
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, locale);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", id);
+        jsonObject.put("reader", reader.toString());
+        jsonObject.put("publication", publication.toLocaleString(locale));
+        jsonObject.put("payment", payment.toLocaleString(locale));
+        jsonObject.put("startDate", dateFormat.format(startSubscription));
+        jsonObject.put("endDate", dateFormat.format(endSubscription));
         return jsonObject.toString();
     }
 }

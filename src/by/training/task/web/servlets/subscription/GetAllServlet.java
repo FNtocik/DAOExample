@@ -3,6 +3,7 @@ package by.training.task.web.servlets.subscription;
 import by.training.task.dao.factory.DAOFactory;
 import by.training.task.dao.interfaces.SubscriptionDAO;
 import by.training.task.entities.Subscription;
+import by.training.task.locale.LocaleManager;
 import by.training.task.utils.LoggerManager;
 import by.training.task.web.sort.SortOrder;
 import by.training.task.web.sort.enums.SubscriptionSortOrder;
@@ -31,6 +32,7 @@ public class GetAllServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        LocaleManager localeManager = LocaleManager.getInstance();
         String counterParam = req.getParameter("counter");
         String numberParam = req.getParameter("number");
         String sortParam = req.getParameter("sortOrder");
@@ -47,14 +49,16 @@ public class GetAllServlet extends HttpServlet {
         }
         if (entities != null) {
             if (sortParam != null) {
-                SortOrder orderFromSession = SessionUtil.getSortOrderFromSession(req.getSession());
-                SubscriptionSortOrder oldOrder = orderFromSession instanceof SubscriptionSortOrder ?
-                        (SubscriptionSortOrder) orderFromSession : SubscriptionSortOrder.NONE;
-                SubscriptionSortOrder newOrder = SubscriptionSortOrder.valueOf(sortParam, oldOrder);
-                SessionUtil.setSortOrderToSession(req.getSession(), newOrder);
-                entities = SubscriptionSortUtil.sort(entities, newOrder);
-            } else {
-                SessionUtil.setSortOrderToSession(req.getSession(), SubscriptionSortOrder.NONE);
+                if (!sortParam.isEmpty()) {
+                    SortOrder orderFromSession = SessionUtil.getSortOrderFromSession(req.getSession());
+                    SubscriptionSortOrder oldOrder = orderFromSession instanceof SubscriptionSortOrder ?
+                            (SubscriptionSortOrder) orderFromSession : SubscriptionSortOrder.NONE;
+                    SubscriptionSortOrder newOrder = SubscriptionSortOrder.valueOf(sortParam, oldOrder);
+                    SessionUtil.setSortOrderToSession(req.getSession(), newOrder);
+                    entities = SubscriptionSortUtil.sort(entities, newOrder);
+                } else {
+                    SessionUtil.setSortOrderToSession(req.getSession(), SubscriptionSortOrder.NONE);
+                }
             }
             if (entities.size() != 0) {
                 int size = entities.size();
@@ -68,7 +72,7 @@ public class GetAllServlet extends HttpServlet {
                 entities = ListConfigUtil.getPartOfList(entities, counter, number);
                 JSONArray jsonArray = new JSONArray();
                 for (Subscription current : entities) {
-                    jsonArray.put(current.toString());
+                    jsonArray.put(current.toLocaleString(localeManager.getLocale()));
                 }
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("size", size);

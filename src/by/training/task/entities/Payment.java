@@ -2,6 +2,9 @@ package by.training.task.entities;
 
 import org.json.JSONObject;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 /**
  * Payment class with properties <b>cost</b>, <b>payed</b>
  * flag, <b>language</b> config and read only id
@@ -90,6 +93,15 @@ public class Payment {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", id);
         jsonObject.put("cost", cost);
+        jsonObject.put("payed", payed);
+        return jsonObject.toString();
+    }
+
+    public String toLocaleString(Locale locale) {
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", id);
+        jsonObject.put("cost", numberFormat.format(cost));
         jsonObject.put("payed", payed);
         return jsonObject.toString();
     }

@@ -3,6 +3,7 @@ package by.training.task.web.servlets.subscription;
 import by.training.task.dao.factory.DAOFactory;
 import by.training.task.dao.interfaces.SubscriptionDAO;
 import by.training.task.entities.Subscription;
+import by.training.task.locale.LocaleManager;
 import by.training.task.utils.LoggerManager;
 import by.training.task.web.sort.enums.SubscriptionSortOrder;
 import by.training.task.web.sort.util.SubscriptionSortUtil;
@@ -28,6 +29,7 @@ public class GetServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        LocaleManager localeManager = LocaleManager.getInstance();
         DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         SubscriptionDAO subscriptionDAO = factory.getSubscriptionDAO();
         String counterParam = req.getParameter("counter");
@@ -48,7 +50,7 @@ public class GetServlet extends HttpServlet {
             }
             if (entities != null) {
                 if (sortOrderFromSession != null) {
-                    SubscriptionSortUtil.sort(entities, sortOrderFromSession);
+                    entities = SubscriptionSortUtil.sort(entities, sortOrderFromSession);
                 }
                 if (entities.size() != 0) {
                     if (counterParam == null || numberParam == null) {

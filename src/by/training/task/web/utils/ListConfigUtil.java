@@ -6,7 +6,8 @@ public class ListConfigUtil {
 
     static public List getPartOfList(List entities, int fromIndex, int count) {
         if (fromIndex >= entities.size()) {
-            return null;
+            entities.clear();
+            return entities;
         }
         if (fromIndex + count >= entities.size()) {
             entities = entities.subList(fromIndex, entities.size());
