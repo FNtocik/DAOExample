@@ -46,9 +46,9 @@
         <headerId>
             <innerText>ID</innerText>
         </headerId>
-        <headerSummary>
+        <headerCost>
             <innerText>Payment summary</innerText>
-        </headerSummary>
+        </headerCost>
         <headerPayed>
             <innerText>Payed</innerText>
         </headerPayed>

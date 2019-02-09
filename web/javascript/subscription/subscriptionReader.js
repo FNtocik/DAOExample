@@ -8,7 +8,9 @@ var counter = 0;
 var numberOfItems = 10;
 
 var table = document.getElementById("tableBody");
+var headers = document.getElementById("tableHead");
 
+setHeadersOnClick(headers);
 getAll();
 fillReaderSelect();
 fillPaymentSelect();
@@ -38,7 +40,7 @@ function add() {
 
 function getAll() {
     var requestToSubs = new XMLHttpRequest();
-    var params = "counter=" + counter * numberOfItems + "&number=" + numberOfItems;
+    var params = "counter=" + counter * numberOfItems + "&number=" + numberOfItems + "&sortOrder=" + header;
     requestToSubs.open("POST", "/secure/getAllSubscription", true);
     requestToSubs.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     requestToSubs.onreadystatechange = function (ev) {
@@ -61,8 +63,6 @@ function getAll() {
             var payment = JSON.parse(subscription["payment"]);
 
             var tr = document.createElement("tr");
-            var tdId = document.createElement("td");
-            var textId = document.createTextNode(subscription["id"]);
             var tdReader = document.createElement("td");
             var textReader = document.createTextNode(reader["login"]);
             var tdPayment = document.createElement("td");
@@ -75,14 +75,12 @@ function getAll() {
             var tdEndDate = document.createElement("td");
             var textEndDate = document.createTextNode(subscription["endDate"]);
 
-            tdId.appendChild(textId);
             tdReader.appendChild(textReader);
             tdPayment.appendChild(textPayment);
             tdPublication.appendChild(textPublication);
             tdStartDate.appendChild(textStartDate);
             tdEndDate.appendChild(textEndDate);
 
-            tr.appendChild(tdId);
             tr.appendChild(tdReader);
             tr.appendChild(tdPublication);
             tr.appendChild(tdPayment);

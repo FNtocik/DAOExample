@@ -2,12 +2,14 @@ var paymentElement = document.getElementById("paymentId");
 var summaryInput = document.getElementById("summary");
 var isPayedCheckbox = document.getElementById("isPayed");
 var table = document.getElementById("tableBody");
+var headers = document.getElementById("tableHead");
 var totalCount = -1;
 var counter = 0;
 var numberOfItems = 10;
 
 
-setOnclick(table, paymentElement);
+setOnclick(table);
+setHeadersOnClick(headers);
 getAll();
 
 function add() {
@@ -57,9 +59,10 @@ function del() {
     request.send(params);
 }
 
-function get() {
+function get(index) {
     var request = new XMLHttpRequest();
-    var params = "paymentId=" + paymentElement.value;
+    var params = "paymentIndex=" + index + "&counter=" + counter * numberOfItems + "&number=" + numberOfItems
+        + "&sortOrder=" + header;
     request.open("POST", "/secure/getPayment", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
@@ -76,7 +79,7 @@ function get() {
 
 function getAll() {
     var request = new XMLHttpRequest();
-    var params = "counter=" + counter * numberOfItems + "&number=" + numberOfItems;
+    var params = "counter=" + counter * numberOfItems + "&number=" + numberOfItems + "&sortOrder=" + header;
     request.open("POST", "/secure/getAllPayment", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
@@ -95,16 +98,12 @@ function getAll() {
         for (var i = 0; i < payments.length; i++) {
             var currentPayment = JSON.parse(payments[i]);
             var tr = document.createElement("tr");
-            var tdId = document.createElement("td");
-            var textId = document.createTextNode(currentPayment["id"]);
             var tdCost = document.createElement("td");
             var textCost = document.createTextNode(currentPayment["cost"]);
             var tdPayed = document.createElement("td");
             var textPayed = document.createTextNode(currentPayment["payed"].toString());
-            tdId.appendChild(textId);
             tdCost.appendChild(textCost);
             tdPayed.appendChild(textPayed);
-            tr.appendChild(tdId);
             tr.appendChild(tdCost);
             tr.appendChild(tdPayed);
             table.appendChild(tr);

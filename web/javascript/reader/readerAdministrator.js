@@ -3,12 +3,14 @@ var languageElement = document.getElementById("languageId");
 var loginInput = document.getElementById("login");
 var passwordInput = document.getElementById("password");
 var table = document.getElementById("tableBody");
+var headers = document.getElementById("tableHead");
 var totalCount = -1;
 var counter = 0;
 var numberOfItems = 10;
 
 
-setOnclick(table, readerElement);
+setOnclick(table);
+setHeadersOnClick(headers);
 getAll();
 
 function add() {
@@ -61,9 +63,10 @@ function del() {
     request.send(params);
 }
 
-function get() {
+function get(index) {
     var request = new XMLHttpRequest();
-    var params = "readerId=" + readerElement.value;
+    var params = "readerIndex=" + index + "&counter=" + counter * numberOfItems + "&number=" + numberOfItems
+        + "&sortOrder=" + header;
     request.open("POST", "/secure/getReader", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
@@ -80,7 +83,7 @@ function get() {
 
 function getAll() {
     var requestToSubs = new XMLHttpRequest();
-    var params = "counter=" + counter * numberOfItems + "&number=" + numberOfItems;
+    var params = "counter=" + counter * numberOfItems + "&number=" + numberOfItems + "&sortOrder=" + header;
     requestToSubs.open("POST", "/secure/getAllReader", true);
     requestToSubs.setRequestHeader("Content-Type",
         "application/x-www-form-urlencoded");
@@ -100,16 +103,12 @@ function getAll() {
         for (var i = 0; i < readers.length; i++) {
             var currentReader = JSON.parse(readers[i]);
             var tr = document.createElement("tr");
-            var tdId = document.createElement("td");
-            var textId = document.createTextNode(currentReader["id"]);
             var tdLogin = document.createElement("td");
             var textLogin = document.createTextNode(currentReader["login"]);
             var tdPassword = document.createElement("td");
             var textPassword = document.createTextNode(currentReader["password"]);
-            tdId.appendChild(textId);
             tdLogin.appendChild(textLogin);
             tdPassword.appendChild(textPassword);
-            tr.appendChild(tdId);
             tr.appendChild(tdLogin);
             tr.appendChild(tdPassword);
             table.appendChild(tr);

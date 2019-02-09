@@ -1,12 +1,14 @@
 var languageElement = document.getElementById("languageId");
 var signatureInput = document.getElementById("signatureInput");
 var table = document.getElementById("tableBody");
+var headers = document.getElementById("tableHead");
 var totalCount = -1;
 var counter = 0;
 var numberOfItems = 10;
 
 
-setOnclick(table, languageElement);
+setOnclick(table);
+setHeadersOnClick(headers);
 getAll();
 
 function add() {
@@ -54,9 +56,10 @@ function del() {
     request.send(params);
 }
 
-function get() {
+function get(index) {
     var request = new XMLHttpRequest();
-    var params = "languageId=" + languageElement.value;
+    var params = "languageIndex=" + index + "&counter=" + counter * numberOfItems + "&number=" + numberOfItems
+        + "&sortOrder=" + header;
     request.open("POST", "/secure/getLanguage", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function (ev) {
@@ -72,7 +75,7 @@ function get() {
 
 function getAll() {
     var request = new XMLHttpRequest();
-    var params = "counter=" + counter * numberOfItems + "&number=" + numberOfItems;
+    var params = "counter=" + counter * numberOfItems + "&number=" + numberOfItems + "&sortOrder=" + header;
     request.open("POST", "/secure/getAllLanguage", true);
     request.setRequestHeader("Content-Type",
         "application/x-www-form-urlencoded");
@@ -93,13 +96,9 @@ function getAll() {
         for (var i = 0; i < languages.length; i++) {
             var currentLanguage = JSON.parse(languages[i]);
             var tr = document.createElement("tr");
-            var tdId = document.createElement("td");
-            var textId = document.createTextNode(currentLanguage["id"]);
             var tdSignature = document.createElement("td");
             var textSignature = document.createTextNode(currentLanguage["signature"]);
-            tdId.appendChild(textId);
             tdSignature.appendChild(textSignature);
-            tr.appendChild(tdId);
             tr.appendChild(tdSignature);
             table.appendChild(tr);
         }

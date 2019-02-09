@@ -2,6 +2,9 @@ package by.training.task.entities;
 
 import org.json.JSONObject;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 /**
  * Publication class with properties <b>author</b>, <b>name</b>,
  * <b>language</b> config and read only id
@@ -178,6 +181,19 @@ public class Publication {
         jsonObject.put("author", author);
         jsonObject.put("name", name);
         jsonObject.put("cost", cost);
+        if (language != null) {
+            jsonObject.put("language", language.toString());
+        }
+        return jsonObject.toString();
+    }
+
+    public String toLocaleString(Locale locale) {
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", id);
+        jsonObject.put("author", author);
+        jsonObject.put("name", name);
+        jsonObject.put("cost", numberFormat.format(cost));
         if (language != null) {
             jsonObject.put("language", language.toString());
         }

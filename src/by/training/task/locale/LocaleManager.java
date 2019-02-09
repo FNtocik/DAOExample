@@ -1,5 +1,6 @@
 package by.training.task.locale;
 
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
@@ -8,11 +9,18 @@ import java.util.ResourceBundle;
  */
 public class LocaleManager {
 
-    /**field config bundle*/
-    private ResourceBundle localeResourceBundle;
-
     /**static field instance of manager*/
     private static LocaleManager instance = null;
+
+    /**
+     * field config bundle
+     */
+    private ResourceBundle localeResourceBundle;
+
+    /**
+     * field current locale
+     */
+    private Locale locale;
 
     /**
      * Private constructor to create an instance of manager
@@ -32,6 +40,19 @@ public class LocaleManager {
         return instance;
     }
 
+    public Locale getLocale() {
+        return locale;
+    }
+
+    /**
+     * Private setter of locale object
+     *
+     * @param signature language signature
+     */
+    private void setLocale(String signature) {
+        locale = new Locale(signature);
+    }
+
     /**
      * Method of obtaining supported in application language
      *
@@ -39,10 +60,11 @@ public class LocaleManager {
      */
     public String getSupportedLanguage(String signature) {
         if (localeResourceBundle.keySet().contains(signature)) {
-            return localeResourceBundle.getString(signature);
+            setLocale(localeResourceBundle.getString(signature));
         } else {
-            return getDefaultLanguage();
+            setLocale(getDefaultLanguage());
         }
+        return locale.getLanguage();
     }
 
     /**
