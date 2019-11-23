@@ -1,4 +1,4 @@
-# DAOExample
+# Servlet HTML app example
 Web project with DAO and pure servlet components, providing multi language system and secured access
 
 What is done
